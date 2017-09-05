@@ -2,5 +2,5 @@
 *.pyc
 swegram_main/uploads
 swegram_main/handle_texts/pipeline/
-swegram/base.py
+swegram/local.py
 swegram/production.py
