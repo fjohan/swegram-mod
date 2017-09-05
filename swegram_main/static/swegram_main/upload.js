@@ -3,7 +3,7 @@ $('#annotate_form').submit(function (e) {
         e.preventDefault();
         var fd = new FormData($(this)[0]);
         $.ajax({
-            url: url_prefix + 'upload_annotate/',
+            url: url_prefix + '/upload_annotate/',
             data: fd,
             processData: false,
             contentType: false,
@@ -36,7 +36,7 @@ $('#analyze_form').submit(function (e) {
         e.preventDefault();
         var fd = new FormData($(this)[0]);
         $.ajax({
-            url: url_prefix + 'upload/',
+            url: url_prefix + '/upload/',
             data: fd,
             processData: false,
             contentType: false,
