@@ -1,0 +1,213 @@
+<div id="upload_annotate_section" style="display:none;">
+  <button onclick="annotate_back();" class="ui basic icon button"><i class="chevron blue basic left icon"></i> Gå tillbaka</button>
+
+  <div class="ui form"><br>
+    <form enctype="multipart/form-data" method="POST" target="hidden-iframe" id="annotate_form">
+      {% csrf_token %}
+
+      <center>
+        <div id="paste_section" class="field">
+          <textarea id="pasted_text" name="pasted_text" placeholder="Klistra in text här för att annotera."></textarea>
+        </div>
+
+        <label style="width:auto; min-width:150px;" id="file_select_label" for="file_to_annotate" class="basic ui big icon button">
+          <i class="attach icon"></i>
+          <span id="choose_file_label">Välj fil</span></label>
+
+          <label id="annotate_submit_label" style="width:150px;" for="annotate_submit" class=" disabled ui big icon button">
+            <i class="upload icon"></i>
+            Annotera</label>
+
+            <input type="file" style="display:none" name="file_to_annotate" id="file_to_annotate">
+            <button type="submit" style="display:none" class="ui huge icon button" id="annotate_submit"></button>
+          </center>
+
+          <br>
+
+          <table class="ui table">
+            <thead>
+              <tr>
+                <th colspan="3">Inställningar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="ui slider checkbox">
+                    <input type="checkbox" name="checkTokenize" checked><label>Tokenisering</label>
+                  </div>
+                </td>
+                <td>
+                  <div style="float:right;" class="ui disabled horizontal label">Tokeniserare</div>
+                </td>
+                <td>
+                  <div class="field">
+                    <select class="ui disabled fluid dropdown" name="tokenizer">
+                      <option name="efselab" value="efselab">efselab (svannotate)</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="ui slider checkbox">
+                    <input type="checkbox" name="checkPOS" checked><label>Ordklasstaggning</label>
+                  </div>
+                </td>
+                <td>
+                  <div style="float:right;" class="ui horizontal label">Ordklasstaggare</div>
+                </td>
+                <td>
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="tagger">
+                      <option name="efselab" value="efselab" selected="selected">efselab</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="border:none;">
+                </td>
+                <td style="border:none;">
+                  <div style="float:right;" class="ui horizontal label">Modell för ordklasstaggare</div>
+                </td>
+                <td  style="border:none;">
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="tagger_model">
+                      <option name="suc" value="suc">SUC 3.0</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+
+                <td>
+                  <div class="ui slider checkbox">
+                    <input type="checkbox" name="checkNormalization" checked><label>Normalisering</label>
+                  </div>
+                </td>
+
+                <td>
+                  <div style="float:right;" class="ui horizontal label">Metod för kontroll av särskrivningar</div>
+                </td>
+
+                <td>
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="compounds_method" id="compound">
+                      <option name="rule_based_compounds" value="rule_based_compounds">Regelbaserad</option>
+                    </select>
+                  </div>
+
+                </td>
+
+              </tr>
+
+              <tr>
+                <td style="border:none;">
+
+                </td>
+
+                <td style="border:none;">
+                  <div style="float:right;" class="ui horizontal label">Rättstavare</div>
+                </td>
+
+                <td style="border:none;">
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="spellchecker" id="spells">
+                      <option name="histnorm" value="histnorm">histnorm</option>
+                    </select>
+                  </div>
+                </td>
+
+              </tr>
+
+
+              <tr>
+                <td>
+                  <div class="ui slider checkbox">
+                    <input type="checkbox" name="checkParse" checked><label>Syntaktisk analys</label>
+                  </div>
+                </td>
+
+                <td>
+                  <div style="float:right;" class="ui horizontal label">Parser</div>
+                </td>
+
+                <td>
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="parser">
+                      <option name="maltparser" value="maltparser">Maltparser</option>
+                    </select>
+                  </div>
+
+                </td>
+
+                <tr>
+                  <td style="border:none;">
+
+                  </td>
+
+                  <td style="border:none;">
+                    <div style="float:right;" class="ui horizontal label">Modell för parser</div>
+                  </td>
+
+                  <td style="border:none;">
+                    <div class="field">
+                      <select class="ui fluid dropdown" name="parser_model">
+                        <option name="swemalt" value="swemalt">maltmodel-UD_Swedish.mco</option>
+                      </select>
+                    </div>
+                  </td>
+
+                </tr>
+
+                <tr>
+                  <td>
+                    <div class="ui slider checkbox">
+                      <input type="checkbox" name="defaultColumns" checked>
+                      <label>Default columns</label>
+                    </div>
+                  </td>
+
+                  <td>
+
+                  </td>
+
+                  <td>
+
+
+                  </td>
+
+                </tr>
+
+
+
+              </tbody>
+            </table>
+
+
+
+
+
+            <input type="checkbox" name="col1" checked id="col1" >
+            <input type="checkbox" name="col2" checked id="col2" >
+            <input type="checkbox" name="col3" checked id="col3" >
+            <input type="checkbox" name="col4" checked id="col4" >
+            <input type="checkbox" name="col5" checked id="col5" >
+            <input type="checkbox" name="col6" checked id="col6" >
+            <input type="checkbox" name="col7" checked id="col7" >
+            <input type="checkbox" name="col8" checked id="col8" >
+            <input type="checkbox" name="col9" checked id="col9" >
+            <input type="checkbox" name="col10" checked id="col10" >
+            <input type="checkbox" name="col11" checked id="col11" >
+            <input type="checkbox" name="col12" checked id="col12" >
+            <input type="checkbox" name="col13" checked id="col13" ><br><br>
+
+            <input type="checkbox" id="use_paste" name="use_paste" hidden>
+
+          </form>
+
+        </div>
+      </div>

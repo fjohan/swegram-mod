@@ -1,0 +1,34 @@
+<div class="ui fixed bla menu">
+  <div class="ui container">
+    <div class="ui simple dropdown item">
+      Statistik <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" href="#" onclick="openTab('page_general'); makeActive(this)">Allmän statistik</a>
+        <a class="item" href="#" onclick="openTab('page_readability'); makeActive(this)">Läsbarhet</a>
+        <a class="item" href="#" onclick="openTab('page_pos'); makeActive(this)">Ordklasser</a>
+        <a class="item" href="#" onclick="openTab('page_freq'); makeActive(this)">Frekvenser</a>
+        <div class="divider"></div>
+        <a href="#" class="item" onclick="openTab('page_significance'); makeActive(this)">Statistisk signifikans</a>
+        <div class="divider"></div>
+        <a href="#" class="item" onclick="openTab('page_export'); makeActive(this)">Exportera statistik</a>
+      </div>
+    </div>
+
+    <span id="text_menu_zone"></span>
+
+    <div class="ui simple dropdown item">
+      Lägg till text <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" href="#" onclick="openTab('page_upload_text'); makeActive(this)">Annoterad text</a>
+        <a class="item active" href="#" onclick="openTab('page_annotate'); makeActive(this)">Annotera ny text</a>
+      </div>
+    </div>
+    <div class="ui right simple dropdown item">
+      Hjälp <i class="dropdown icon"></i>
+    <div class="right menu">
+      <a class="item" href="#" onclick="openTab('page_help'); makeActive(this)">Användarmanual</a>
+      <a class="item" href="#" onclick="openTab('page_about'); makeActive(this)">Om</a>
+    </div>
+    </div>
+  </div>
+</div>
