@@ -10,21 +10,17 @@ STATIC_ROOT = "/local/swegram/django/static"
 STATIC_URL = '/swegramstatic/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'swegram_main/static'),)
 
+ALLOWED_HOSTS = ['stp.lingfil.uu.se']
+
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'swegram_main/uploads')
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
 DATABASES = {
     'default': {
         'ENGINE': "django.db.backends.postgresql_psycopg2",
         'NAME': "swegram",
-        'USER': 'swegram',
+        'USER': 'jena0545',
+	    'PASSWORD': 'secret',
         'HOST': "localhost",
         'PORT': "5432"
     }
