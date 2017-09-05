@@ -10,7 +10,7 @@ def swegram_main(request):
         request.session['text_list'] = sum([[text for text in file.texts] for file in request.session['file_list'] if file.activated], [])
 
     context = {}
-    if settings.PRODUCTION: # If in production
+    if settings.PRODUCTION:
         context['url'] = '/swegram_dev'
 
     return render(request, "swegram_main/main.html", context)
