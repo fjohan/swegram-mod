@@ -24,4 +24,4 @@ def show_session(request):
     for r in request.session.iteritems():
         print(r)
 
-    return HttpResponse('a')
+    return HttpResponse('aa')
