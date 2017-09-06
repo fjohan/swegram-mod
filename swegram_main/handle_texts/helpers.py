@@ -198,7 +198,7 @@ def f7(seq):
 def checkbox_to_bool(s):
     return True if s == "on" else False
 
-def download_file(request, file_id, get_md5=False):
+def download_file(request, file_id):
     file_to_dl = [f for f in request.session['file_list']\
     if f.file_id == int(file_id)][0]
 
@@ -234,10 +234,6 @@ def download_file(request, file_id, get_md5=False):
             f.write('\n')
 
     f.close()
-
-    import hashlib
-    print('md5 downloadable', hashlib.md5(f.name).hexdigest())
-    print('md5 raw contents', hashlib.md5(file_to_dl.raw_contents).hexdigest())
 
     response = HttpResponse(FileWrapper(open(f.name)), content_type='application/force-download')
 
