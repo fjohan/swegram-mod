@@ -2,4 +2,5 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-# Create your models here.
+# This is used to check if an uploaded file has previously been annotated,
+# if the md5 matches we can determine whether it's been normalized or not

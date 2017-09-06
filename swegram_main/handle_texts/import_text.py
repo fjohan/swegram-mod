@@ -9,6 +9,8 @@ from django.http import HttpResponse
 from datetime import datetime
 import filesize
 
+from django.db import IntegrityError
+
 class Metadata:
     metadata = {}
 
@@ -221,6 +223,7 @@ def get_text_stats(text):
     return text
 
 def import_textfile(path, eligible, normalized, check_if_normalized=False):
+
     T = Textfile(path, eligible, normalized)
 
     text_list = T.raw_contents_list
@@ -235,11 +238,9 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
     text_list[0].strip().endswith(METADATA_FINAL):
         use_metadata = True
         T.has_metadata = True
-        print('use metadata')
     else:
         use_metadata = False
         T.has_metadata = False
-        print('no metadata')
     if use_metadata:
         metadata_labels = text_list[0].strip().strip('<>')
         T.metadata_labels = metadata_labels.split(METADATA_DELIMITER)

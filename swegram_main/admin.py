@@ -3,6 +3,8 @@ from django.contrib import admin
 # Register your models here.
 import pprint
 from django.contrib.sessions.models import Session
+
+
 class SessionAdmin(admin.ModelAdmin):
     def _session_data(self, obj):
         return pprint.pformat(obj.get_decoded()).replace('\n', '<br>\n')

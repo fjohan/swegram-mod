@@ -2,8 +2,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-#ALLOWED_HOSTS = ['10.0.0.74']
-
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 SESSION_SAVE_EVERY_REQUEST = True
