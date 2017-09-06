@@ -14,6 +14,8 @@ import os
 
 import subprocess
 
+from django.conf import settings
+
 from pipeline import pipeline
 from get_optparse import get_optparse
 from helpers import handle_uploaded_file, checkbox_to_bool, add_text_metadata, str_to_bool
@@ -103,7 +105,7 @@ def annotate_uploaded_file(request):
     else:
         handle_uploaded_file(request.FILES['file_to_annotate'])
         filename = str(request.FILES['file_to_annotate'])
-        if config.ENVIRONMENT == 'PRODUCTION' and os.path.splitext(filename)[1] != ".txt":
+        if settings.PRODUCTION and os.path.splitext(filename)[1] != ".txt":
             try:
                 subprocess.call(['unoconv', '--format=txt', upload_location + filename])
                 stdout_file = open(upload_location + os.path.splitext(filename)[0] + ".txt2", "w")
