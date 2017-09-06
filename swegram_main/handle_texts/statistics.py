@@ -45,11 +45,11 @@ def basic_stats(text_list, request):
                                 a.activated,
                                 a.normalized] for a in request.session.get('file_list')]
     data['metadata']        = request.session.get('metadata')
-    data['total_words']     = np.sum([text.word_count for text in text_list])
-    data['total_tokens']    = np.sum([text.token_count for text in text_list])
-    data['total_sentences'] = np.sum([text.sentence_count for text in text_list])
-    data['compounds']       = np.sum([text.compounds for text in text_list])
-    data['misspells']       = np.sum([text.misspells for text in text_list])
+    data['total_words']     = int(np.sum([text.word_count for text in text_list]))
+    data['total_tokens']    = int(np.sum([text.token_count for text in text_list]))
+    data['total_sentences'] = int(np.sum([text.sentence_count for text in text_list]))
+    data['compounds']       = int(np.sum([text.compounds for text in text_list]))
+    data['misspells']       = int(np.sum([text.misspells for text in text_list]))
     data['texts']           = []
 
     for text_file in request.session['file_list']:
