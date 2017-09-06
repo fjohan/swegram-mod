@@ -32,7 +32,8 @@ $('#annotate_form').submit(function (e) {
 
 
 $('#analyze_form').submit(function (e) {
-        $('.ui.dimmer').dimmer({closable: false}).dimmer('show');
+        $('.main.ui.dimmer').dimmer({closable: false}).dimmer('show');
+        console.log('upload');
         e.preventDefault();
         var fd = new FormData($(this)[0]);
         $.ajax({
@@ -48,7 +49,7 @@ $('#analyze_form').submit(function (e) {
                 $('#analyze_submit_label').addClass('basic');
                 update_sidebar();
 
-                $('.ui.dimmer').dimmer({closable: false}).dimmer('hide');
+                $('.main.ui.dimmer').dimmer({closable: false}).dimmer('hide');
                 initialize_semantic();
             }
         });
