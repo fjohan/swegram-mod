@@ -4,3 +4,4 @@ swegram_main/uploads
 swegram_main/handle_texts/pipeline/
 swegram/local.py
 swegram/production.py
+swegram_main/config.py
