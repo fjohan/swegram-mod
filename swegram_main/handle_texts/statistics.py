@@ -497,29 +497,37 @@ def get_general_stats(request):
     if not text_list:
         return JsonResponse({})
 
-    stats['n_tokens'] = sum([t.token_count for t in text_list])
-    stats['mean_tokens'] = round(np.mean([t.token_count for t in text_list]), 2)
-    stats['median_tokens'] = np.median([t.token_count for t in text_list])
+    tokens =    [t.token_count for t in text_list]
+    words =     [t.word_count for t in text_list]
+    sentences = [t.sentence_count for t in text_list]
+    misspells = [t.misspells for t in text_list]
+    compounds = [t.compounds for t in text_list]
+
+
+
+    stats['n_tokens'] = sum(tokens)
+    stats['mean_tokens'] = round(np.mean(tokens), 2)
+    stats['median_tokens'] = np.median(tokens)
 
     stats['mean_word_len'], stats['median_word_len'] = mean_median_word_len(text_list)
 
-    stats['n_words'] = sum([t.word_count for t in text_list])
-    stats['mean_words'] = round(np.mean([t.word_count for t in text_list]), 2)
-    stats['median_words'] = np.median([t.word_count for t in text_list])
+    stats['n_words'] = sum(words)
+    stats['mean_words'] = round(np.mean(words), 2)
+    stats['median_words'] = np.median(words)
 
-    stats['n_sent'] = sum([t.sentence_count for t in text_list])
-    stats['mean_sent'] = round(np.mean([t.sentence_count for t in text_list]), 2)
-    stats['median_sent'] = np.median([t.sentence_count for t in text_list])
+    stats['n_sent'] = sum(sentences)
+    stats['mean_sent'] = round(np.mean(sentences), 2)
+    stats['median_sent'] = np.median(sentences)
 
     stats['mean_sent_len'], stats['median_sent_len'] = mean_median_sent_len(text_list)
 
-    stats['n_misspells'] = sum([t.misspells for t in text_list])
-    stats['mean_misspells'] = round(np.mean([t.misspells for t in text_list]), 2)
-    stats['median_misspells'] = np.median([t.misspells for t in text_list])
+    stats['n_misspells'] = sum(misspells)
+    stats['mean_misspells'] = round(np.mean(misspells), 2)
+    stats['median_misspells'] = np.median(misspells)
 
-    stats['n_compounds'] = sum([t.compounds for t in text_list])
-    stats['mean_compounds'] = round(np.mean([t.compounds for t in text_list]), 2)
-    stats['median_compounds'] = np.median([t.compounds for t in text_list])
+    stats['n_compounds'] = sum(compounds)
+    stats['mean_compounds'] = round(np.mean(compounds), 2)
+    stats['median_compounds'] = np.median(compounds)
 
     stats['non_normalized_files'] = non_normalized_files
 
