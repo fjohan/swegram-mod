@@ -105,6 +105,7 @@ def annotate_uploaded_file(request):
     else:
         handle_uploaded_file(request.FILES['file_to_annotate'])
         filename = str(request.FILES['file_to_annotate'])
+        original_filename = filename
         if settings.PRODUCTION and os.path.splitext(filename)[1] != ".txt":
             try:
                 subprocess.call(['unoconv', '--format=txt', upload_location + filename])
@@ -113,7 +114,7 @@ def annotate_uploaded_file(request):
                 shutil.move(upload_location + os.path.splitext(filename)[0] + ".txt2", upload_location + os.path.splitext(filename)[0] + ".txt")
                 filename = os.path.splitext(filename)[0] + ".txt"
             finally:
-                os.remove(upload_location + filename)
+                os.remove(upload_location + original_filename)
         options = get_optparse(request, upload_location + filename, tmp_dir)
 
     # If the user has removed some column, the text can't be used for analysis
