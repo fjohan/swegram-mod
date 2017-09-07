@@ -12,6 +12,16 @@ function getQueryStr() {
   return queryStrParts;
 }
 
+function download_stats(){
+  var table = document.getElementById('table_lengths');
+
+  for (var r = 0, n = table.rows.length; r < n; r++) {
+    for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+        console.log(table.rows[r].cells[c].innerHTML);
+      }
+  }
+}
+
 function toggle_metadata(metadata){
 
   $("input").attr("disabled", true);

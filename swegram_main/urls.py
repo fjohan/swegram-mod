@@ -2,8 +2,10 @@ from django.conf.urls import url
 
 from . import views
 from handle_texts.upload_file import upload_annotated_file, annotate_uploaded_file
-from handle_texts.helpers import update_sidebar, download_file, set_filename, visualise_text, edit_token, set_stats_type, update_metadata
-from handle_texts.statistics import get_pos_stats, get_freq_list, get_general_stats, get_length, get_readability, set_freq_limit
+from handle_texts.helpers import update_sidebar, download_file, set_filename,\
+visualise_text, edit_token, set_stats_type, update_metadata, download_stats
+from handle_texts.statistics import get_pos_stats, get_freq_list,\
+get_general_stats, get_length, get_readability, set_freq_limit
 from .views import show_session
 
 app_name = 'swegram'
@@ -28,5 +30,7 @@ urlpatterns = [
     url(r'^dl/(?P<file_id>.*)/$', download_file, name='download_file'),
 
     url(r'^show_session/$', show_session, name='show_session'),
+
+    url(r'^get_stats/$', download_stats, name='download_stats'),
 
 ]

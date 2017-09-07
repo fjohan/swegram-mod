@@ -17,6 +17,11 @@ import os
 
 import statistics
 
+from ..models import UploadedFile
+
+def download_stats(request):
+    pass
+
 def set_stats_type(request):
     text_id = None
     for prop in request.GET:
@@ -198,6 +203,35 @@ def f7(seq):
 def checkbox_to_bool(s):
     return True if s == "on" else False
 
+def get_md5(file):
+    import hashlib
+    mystr = '<' + ' '.join(file.metadata_labels) + '>\n'
+
+    for text in file.texts:
+        mystr += '<' + ' '.join(text.metadata) + '>'
+        mystr += '\n'
+        for sentence in text.sentences:
+            for token in sentence.tokens:
+                mystr += \
+                token.text_id + '\t' +\
+                token.token_id + '\t' +\
+                token.form + '\t' +\
+                token.norm + '\t' +\
+                token.lemma + '\t' +\
+                token.upos + '\t' +\
+                token.xpos + '\t' +\
+                token.feats + '\t' +\
+                token.ufeats + '\t' +\
+                token.head + '\t' +\
+                token.deprel + '\t' +\
+                token.deps + '\t' +\
+                token.misc
+            mystr += '\n'
+
+    hash_md5 = hashlib.md5()
+    hash_md5.update(mystr)
+    return hash_md5.hexdigest()
+
 def download_file(request, file_id):
     file_to_dl = [f for f in request.session['file_list']\
     if f.file_id == int(file_id)][0]
@@ -234,6 +268,8 @@ def download_file(request, file_id):
             f.write('\n')
 
     f.close()
+
+    UploadedFile.objects.create(md5_checksum=get_md5(file_to_dl), normalized=file_to_dl.normalized)
 
     response = HttpResponse(FileWrapper(open(f.name)), content_type='application/force-download')
 

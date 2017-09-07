@@ -322,8 +322,11 @@ def get_pos_stats(request):
     return JsonResponse({'pos_counts': pos_stats(text_list, included_pos_tags), 'pos_list': request.session['pos_enabled']})
 
 def get_length(request):
+    print('GET LENGTH')
+
     def calculate_lengths(texts, type, n, words_pos):
         occurrences = 0
+
         if type == 'morethan':
             for text in texts:
                 for sentence in text.sentences:

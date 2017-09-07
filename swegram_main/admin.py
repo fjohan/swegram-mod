@@ -3,6 +3,7 @@ from django.contrib import admin
 # Register your models here.
 import pprint
 from django.contrib.sessions.models import Session
+from models import UploadedFile
 
 
 class SessionAdmin(admin.ModelAdmin):
@@ -14,3 +15,7 @@ class SessionAdmin(admin.ModelAdmin):
     exclude = ['session_data']
     date_hierarchy='expire_date'
 admin.site.register(Session, SessionAdmin)
+
+@admin.register(UploadedFile)
+class FileAdmin(admin.ModelAdmin):
+    readonly_fields=('md5_checksum', 'normalized')

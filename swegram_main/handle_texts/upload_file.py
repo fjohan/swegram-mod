@@ -16,9 +16,11 @@ import subprocess
 
 from django.conf import settings
 
+from ..models import UploadedFile
+
 from pipeline import pipeline
 from get_optparse import get_optparse
-from helpers import handle_uploaded_file, checkbox_to_bool, add_text_metadata, str_to_bool
+from helpers import handle_uploaded_file, checkbox_to_bool, add_text_metadata, str_to_bool, get_md5
 from .. import config
 from import_text import import_textfile
 import os
@@ -67,6 +69,12 @@ def upload_annotated_file(request):
     try:
         # File that are already annotated are assumed to be eligible
         t = import_textfile(upload_location + filename, True, normalized)
+        md5 = get_md5(t)
+        try:
+            existing = UploadedFile.objects.get(pk=md5)
+            t.normalized = existing.normalized
+        except:
+            pass
     finally:
         os.remove(upload_location + filename)
 
