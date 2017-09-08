@@ -20,6 +20,46 @@ import statistics
 from ..models import UploadedFile
 
 def download_stats(request):
+
+    # Unfinished
+    # Pure JS seems to be working fine so using that for the moment
+
+    return JsonResponse({})
+
+    translations = {
+                    'Fullnominalkvot': 'Full nominalkvot',
+    }
+
+    pos = {}
+    freq = {}
+    general = {}
+    readability = {}
+
+    for prop in request.GET:
+        split = prop.split("_")
+        if split[0] == 'pos':
+            pos[split[1]] = '\t'.join(request.GET[prop].replace('__', '_').split('_'))
+        elif split[0] == 'freq':
+            freq[split[1]] = '\t'.join(request.GET[prop].replace('__', '_').split('_'))
+        elif split[0] == 'general':
+            general[split[1]] = '\t'.join(request.GET[prop].replace('__', '_').split('_'))
+        elif split[0] == 'readability':
+            readability[split[1]] = '\t'.join(request.GET[prop].replace('__', '_').split('_'))
+
+    stats = ''
+
+    if general:
+        stats += u'#Allmän statistik\n\n'
+        for key in general:
+            stats += key + '\t' + general[key] + '\n'
+
+    if readability:
+        stats += u'#Läsbarhet\n\n'
+        for key in readability:
+            stats += key + '\t' + readability[key] + '\n'
+
+    print(stats)
+    return JsonResponse({})
     pass
 
 def set_stats_type(request):

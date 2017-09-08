@@ -12,14 +12,72 @@ function getQueryStr() {
   return queryStrParts;
 }
 
-function download_stats(){
-  var table = document.getElementById('table_lengths');
+function download_stats(general, readability, pos, freq){
+  return '';
 
-  for (var r = 0, n = table.rows.length; r < n; r++) {
-    for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
-        console.log(table.rows[r].cells[c].innerHTML);
+  queryStr = '?';
+
+  if (general === true){
+    var table = document.getElementById('table_general');
+    for (var r = 1, n = table.rows.length; r < n; r++) {
+      queryStr += '&general_' + table.rows[r].cells[0].textContent.replace(/\s/g, '') + '=';
+      for (var c = 1, m = table.rows[r].cells.length; c < m; c++) {
+          queryStr += table.rows[r].cells[c].textContent.replace(/\s/g, '') + '_';
       }
+    }
+    var table = document.getElementById('table_lengths');
+    for (var r = 0, n = table.rows.length; r < n; r++) {
+      queryStr += '&lengths_' + table.rows[r].cells[0].textContent.replace(/\s+/g, '') + '=';
+      for (var c = 1, m = table.rows[r].cells.length; c < m; c++) {
+          queryStr += table.rows[r].cells[c].textContent.replace(/\s/g, '') + '_';
+      }
+    }
   }
+
+  if (readability === true){
+    var table = document.getElementById('table_readability');
+    for (var r = 0, n = table.rows.length; r < n; r++) {
+      queryStr += '&readability_' + table.rows[r].cells[0].textContent.replace(/\s/g, '') + '=';
+      for (var c = 1, m = table.rows[r].cells.length; c < m; c++) {
+          queryStr += table.rows[r].cells[c].textContent.replace(/\s/g, '') + '_';
+      }
+    }
+  }
+
+  if (pos === true){
+    var table = document.getElementById('table_pos');
+    for (var r = 1, n = table.rows.length; r < n; r++) {
+      queryStr += '&pos_' + table.rows[r].cells[0].textContent.replace(/\s/g, '') + '=';
+      for (var c = 1, m = table.rows[r].cells.length; c < m; c++) {
+          queryStr += table.rows[r].cells[c].textContent.replace(/\s/g, '') + '_';
+      }
+    }
+  }
+
+  if (freq === true){
+    var table = document.getElementById('table_freq');
+    for (var r = 1, n = table.rows.length; r < n; r++) {
+      queryStr += '&freq_' + table.rows[r].cells[0].textContent.replace(/\s/g, '') + '=';
+      for (var c = 1, m = table.rows[r].cells.length; c < m; c++) {
+          queryStr += table.rows[r].cells[c].textContent.replace(/\s/g, '') + '_';
+      }
+    }
+  }
+
+  console.log(queryStr);
+
+  $.get(url_prefix + '/get_stats' + queryStr, function(data) {
+    $('.ui.dimmer').dimmer({closable: false}).dimmer('show');
+
+  }).fail(function() {
+    $('.ui.dimmer').dimmer({closable: false}).dimmer('hide');
+    console.log('Javascript error');
+
+  }).done(function() {
+    $('.ui.dimmer').dimmer({closable: false}).dimmer('hide');
+  });
+
+
 }
 
 function toggle_metadata(metadata){

@@ -22,31 +22,40 @@ document.getElementById('pasted_text').onkeyup = function () {
 function get_pos_color(pos){
   var color_dict = {};
 
-  color_dict['AB'] = '#730000';
-  color_dict['DT'] = '#e53939';
-  color_dict['HA'] = '#663333';
-  color_dict['HD'] = '#ffa280';
-  color_dict['HP'] = '#f2c6b6';
-  color_dict['HS'] = '#662900';
-  color_dict['IE'] = '#a67453';
-  color_dict['IN'] = '#f28100';
-  color_dict['JJ'] = '#33271a';
-  color_dict['KN'] = '#e5ac39';
-  color_dict['NN'] = '#7f7340';
-  color_dict['MAD'] = '#7f7340';
-  color_dict['MID'] = '#7f7340';
-  color_dict['PAD'] = '#7f7340';
-  color_dict['PC'] = '#e6daac';
-  color_dict['PL'] = '#e5de73';
-  color_dict['PM'] = '#b8e600';
-  color_dict['PN'] = '#3a5916';
-  color_dict['PP'] = '#0e3300';
-  color_dict['PS'] = '#495943';
-  color_dict['RG'] = '#20f200';
-  color_dict['RO'] = '#009900';
-  color_dict['SN'] = '#7fff91';
-  color_dict['UO'] = '#008c5e';
-  color_dict['VB'] = '#a3d9ce';
+  color_dict['AB'] = '#F9EBEA';
+  color_dict['DT'] = '#F5EEF8';
+  color_dict['HA'] = '#EAF2F8';
+  color_dict['HD'] = '#E8F8F5';
+  color_dict['HP'] = '#E9F7EF';
+  color_dict['HS'] = '#FEF9E7';
+  color_dict['IE'] = '#FDF2E9';
+  color_dict['IN'] = '#FADBD8';
+  color_dict['JJ'] = '#E8DAEF';
+  color_dict['KN'] = '#D6EAF8';
+  color_dict['NN'] = '#D4EFDF';
+  color_dict['MAD'] = '#FDEBD0';
+  color_dict['MID'] = '#E6B0AA';
+  color_dict['PAD'] = '#D7BDE2';
+  color_dict['PC'] = '#A9CCE3';
+  color_dict['PL'] = '#A2D9CE';
+  color_dict['PM'] = '#F9E79F';
+  color_dict['PN'] = '#F5CBA7';
+  color_dict['PP'] = '#F1948A';
+  color_dict['PS'] = '#BB8FCE';
+  color_dict['RG'] = '#85C1E9';
+  color_dict['RO'] = '#ABEBC6';
+  color_dict['SN'] = '#FAD7A0';
+  color_dict['UO'] = '#F4F6F6';
+  color_dict['VB'] = '#EBEDEF';
+
+  /*
+    Additional unused colors
+    #EAEDED
+    #D6DBDF
+    #E5E7E9
+    #BFC9CA
+    #ABB2B9
+  */
 
   return color_dict[pos];
 }
@@ -422,7 +431,7 @@ function export_table_to_csv(tables, filename) {
       csv.push(row.join("\t").trim());
     }
   }
-  download_csv(csv.join("\n").replace(/\s\s+/g, '\t').replace(/\t#/g, '\n\n#').replace(/Antal/g, '\tAntal'), filename);
+  download_csv(csv.join("\n").replace(/\s\s+/g, '\t').replace(/\t#/g, '\n\n#').replace(/Antal\tMedelvärde/g, '\tAntal\tMedelvärde'), filename);
 }
 
 

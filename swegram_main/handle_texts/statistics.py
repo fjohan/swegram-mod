@@ -544,8 +544,8 @@ def pos_stats(text_list, included_pos_tags):
         # Makes sure there's two decimals
         return ("{0:." + str(dp) + "f}").format(acc * 100) + "%"
 
-    # Dicts could probably be merged in a better way but it doesn't seem
-    # reliable in python2
+    # Change dict merging to rely on Counter(), should make it faster
+
     pos_stats = {}
     total = 0.0
 
