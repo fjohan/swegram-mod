@@ -37,7 +37,7 @@ function get_pos_color(pos){
   color_dict['MID'] = '#E6B0AA';
   color_dict['PAD'] = '#D7BDE2';
   color_dict['PC'] = '#A9CCE3';
-  color_dict['PL'] = '#A2D9CE';
+  color_dict['PL'] = '#F4D03F';
   color_dict['PM'] = '#F9E79F';
   color_dict['PN'] = '#F5CBA7';
   color_dict['PP'] = '#F1948A';
@@ -46,7 +46,7 @@ function get_pos_color(pos){
   color_dict['RO'] = '#ABEBC6';
   color_dict['SN'] = '#FAD7A0';
   color_dict['UO'] = '#F4F6F6';
-  color_dict['VB'] = '#EBEDEF';
+  color_dict['VB'] = '#3498DB';
 
   /*
     Additional unused colors

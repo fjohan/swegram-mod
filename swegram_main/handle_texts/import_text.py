@@ -312,4 +312,5 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
         pos_counts = {}
 
     T.texts = list_of_texts
+    print(T.texts)
     return T

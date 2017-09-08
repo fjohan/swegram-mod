@@ -69,6 +69,8 @@ def upload_annotated_file(request):
     try:
         # File that are already annotated are assumed to be eligible
         t = import_textfile(upload_location + filename, True, normalized)
+        if type(t) == str:
+            return JsonResponse({'success': 0, 'error_meta': t})
         md5 = get_md5(t)
         try:
             existing = UploadedFile.objects.get(pk=md5)

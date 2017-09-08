@@ -245,31 +245,34 @@ def checkbox_to_bool(s):
 
 def get_md5(file):
     import hashlib
-    mystr = '<' + ' '.join(file.metadata_labels) + '>\n'
+    try:
+        mystr = '<' + ' '.join(file.metadata_labels) + '>\n'
 
-    for text in file.texts:
-        mystr += '<' + ' '.join(text.metadata) + '>'
-        mystr += '\n'
-        for sentence in text.sentences:
-            for token in sentence.tokens:
-                mystr += \
-                token.text_id + '\t' +\
-                token.token_id + '\t' +\
-                token.form + '\t' +\
-                token.norm + '\t' +\
-                token.lemma + '\t' +\
-                token.upos + '\t' +\
-                token.xpos + '\t' +\
-                token.feats + '\t' +\
-                token.ufeats + '\t' +\
-                token.head + '\t' +\
-                token.deprel + '\t' +\
-                token.deps + '\t' +\
-                token.misc
+        for text in file.texts:
+            mystr += '<' + ' '.join(text.metadata) + '>'
             mystr += '\n'
+            for sentence in text.sentences:
+                for token in sentence.tokens:
+                    mystr += \
+                    token.text_id + '\t' +\
+                    token.token_id + '\t' +\
+                    token.form + '\t' +\
+                    token.norm + '\t' +\
+                    token.lemma + '\t' +\
+                    token.upos + '\t' +\
+                    token.xpos + '\t' +\
+                    token.feats + '\t' +\
+                    token.ufeats + '\t' +\
+                    token.head + '\t' +\
+                    token.deprel + '\t' +\
+                    token.deps + '\t' +\
+                    token.misc
+                mystr += '\n'
 
-    hash_md5 = hashlib.md5()
-    hash_md5.update(mystr)
+        hash_md5 = hashlib.md5()
+        hash_md5.update(mystr)
+    except:
+        return None
     return hash_md5.hexdigest()
 
 def download_file(request, file_id):

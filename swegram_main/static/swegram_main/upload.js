@@ -13,7 +13,7 @@ $('#annotate_form').submit(function (e) {
 
                 if (data['error_meta'] != undefined){
                   show_error_msg('Ett fel har hittats i metadatan för följande text: <br>&lt;' + data['error_meta'] + '&gt;<br>Kontrollera metadatan och prova igen.');
-                  alert(data['error_meta']);
+                  
                 }
 
                 document.getElementById("file_to_annotate").value = "";
@@ -43,6 +43,10 @@ $('#analyze_form').submit(function (e) {
             contentType: false,
             type: 'POST',
             success: function(data){
+                if (data['error_meta'] != undefined){
+                  show_error_msg('Ett fel har hittats i metadatan för följande text: <br>&lt;' + data['error_meta'] + '&gt;<br>Kontrollera metadatan och prova igen.');
+
+                }
                 console.log(data);
                 document.getElementById("choose_file_label_analyze").innerHTML = 'Välj fil';
                 $('#analyze_submit_label').removeClass('disabled');
