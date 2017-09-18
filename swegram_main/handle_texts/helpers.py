@@ -58,7 +58,6 @@ def download_stats(request):
         for key in readability:
             stats += key + '\t' + readability[key] + '\n'
 
-    print(stats)
     return JsonResponse({})
     pass
 
@@ -153,6 +152,7 @@ def edit_token(request):
 
     return JsonResponse({})
 
+from django.utils.encoding import smart_str
 def update_metadata(request):
     def invert(bool):
         return not bool
@@ -162,8 +162,9 @@ def update_metadata(request):
         if prop == 'meta':
             meta = request.GET['meta']
 
-    meta_label = meta.split("_")[0]
-    meta_prop = meta.split("_")[1]
+    meta_label = smart_str(meta.split("_")[0])
+    meta_prop = smart_str(meta.split("_")[1])
+
     request.session['metadata'][meta_label][meta_prop][0] = invert(request.session['metadata'][meta_label][meta_prop][0])
     return JsonResponse({})
 
@@ -192,6 +193,7 @@ def add_text_metadata(request, file_id):
             file.meta_added = True
             for text in file.texts:
                 for x in range(len(text.metadata_labels)):
+
                     if text.metadata_labels[x] in request.session['metadata']:
                         if text.metadata[x] in request.session['metadata'][text.metadata_labels[x]]:
                             request.session['metadata'][text.metadata_labels[x]][text.metadata[x]][1] += 1

@@ -244,6 +244,7 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
     if use_metadata:
         metadata_labels = text_list[0].strip().strip('<>')
         T.metadata_labels = metadata_labels.split(METADATA_DELIMITER)
+
         del text_list[0]
 
         new_text_contents = []
@@ -312,5 +313,4 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
         pos_counts = {}
 
     T.texts = list_of_texts
-    print(T.texts)
     return T

@@ -16,20 +16,17 @@ def swegram_main(request):
     return render(request, "swegram_main/main.html", context)
 
 def show_session(request):
-    from django.db import connections
-    from django.db.utils import OperationalError
-    db_conn = connections['default']
-    try:
-        c = db_conn.cursor()
-    except OperationalError:
-        return HttpResponse('not connected')
-    else:
-        return HttpResponse('connected')
+
     print('caches:')
     from django.core.cache.backends import locmem
     print(locmem._caches)
 
+    if request.session.get('test'):
+        print('TEST working')
+
     print('current session:')
+    request.session['test'] = 1
+    print(request.session.session_key)
     for r in request.session.iteritems():
         print(r)
 
