@@ -163,7 +163,10 @@ def update_metadata(request):
             meta = request.GET['meta']
 
     meta_label = smart_str(meta.split("_")[0])
-    meta_prop = smart_str(meta.split("_")[1])
+    if '__' in meta:
+        meta_prop = '_'
+    else:
+        meta_prop = smart_str(meta.split("_")[1])
 
     request.session['metadata'][meta_label][meta_prop][0] = invert(request.session['metadata'][meta_label][meta_prop][0])
     return JsonResponse({})
