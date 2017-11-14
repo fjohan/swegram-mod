@@ -417,6 +417,7 @@ function download_csv(csv, filename) {
 
 function export_table_to_csv(tables, filename) {
 	var csv = [];
+  separator = document.querySelector('input[name="freq_radio"]:checked').value;
   console.log(tables);
   for (i=0; i < tables.length; i++){
 
@@ -431,7 +432,17 @@ function export_table_to_csv(tables, filename) {
       csv.push(row.join("\t").trim());
     }
   }
-  download_csv(csv.join("\n").replace(/\s\s+/g, '\t').replace(/\t#/g, '\n\n#').replace(/Antal\tMedelvärde/g, '\tAntal\tMedelvärde'), filename);
+
+  new_csv = csv.join("\n").replace(/\s\s+/g, '\t').replace(/\t#/g, '\n\n#').replace(/Antal\tMedelvärde/g, '\tAntal\tMedelvärde');
+
+  if (separator == 'comma') {
+    download_csv(new_csv.replace(/([0-9])\.([0-9])/g, '$1,$2'), filename);
+  }
+  else{
+    download_csv(new_csv, filename);
+  }
+
+
 }
 
 

@@ -101,7 +101,7 @@ def nominal_quota(textlist):
         full = 0
     else:
         full = round((float(nn_pp_pc) / pn_ab_vb) * 100, 2)
-    return simple, full
+    return round(simple/100, 2), round(full/100, 2)
 
 def ovix_ttr(textlist):
     # gets ovix and ttr since they use the same data
