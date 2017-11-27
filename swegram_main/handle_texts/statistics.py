@@ -321,45 +321,49 @@ def get_pos_stats(request):
 
     return JsonResponse({'pos_counts': pos_stats(text_list, included_pos_tags), 'pos_list': request.session['pos_enabled']})
 
+
+def calculate_lengths(texts, type, n, words_pos):
+    occurrences = 0
+
+    if type == 'morethan':
+        for text in texts:
+            for sentence in text.sentences:
+                for token in sentence.tokens:
+                    if words_pos == 'words':
+                        if token.length > n:
+                            occurrences += 1
+                    else:
+                        if token.length > n and token.xpos == words_pos:
+                            occurrences += 1
+    elif type == 'lessthan':
+        for text in texts:
+            for sentence in text.sentences:
+                for token in sentence.tokens:
+                    if words_pos == 'words':
+                        if token.length < n:
+                            occurrences += 1
+                    else:
+                        if token.length < n and token.xpos == words_pos:
+                            occurrences += 1
+    elif type == 'equal':
+        for text in texts:
+            for sentence in text.sentences:
+                for token in sentence.tokens:
+                    if words_pos == 'words':
+                        if token.length == n:
+                            occurrences += 1
+                    else:
+                        if token.length == n and token.xpos == words_pos:
+                            occurrences += 1
+    else:
+        pass
+    return occurrences
+
+
 def get_length(request):
     print('GET LENGTH')
 
-    def calculate_lengths(texts, type, n, words_pos):
-        occurrences = 0
 
-        if type == 'morethan':
-            for text in texts:
-                for sentence in text.sentences:
-                    for token in sentence.tokens:
-                        if words_pos == 'words':
-                            if token.length > n:
-                                occurrences += 1
-                        else:
-                            if token.length > n and token.xpos == words_pos:
-                                occurrences += 1
-        elif type == 'lessthan':
-            for text in texts:
-                for sentence in text.sentences:
-                    for token in sentence.tokens:
-                        if words_pos == 'words':
-                            if token.length < n:
-                                occurrences += 1
-                        else:
-                            if token.length < n and token.xpos == words_pos:
-                                occurrences += 1
-        elif type == 'equal':
-            for text in texts:
-                for sentence in text.sentences:
-                    for token in sentence.tokens:
-                        if words_pos == 'words':
-                            if token.length == n:
-                                occurrences += 1
-                        else:
-                            if token.length == n and token.xpos == words_pos:
-                                occurrences += 1
-        else:
-            pass
-        return occurrences
 
     if not request.session.get('morethan_n'):
         request.session['morethan_n'] = 3

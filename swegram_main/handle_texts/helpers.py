@@ -13,11 +13,132 @@ from tempfile import NamedTemporaryFile
 from wsgiref.util import FileWrapper
 from django.utils.encoding import smart_str
 
-import os
+import numpy as np
+
+from datetime import datetime
+
+import os, csv
 
 import statistics
 
 from ..models import UploadedFile
+
+def download_all(request):
+
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="stats.csv"'
+
+    writer = csv.writer(response, delimiter='\t')
+
+    writer.writerow(['Statistik för enskilda texter, ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S')])
+
+    delimiter = 'period'
+    include_pos = False
+    include_general = False
+    include_freq = False
+    include_readability = False
+
+    lessthan_n = 3
+    morethan_n = 3
+    equals_n = 3
+
+    if request.session.get('freq_type'):
+        freq_type = request.session.get('freq_type')
+    else:
+        freq_type = 'norm'
+
+    freq_limit = 25
+    if request.GET.get('freq_limit'):
+        freq_limit = int(request.GET.get('freq_limit'))
+
+    if request.GET.get('delimiter'):
+        delimiter = request.GET.get('delimiter')
+
+    delimiter = delimiter.replace('period', '.').replace('comma', ',')
+
+
+    if request.session.get('lessthan_n'):
+        lessthan_n = request.session['lessthan_n']
+    if request.session.get('morethan_n'):
+        morethan_n = request.session['morethan_n']
+    if request.session.get('equals_n'):
+        equals_n = request.session['equals_n']
+
+
+    for text in request.session['text_list']:
+        writer.writerow([])
+        writer.writerow([])
+        writer.writerow([' '.join(text.metadata)])
+        writer.writerow([])
+
+        if request.GET.get('general'):
+            writer.writerow(['Allmän statistik'])
+            def get_total_wordlen(t):
+                lens = []
+                for s in t.sentences:
+                    for token in s.tokens:
+                        if token.xpos not in ['MAD', 'MID', 'PAD']:
+                            lens.append(len(token.norm))
+                return lens
+            def get_total_sentlen(t):
+                lens = []
+                for s in t.sentences:
+                    lens.append(len([t for t in s.tokens if t.xpos not in ['MID','MAD','PAD']]))
+                return lens
+
+            wordlens = get_total_wordlen(text)
+            sentlens = get_total_sentlen(text)
+
+            writer.writerow(['Tokens'] + [text.token_count])
+            writer.writerow(['Ord'] + [text.word_count])
+            writer.writerow(['Ordlängd, medelvärde'] + [round(np.mean(wordlens), 2)])
+            writer.writerow(['Ordlängd, median'] + [round(np.median(wordlens), 2)])
+            writer.writerow(['Meningslängd, medelvärde'] + [round(np.mean(sentlens), 2)])
+            writer.writerow(['Meningslängd, median'] + [round(np.median(sentlens), 2)])
+            writer.writerow(['Felstavningar'] + [text.misspells])
+            writer.writerow(['Särskrivningar'] + [text.compounds])
+            writer.writerow(['Ord mer fler än ' + str(morethan_n) + ' tecken: '\
+            + str(statistics.calculate_lengths([text], 'morethan', morethan_n, 'words'))])
+            writer.writerow(['Ord mer färre än ' + str(lessthan_n) + ' tecken: '\
+            + str(statistics.calculate_lengths([text], 'lessthan', lessthan_n, 'words'))])
+            writer.writerow(['Ord mer exakt ' + str(equals_n) + ' tecken: '\
+            + str(statistics.calculate_lengths([text], 'equal', equals_n, 'words'))])
+
+        if request.GET.get('pos'):
+            print(text.pos_counts)
+            writer.writerow([])
+            writer.writerow(['# Ordklasstatistik'])
+            for key in sorted(text.pos_counts.keys(), key = lambda x: text.pos_counts[x][0], reverse = True):
+
+                writer.writerow([key] + [text.pos_counts[key][0]] + [text.pos_counts[key][1].replace('.', delimiter)])
+        if request.GET.get('freq'):
+            writer.writerow([])
+            writer.writerow(['# Frekvensordlista'])
+            writer.writerow(['#'] + ['Token'] + ['POS'] + ['Antal'] + ['Andel'])
+            freqs = getattr(text, 'freqlist_' + freq_type)
+            if len(freqs) > freq_limit:
+                for x in range(freq_limit):
+                    writer.writerow(
+                                    [str(freqs[x][0])] +
+                                    [freqs[x][1].split('_')[0]] +
+                                    [freqs[x][1].split('_')[1]] +
+                                    [str(freqs[x][2])] +
+                                    [str(freqs[x][3])]
+                                    )
+
+        if request.GET.get('readability'):
+            writer.writerow([])
+            writer.writerow(['# Läsbarhet'])
+            writer.writerow(['LIX'] + [text.lix])
+            writer.writerow(['OVIX'] + [text.ovix])
+            writer.writerow(['Enkel nominalkvot'] + [text.nq_simple])
+            writer.writerow(['Full nominalkvot'] + [text.nq_full])
+            writer.writerow(['Type-token ratio'] + [text.ttr])
+
+
+
+    return response
 
 def download_stats(request):
 

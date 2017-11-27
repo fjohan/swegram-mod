@@ -5,6 +5,8 @@ from django.conf import settings
 
 from django.shortcuts import render, HttpResponse
 
+from django.contrib.auth.models import User
+
 def swegram_main(request):
     if request.session.get('file_list') and request.session.get('text_list'):
         request.session['text_list'] = sum([[text for text in file.texts] for file in request.session['file_list'] if file.activated], [])
@@ -31,3 +33,6 @@ def show_session(request):
         print(r)
 
     return HttpResponse('aa')
+
+def u(request):
+    return HttpResponse([u.username for u in User.objects.all()])

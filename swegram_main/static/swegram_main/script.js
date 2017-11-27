@@ -445,6 +445,39 @@ function export_table_to_csv(tables, filename) {
 
 }
 
+document.querySelector("#export_separated").addEventListener("click", function () {
+
+  separator = document.querySelector('input[name="freq_radio"]:checked').value;
+
+  if (separator === 'comma') {
+    queryStr = '?delimiter=comma'
+  } else {
+    queryStr = '?delimiter=period'
+  }
+
+  if (document.getElementById('chk_freq_limit').checked) {
+    console.log('checked limit')
+    var freqlimit = document.getElementById('freq_limit_n').value;
+    queryStr += '&freq_limit=' + freqlimit;
+  }
+
+  if (document.getElementById('chk_general_stats').checked) {
+    queryStr += '&general=true'
+  }
+  if (document.getElementById('chk_pos_stats').checked) {
+    queryStr += '&pos=true'
+  }
+  if (document.getElementById('chk_freq_stats').checked) {
+    queryStr += '&freq=true'
+  }
+  if (document.getElementById('chk_readability_stats').checked) {
+    queryStr += '&readability=true'
+  }
+
+  window.location.replace(url_prefix + '/download_all' + queryStr);
+
+});
+
 
 document.querySelector("#exportbtn").addEventListener("click", function () {
   var tables = [];
