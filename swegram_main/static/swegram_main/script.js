@@ -456,7 +456,6 @@ document.querySelector("#export_separated").addEventListener("click", function (
   }
 
   if (document.getElementById('chk_freq_limit').checked) {
-    console.log('checked limit')
     var freqlimit = document.getElementById('freq_limit_n').value;
     queryStr += '&freq_limit=' + freqlimit;
   }

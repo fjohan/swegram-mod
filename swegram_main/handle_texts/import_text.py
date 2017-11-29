@@ -234,15 +234,17 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
 
     text_list = rm_blanks(text_list)
 
-    if text_list[0].strip().startswith(METADATA_INITIAL) and\
-    text_list[0].strip().endswith(METADATA_FINAL):
+    #if text_list[0].strip().startswith(METADATA_INITIAL) and\
+    #text_list[0].strip().endswith(METADATA_FINAL):
+    if METADATA_INITIAL in text_list[0] and METADATA_FINAL in text_list[0]:
         use_metadata = True
         T.has_metadata = True
     else:
         use_metadata = False
         T.has_metadata = False
     if use_metadata:
-        metadata_labels = text_list[0].strip().strip('<>')
+        metadata_labels = text_list[0].split("<")[1].strip().strip("<>")
+        #metadata_labels = text_list[0].strip().strip('<>')
         T.metadata_labels = metadata_labels.split(METADATA_DELIMITER)
 
         del text_list[0]
