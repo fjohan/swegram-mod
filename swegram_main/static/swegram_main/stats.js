@@ -83,7 +83,7 @@ function download_stats(general, readability, pos, freq){
 function toggle_metadata(metadata){
 
   $("input").attr("disabled", true);
-
+  $('.main.ui.dimmer').dimmer({closable: false}).dimmer('show');
   var e = document.getElementById("stats_type_dropdown");
   val = e.options[e.selectedIndex].value;
 
