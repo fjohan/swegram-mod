@@ -100,8 +100,9 @@ function toggle_metadata(metadata){
       set_loading_all();
       //update_sidebar(false, 'none', false);
     }
-    $('.ui.dimmer').dimmer({closable: false}).dimmer('hide');
+
     update_everything();
+    $('.ui.dimmer').dimmer({closable: false}).dimmer('hide');
     $("input").attr("disabled", false);
   });
 }
