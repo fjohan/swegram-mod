@@ -83,7 +83,7 @@ function download_stats(general, readability, pos, freq){
 function toggle_metadata(metadata){
 
   $("input").attr("disabled", true);
-  $('.main.ui.dimmer').dimmer({closable: false}).dimmer('show');
+
   var e = document.getElementById("stats_type_dropdown");
   val = e.options[e.selectedIndex].value;
   $.get(url_prefix + '/update_metadata?meta=' + metadata, function(data) {
@@ -103,7 +103,10 @@ function toggle_metadata(metadata){
 
     update_everything();
     $('.ui.dimmer').dimmer({closable: false}).dimmer('hide');
-    $("input").attr("disabled", false);
+    $(document).ajaxStop(function () {
+      $("input").attr("disabled", false);
+    });
+
   });
 }
 
@@ -462,4 +465,5 @@ function update_everything(){
   get_readability();
   update_pos();
   initialize_semantic();
+
 }
