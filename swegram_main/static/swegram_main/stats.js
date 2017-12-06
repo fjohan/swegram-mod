@@ -86,7 +86,6 @@ function toggle_metadata(metadata){
   $('.main.ui.dimmer').dimmer({closable: false}).dimmer('show');
   var e = document.getElementById("stats_type_dropdown");
   val = e.options[e.selectedIndex].value;
-
   $.get(url_prefix + '/update_metadata?meta=' + metadata, function(data) {
 
 
@@ -96,13 +95,14 @@ function toggle_metadata(metadata){
     console.log('Javascript error');
 
   }).done(function() {
-    $("input").attr("disabled", false);
+
     if (val === 'all_texts'){
       set_loading_all();
       //update_sidebar(false, 'none', false);
     }
     $('.ui.dimmer').dimmer({closable: false}).dimmer('hide');
     update_everything();
+    $("input").attr("disabled", false);
   });
 }
 
@@ -359,7 +359,7 @@ function update_pos_list(){
 function update_pos(toggle=false){
   $('.pos.ui.dimmer').dimmer({closable: false}).dimmer('show');
   var queryStr = '?'
-  $("input").attr("disabled", true);
+  //$("input").attr("disabled", true);
 
   if (toggle != false){
     queryStr += 'toggle=' + toggle + '&'
@@ -381,12 +381,12 @@ function update_pos(toggle=false){
 
 
   }).fail(function() {
-    $("input").attr("disabled", false);
+    //$("input").attr("disabled", false);
     $('.ui.dimmer').dimmer({closable: false}).dimmer('hide');
     $('.pos.ui.dimmer').dimmer({closable: false}).dimmer('hide');
     console.log('Javascript error');
   }).done(function() {
-    $("input").attr("disabled", false);
+    //$("input").attr("disabled", false);
     $('.ui.dimmer').dimmer({closable: false}).dimmer('hide');
     $('.pos.ui.dimmer').dimmer({closable: false}).dimmer('hide');
   });
@@ -454,10 +454,11 @@ function update_everything(){
   update_lengths();
   update_general_stats();
   //update_pos_list();
-  update_pos();
+
   //update_freq_header();
   //update_freq_pos();
   update_freq();
   get_readability();
+  update_pos();
   initialize_semantic();
 }
