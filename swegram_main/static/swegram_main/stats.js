@@ -88,7 +88,7 @@ function toggle_metadata(metadata){
   val = e.options[e.selectedIndex].value;
 
   $.get(url_prefix + '/update_metadata?meta=' + metadata, function(data) {
-    initialize_semantic();
+
 
   }).fail(function() {
     $("input").attr("disabled", false);
@@ -99,9 +99,10 @@ function toggle_metadata(metadata){
     $("input").attr("disabled", false);
     if (val === 'all_texts'){
       set_loading_all();
-      update_sidebar(false, 'none', false);
+      //update_sidebar(false, 'none', false);
     }
     $('.ui.dimmer').dimmer({closable: false}).dimmer('hide');
+    update_everything();
   });
 }
 
