@@ -81,32 +81,56 @@ def nominal_quota(textlist):
     nn_pp_pc = 0
     pn_ab_vb = 0
 
+    individual_simple_nq = []
+    individual_full_nq = []
+
     for t in textlist:
+        text_nn = 0
+        text_vb = 0
+
+        text_nn_pp_pc = 0
+        text_pn_ab_vb = 0
+
         for s in t.sentences:
             for token in s.tokens:
                 if token.xpos in ['NN','PP','PC']:
-                    nn_pp_pc += 1
+                    text_nn_pp_pc += 1
+
                     if token.xpos == 'NN':
-                        nn += 1
+                        text_nn += 1
                 elif token.xpos in ['PN', 'AB', 'VB']:
-                    pn_ab_vb += 1
+                    text_pn_ab_vb += 1
                     if token.xpos == 'VB':
-                        vb += 1
+                        text_vb += 1
+            nn += text_nn
+            vb += text_vb
+
+            nn_pp_pc += text_nn_pp_pc
+            pn_ab_vb += text_pn_ab_vb
+
+        text_simple_nq = (float(text_nn)/text_vb)
+        text_full_nq = (float(text_nn_pp_pc) / text_pn_ab_vb)
+
+        individual_simple_nq.append(text_simple_nq)
+        individual_full_nq.append(text_full_nq)
+
     if nn == 0 or vb == 0:
         simple = 0
     else:
-        simple = round((float(nn)/vb) * 100, 2)
+        simple = round((float(nn)/vb), 2)
 
     if nn_pp_pc == 0 or pn_ab_vb == 0:
         full = 0
     else:
-        full = round((float(nn_pp_pc) / pn_ab_vb) * 100, 2)
-    return round(simple/100, 2), round(full/100, 2)
+        full = round((float(nn_pp_pc) / pn_ab_vb), 2)
+
+    return round(simple, 2), round(full, 2), round(np.median(individual_simple_nq), 2), round(np.median(individual_full_nq), 2)
 
 def ovix_ttr(textlist):
-    # gets ovix and ttr since they use the same data
+    # gets ovix (median), ovix (total), and ttr since they use the same data
     tokens = []
     individual_ovix_values = []
+    individual_ttr_values = []
     for t in textlist:
         text_tokens = []
         for s in t.sentences:
@@ -116,7 +140,9 @@ def ovix_ttr(textlist):
         text_n_tokens = float(len(text_tokens))
         text_n_types = float(len(set(text_tokens)))
         text_ovix = np.log(text_n_tokens) / np.log(2-(np.log(text_n_types)/np.log(text_n_tokens)))
+        text_ttr = float(len(set(text_tokens))) / len(text_tokens)
 
+        individual_ttr_values.append(text_ttr)
         individual_ovix_values.append(text_ovix)
 
     n_tokens = float(len(tokens))
@@ -126,19 +152,27 @@ def ovix_ttr(textlist):
         return 0, 0
     if n_types == n_tokens:
         return 0, 1
-    return round(np.median(individual_ovix_values), 2), round((float(len(set(tokens))) / len(tokens)), 2)
-    #return round(np.log(n_tokens) / np.log(2-(np.log(n_types)/np.log(n_tokens))), 2), round((float(len(set(tokens))) / len(tokens)), 2)
+    return round(np.median(individual_ovix_values), 2), round(np.log(n_tokens) / np.log(2-(np.log(n_types)/np.log(n_tokens))), 2),\
+    round((float(len(set(tokens))) / len(tokens)), 2), round(np.median(individual_ttr_values), 2)
 
 def lix(textlist):
     long_words = 0
     words = np.sum([text.word_count for text in textlist])
     sentences = np.sum([text.sentence_count for text in textlist])
 
-    for t in textlist:
-        for s in t.sentences:
-            long_words += len([len(token.norm.lower()) for token in s.tokens if len(token.norm) > 6])
+    individual_lix_values = []
 
-    return round((float(words)/sentences) + ((long_words*100) / float(words)), 2)
+    for t in textlist:
+        t_long_words = 0
+        t_words = t.word_count
+        t_sentences = t.sentence_count
+        for s in t.sentences:
+            lw = len([len(token.norm.lower()) for token in s.tokens if len(token.norm) > 6])
+            long_words += lw
+            t_long_words += lw
+        individual_lix_values.append((float(t_words)/t_sentences) + ((t_long_words*100) / float(t_words)))
+
+    return round(np.median(individual_lix_values), 2), round((float(words)/sentences) + ((long_words*100) / float(words)), 2)
 
 def freq_list(text, type):
 
@@ -217,7 +251,7 @@ def set_freq_limit(request):
 
 
 def get_freq_list(request):
-    print('GET FREQ')
+
     def perc_string(acc, dp=2):
         # Makes sure there's two decimals
         return ("{0:." + str(dp) + "f}").format(acc * 100) + "%"
@@ -372,9 +406,6 @@ def calculate_lengths(texts, type, n, words_pos):
 
 
 def get_length(request):
-    print('GET LENGTH')
-
-
 
     if not request.session.get('morethan_n'):
         request.session['morethan_n'] = 3
@@ -520,6 +551,10 @@ def get_general_stats(request):
     sentences = [t.sentence_count for t in text_list]
     misspells = [t.misspells for t in text_list]
     compounds = [t.compounds for t in text_list]
+    paragraphs = [t.paragraphs for t in text_list]
+
+    print(paragraphs)
+    print(tokens)
 
 
 
@@ -548,6 +583,10 @@ def get_general_stats(request):
     stats['median_compounds'] = np.median(compounds)
 
     stats['non_normalized_files'] = non_normalized_files
+
+    stats['n_paragraphs'] = sum(paragraphs)
+    stats['mean_paragraphs'] = round(np.mean(paragraphs), 2)
+    stats['median_paragraphs']  = np.median(paragraphs)
 
     return JsonResponse(stats)
 
@@ -629,9 +668,9 @@ def get_readability(request):
     data = {}
 
     if text_list:
-        data['nq_simple'], data['nq_full'] = nominal_quota(text_list)
-        data['ovix'], data['ttr'] = ovix_ttr(text_list)
-        data['lix'] = lix(text_list)
+        data['nq_simple_total'], data['nq_full_total'], data['nq_simple_median'], data['nq_full_median'] = nominal_quota(text_list)
+        data['ovix_median'], data['ovix_total'], data['ttr_total'], data['ttr_median'] = ovix_ttr(text_list)
+        data['lix_median'], data['lix_total'] = lix(text_list)
 
     return JsonResponse(data)
 

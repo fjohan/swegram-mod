@@ -116,36 +116,55 @@
   <table class="ui very basic table" id="table_readability" style="width:100%;">
   <thead style="display:none;"><tr style="display:none;"><th>#Allmän statistik</th></tr></thead>
 
+    <thead>
+      <tr>
+
+      <th></th>
+      <th style="text-align:right;">Total<sup>1</sup></th>
+      <th style="text-align:right;">Median<sup>2</sup></th>
+    </tr></thead>
+
+
+
     <tbody>
       <tr>
-        <td>LIX</td>
-        <td class="td_content" style="text-align:right;">{{lix}}</td>
+        <td>LIX (total)</td>
+        <td class="td_content" style="text-align:right;">{{lix_total}}</td>
+        <td class="td_content" style="text-align:right;">{{lix_median}}</td>
       </tr>
 
+
       <tr>
-        <td>OVIX</td>
-        <td class="td_content" style="text-align:right;">{{ovix}}</td>
+        <td>OVIX (total)</td>
+        <td class="td_content" style="text-align:right;">{{ovix_total}}</td>
+        <td class="td_content" style="text-align:right;">{{ovix_median}}</td>
       </tr>
 
       <tr>
         <td>Typ-token ratio</td>
-        <td class="td_content" style="text-align:right;">{{ttr}}</td>
+        <td class="td_content" style="text-align:right;">{{ttr_total}}</td>
+        <td class="td_content" style="text-align:right;">{{ttr_median}}</td>
       </tr>
 
       <tr>
         <td>Full nominalkvot</td>
-        <td class="td_content" style="text-align:right;">{{nq_full}}</td>
+        <td class="td_content" style="text-align:right;">{{nq_full_total}}</td>
+        <td class="td_content" style="text-align:right;">{{nq_full_median}}</td>
       </tr>
 
       <tr>
         <td>Enkel nominalkvot</td>
-        <td class="td_content" style="text-align:right;">{{nq_simple}}</td>
+        <td class="td_content" style="text-align:right;">{{nq_simple_total}}</td>
+        <td class="td_content" style="text-align:right;">{{nq_simple_median}}</td>
       </tr>
 
     </tbody>
 
   </thead>
   </table>
+  <br>
+  <sup>1</sup> Behandlar alla texter som en text och beräknar läsbarhet utifrån det<br>
+  <sup>2</sup> Medianvärde för varje individuell text
 
   </script>
 {% endverbatim myblock %}
@@ -343,6 +362,21 @@
         </td>
         <td class="td_content" style="text-align:right;">
           {{median_compounds}}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Stycken
+        </td>
+        <td class="td_content" style="text-align:right;">
+          {{n_paragraphs}}
+        </td>
+        <td class="td_content" style="text-align:right;">
+          {{mean_paragraphs}}
+        </td>
+        <td class="td_content" style="text-align:right;">
+          {{median_paragraphs}}
         </td>
       </tr>
 

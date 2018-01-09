@@ -111,6 +111,8 @@ class Text:
     freqlist_norm = {}
     freqlist_lemma = {}
 
+    paragraphs = 0
+
     eligible = False
     activated = False
 
@@ -189,6 +191,8 @@ def get_text_stats(text):
                     sentence.tokens = []
         return sentences
 
+
+
     text.sentences = create_sentences(text)
     text.token_count = statistics.token_count_text(text)
     text.word_count = statistics.word_count_text(text)
@@ -196,9 +200,9 @@ def get_text_stats(text):
     text.sentence_count = statistics.number_of_sentences_text(text)
     text.avg_sent_len = statistics.avg_sent_len_text(text)
 
-    text.lix = statistics.lix([text])
-    text.ovix, text.ttr = statistics.ovix_ttr([text])
-    text.nq_simple, text.nq_full = statistics.nominal_quota([text])
+    text.lix, _ = statistics.lix([text])
+    text.ovix, _, text.ttr, _ = statistics.ovix_ttr([text])
+    text.nq_simple, text.nq_full, _, _ = statistics.nominal_quota([text])
 
     text.total_token_len
     text.total_word_len
@@ -210,6 +214,7 @@ def get_text_stats(text):
     text.freqlist_norm = statistics.freq_list(text, 'norm')
     text.freqlist_lemma = statistics.freq_list(text, 'lemma')
 
+    text.paragraphs = max(max([[int(token.text_id.split(".")[0]) for token in sentence.tokens] for sentence in text.sentences]))
 
     for sentence in text.sentences:
         for token in sentence.tokens:
