@@ -11,6 +11,9 @@ import filesize
 
 from django.db import IntegrityError
 
+# This counts erroneously split compounds as one word when calculating paragraph count if set to True, otherwise as two words.
+paragraph_count_norm_based = True
+
 class Metadata:
     metadata = {}
 
@@ -111,7 +114,7 @@ class Text:
     freqlist_norm = {}
     freqlist_lemma = {}
 
-    paragraphs = 0
+    paragraphs = [] # contains ints of lengths for each paragraph
 
     eligible = False
     activated = False
@@ -214,7 +217,28 @@ def get_text_stats(text):
     text.freqlist_norm = statistics.freq_list(text, 'norm')
     text.freqlist_lemma = statistics.freq_list(text, 'lemma')
 
-    text.paragraphs = max(max([[int(token.text_id.split(".")[0]) for token in sentence.tokens] for sentence in text.sentences]))
+    paragraphs = []
+    paragraph_token_count = 0
+    current_paragraph = 1
+
+    for sentence in text.sentences:
+        for token in sentence.tokens:
+            if not paragraph_count_norm_based:
+                if '-' in token.token_id:
+                    paragraph_token_count += 1
+            if int(token.text_id.split(".")[0]) > current_paragraph:
+                paragraphs.append(paragraph_token_count)
+                if token.xpos not in ['MAD', 'MID', 'PAD']:
+                    paragraph_token_count = 1
+                current_paragraph += 1
+            elif token.xpos not in ['MAD', 'MID', 'PAD']:
+                paragraph_token_count += 1
+    paragraphs.append(paragraph_token_count)
+
+    text.paragraphs = paragraphs
+    print(text.paragraphs)
+
+
 
     for sentence in text.sentences:
         for token in sentence.tokens:

@@ -164,7 +164,7 @@
   </table>
   <br>
   <sup>1</sup> Behandlar alla texter som en text och beräknar läsbarhet utifrån det<br>
-  <sup>2</sup> Medianvärde för varje individuell text
+  <sup>2</sup> Medianvärde för den valda gruppen enskilda texter
 
   </script>
 {% endverbatim myblock %}
@@ -377,6 +377,21 @@
         </td>
         <td class="td_content" style="text-align:right;">
           {{median_paragraphs}}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Styckelängd (ord)
+        </td>
+        <td class="td_content" style="text-align:right;">
+
+        </td>
+        <td class="td_content" style="text-align:right;">
+          {{mean_paragraph_length}}
+        </td>
+        <td class="td_content" style="text-align:right;">
+          {{median_paragraph_length}}
         </td>
       </tr>
 

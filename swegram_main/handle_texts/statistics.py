@@ -551,10 +551,16 @@ def get_general_stats(request):
     sentences = [t.sentence_count for t in text_list]
     misspells = [t.misspells for t in text_list]
     compounds = [t.compounds for t in text_list]
-    paragraphs = [t.paragraphs for t in text_list]
+    paragraphs = [len(t.paragraphs) for t in text_list]
 
-    print(paragraphs)
-    print(tokens)
+    paragraph_lengths = []
+
+    for t in text_list:
+        for p in t.paragraphs:
+            paragraph_lengths.append(p)
+
+    print(paragraph_lengths)
+
 
 
 
@@ -587,6 +593,9 @@ def get_general_stats(request):
     stats['n_paragraphs'] = sum(paragraphs)
     stats['mean_paragraphs'] = round(np.mean(paragraphs), 2)
     stats['median_paragraphs']  = np.median(paragraphs)
+
+    stats['mean_paragraph_length'] = round(np.mean(paragraph_lengths), 2)
+    stats['median_paragraph_length'] = round(np.median(paragraph_lengths), 2)
 
     return JsonResponse(stats)
 
