@@ -1,5 +1,12 @@
-<div class="ui fixed bla menu">
+<div class="ui bla menu" style="width:1020px; background-color:#f3f4f6">
   <div class="ui container">
+    <div class="ui simple dropdown item">
+      Lägg till text <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item active" href="#" onclick="openTab('page_upload_text'); makeActive(this)">Annoterad text</a>
+        <a class="item" href="#" onclick="openTab('page_annotate'); makeActive(this)">Annotera ny text</a>
+      </div>
+    </div>
     <div class="ui simple dropdown item">
       Statistik <i class="dropdown icon"></i>
       <div class="menu">
@@ -14,13 +21,7 @@
 
     <span id="text_menu_zone"></span>
 
-    <div class="ui simple dropdown item">
-      Lägg till text <i class="dropdown icon"></i>
-      <div class="menu">
-        <a class="item" href="#" onclick="openTab('page_upload_text'); makeActive(this)">Annoterad text</a>
-        <a class="item active" href="#" onclick="openTab('page_annotate'); makeActive(this)">Annotera ny text</a>
-      </div>
-    </div>
+
     <div class="right menu">
 
       <!---

@@ -504,7 +504,6 @@ document.querySelector("#exportbtn").addEventListener("click", function () {
 $( document ).ready(function() {
   window.url_prefix = document.getElementById("urls").value;
   openTab('page_upload_text');
-  console.log('documet ready');
   update_sidebar();
   initialize_semantic();
 });

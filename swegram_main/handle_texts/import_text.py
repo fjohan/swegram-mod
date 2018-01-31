@@ -236,7 +236,6 @@ def get_text_stats(text):
     paragraphs.append(paragraph_token_count)
 
     text.paragraphs = paragraphs
-    print(text.paragraphs)
 
 
 

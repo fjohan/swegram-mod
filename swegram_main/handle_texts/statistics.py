@@ -561,9 +561,6 @@ def get_general_stats(request):
 
     print(paragraph_lengths)
 
-
-
-
     stats['n_tokens'] = sum(tokens)
     stats['mean_tokens'] = round(np.mean(tokens), 2)
     stats['median_tokens'] = np.median(tokens)
@@ -596,6 +593,9 @@ def get_general_stats(request):
 
     stats['mean_paragraph_length'] = round(np.mean(paragraph_lengths), 2)
     stats['median_paragraph_length'] = round(np.median(paragraph_lengths), 2)
+
+    stats['mean_paragraph_sentence_length'] = round(np.mean(paragraph_lengths), 2)
+    stats['median_paragraph_sentence_length'] = round(np.median(paragraph_lengths), 2)
 
     return JsonResponse(stats)
 
