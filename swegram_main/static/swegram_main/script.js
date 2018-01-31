@@ -503,7 +503,7 @@ document.querySelector("#exportbtn").addEventListener("click", function () {
 
 $( document ).ready(function() {
   window.url_prefix = document.getElementById("urls").value;
-  openTab('page_upload_text');
+  openTab('page_annotate_text');
   update_sidebar();
   initialize_semantic();
 });
