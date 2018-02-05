@@ -553,13 +553,15 @@ def get_general_stats(request):
     compounds = [t.compounds for t in text_list]
     paragraphs = [len(t.paragraphs) for t in text_list]
 
+
     paragraph_lengths = []
+    paragraph_sent_lengths = []
 
     for t in text_list:
         for p in t.paragraphs:
             paragraph_lengths.append(p)
-
-    print(paragraph_lengths)
+        for p in t.paragraph_sents:
+            paragraph_sent_lengths.append(p)
 
     stats['n_tokens'] = sum(tokens)
     stats['mean_tokens'] = round(np.mean(tokens), 2)
@@ -594,8 +596,8 @@ def get_general_stats(request):
     stats['mean_paragraph_length'] = round(np.mean(paragraph_lengths), 2)
     stats['median_paragraph_length'] = round(np.median(paragraph_lengths), 2)
 
-    stats['mean_paragraph_sentence_length'] = round(np.mean(paragraph_lengths), 2)
-    stats['median_paragraph_sentence_length'] = round(np.median(paragraph_lengths), 2)
+    stats['mean_paragraph_sentence_length'] = round(np.mean(paragraph_sent_lengths), 2)
+    stats['median_paragraph_sentence_length'] = round(np.median(paragraph_sent_lengths), 2)
 
     return JsonResponse(stats)
 
