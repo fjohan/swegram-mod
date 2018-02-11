@@ -153,7 +153,7 @@ def ovix_ttr(textlist):
         return 0, 0
     if n_types == n_tokens:
         return 0, 1
-
+    print('ovix_ttr 2')
     a, b, c, d = round(np.median(individual_ovix_values), 2), round(np.log(n_tokens) / np.log(2-(np.log(n_types)/np.log(n_tokens))), 2),\
     round((float(len(set(tokens))) / len(tokens)), 2), round(np.median(individual_ttr_values), 2)
     print(a, b, c, d)
