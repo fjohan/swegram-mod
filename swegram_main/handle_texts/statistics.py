@@ -127,6 +127,7 @@ def nominal_quota(textlist):
     return round(simple, 2), round(full, 2), round(np.median(individual_simple_nq), 2), round(np.median(individual_full_nq), 2)
 
 def ovix_ttr(textlist):
+    print('ovix_ttr')
     # gets ovix (median), ovix (total), and ttr since they use the same data
     tokens = []
     individual_ovix_values = []
