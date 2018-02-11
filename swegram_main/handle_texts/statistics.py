@@ -132,6 +132,7 @@ def ovix_ttr(textlist):
     tokens = []
     individual_ovix_values = []
     individual_ttr_values = []
+    print('ovix 2')
     for t in textlist:
         text_tokens = []
         for s in t.sentences:
@@ -145,7 +146,7 @@ def ovix_ttr(textlist):
 
         individual_ttr_values.append(text_ttr)
         individual_ovix_values.append(text_ovix)
-
+    print('ovix 3')
     n_tokens = float(len(tokens))
     n_types = float(len(set(tokens)))
 
@@ -153,7 +154,7 @@ def ovix_ttr(textlist):
         return 0, 0
     if n_types == n_tokens:
         return 0, 1
-    print('ovix_ttr 2')
+    print('ovix 4')
     a, b, c, d = round(np.median(individual_ovix_values), 2), round(np.log(n_tokens) / np.log(2-(np.log(n_types)/np.log(n_tokens))), 2),\
     round((float(len(set(tokens))) / len(tokens)), 2), round(np.median(individual_ttr_values), 2)
     print(a, b, c, d)
