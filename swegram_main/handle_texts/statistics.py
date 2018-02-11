@@ -127,12 +127,10 @@ def nominal_quota(textlist):
     return round(simple, 2), round(full, 2), round(np.median(individual_simple_nq), 2), round(np.median(individual_full_nq), 2)
 
 def ovix_ttr(textlist):
-    print('ovix_ttr')
     # gets ovix (median), ovix (total), and ttr since they use the same data
     tokens = []
     individual_ovix_values = []
     individual_ttr_values = []
-    print('ovix 2')
     for t in textlist:
         text_tokens = []
         for s in t.sentences:
@@ -146,19 +144,15 @@ def ovix_ttr(textlist):
 
         individual_ttr_values.append(text_ttr)
         individual_ovix_values.append(text_ovix)
-    print('ovix 3')
     n_tokens = float(len(tokens))
     n_types = float(len(set(tokens)))
 
     if n_types == 0 or n_tokens == 0:
-        return 0, 0
+        return 0, 0, 0, 0
     if n_types == n_tokens:
-        return 0, 1
-    print('ovix 4')
-    a, b, c, d = round(np.median(individual_ovix_values), 2), round(np.log(n_tokens) / np.log(2-(np.log(n_types)/np.log(n_tokens))), 2),\
+        return 0, 0, 1, 1
+    return round(np.median(individual_ovix_values), 2), round(np.log(n_tokens) / np.log(2-(np.log(n_types)/np.log(n_tokens))), 2),\
     round((float(len(set(tokens))) / len(tokens)), 2), round(np.median(individual_ttr_values), 2)
-    print(a, b, c, d)
-    return a, b, c, d
 
 def lix(textlist):
     long_words = 0
