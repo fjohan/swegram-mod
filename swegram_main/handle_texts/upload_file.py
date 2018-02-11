@@ -109,7 +109,7 @@ def annotate_uploaded_file(request):
             f.write(pasted_text)
         file_path = tf.name
         filename = 'paste ' + datetime.now().strftime("%H:%M:%S") + '.txt'
-        os.rename(tf.name, upload_location + filename)
+        shutil.move(tf.name, upload_location + filename)
         options = get_optparse(request, upload_location + filename, tmp_dir, custom_filename=filename)
 
     else:
