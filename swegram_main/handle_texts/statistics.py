@@ -16,7 +16,6 @@ def get_text_list(request):
     if request.session.get('single_text'):
         return request.session['single_text']
     elif request.session.get('text_list'):
-
         return [text for text in request.session['text_list'] if text_eligibility(request, text)]
     else:
         return []

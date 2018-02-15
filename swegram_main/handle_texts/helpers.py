@@ -288,8 +288,9 @@ def update_metadata(request):
         meta_prop = '_'
     else:
         meta_prop = smart_str(meta.split("_")[1])
-
+    print(request.session['metadata'][meta_label])
     request.session['metadata'][meta_label][meta_prop][0] = invert(request.session['metadata'][meta_label][meta_prop][0])
+    print(request.session['metadata'][meta_label])
     return JsonResponse({})
 
 def text_eligibility(request, text):
