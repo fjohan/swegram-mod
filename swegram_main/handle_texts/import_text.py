@@ -269,7 +269,7 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
     file_id = T.file_id
 
     list_of_texts = []
-
+    
     text_list = rm_blanks(text_list)
 
     #if text_list[0].strip().startswith(METADATA_INITIAL) and\
