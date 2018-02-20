@@ -163,6 +163,8 @@ def get_text_stats(text):
             # If corrected compound, include original tokens
             if compound_originals:
                 token.form = ' '.join(compound_originals) + ' [särskrivning]'
+                print('Form:')
+                print(token.form)
             return token
 
         sentences = []
@@ -173,8 +175,8 @@ def get_text_stats(text):
             split_line = text.text[x].split("\t")
             if len(split_line) == 13:
                 if '-' in split_line[1]:
-                    cmpnd_1 = text.text[x+1].split("\t")[2]
-                    cmpnd_2 = text.text[x+2].split("\t")[2]
+                    cmpnd_1 = text.text[x+1].split("\t")[2].strip()
+                    cmpnd_2 = text.text[x+2].split("\t")[2].strip()
                     token = new_token(split_line, (cmpnd_1, cmpnd_2))
                 else:
                     token = new_token(split_line)

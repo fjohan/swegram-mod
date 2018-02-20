@@ -50,38 +50,6 @@
               </tr>
 
               <tr>
-                <td>
-                  <div class="ui slider checkbox">
-                    <input type="checkbox" name="checkPOS" checked><label>Ordklasstaggning</label>
-                  </div>
-                </td>
-                <td>
-                  <div style="float:right;" class="ui horizontal label">Ordklasstaggare</div>
-                </td>
-                <td>
-                  <div class="field">
-                    <select class="ui fluid dropdown" name="tagger">
-                      <option name="efselab" value="efselab" selected="selected">efselab</option>
-                    </select>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td style="border:none;">
-                </td>
-                <td style="border:none;">
-                  <div style="float:right;" class="ui horizontal label">Modell för ordklasstaggare</div>
-                </td>
-                <td  style="border:none;">
-                  <div class="field">
-                    <select class="ui fluid dropdown" name="tagger_model">
-                      <option name="suc" value="suc">SUC 3.0</option>
-                    </select>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
 
                 <td>
                   <div class="ui slider checkbox">
@@ -123,12 +91,42 @@
 
               </tr>
 
+              <tr>
+                <td>
+                  <label>Ordklasstaggning</label>
+
+                </td>
+                <td>
+                  <div style="float:right;" class="ui horizontal label">Ordklasstaggare</div>
+                </td>
+                <td>
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="tagger">
+                      <option name="efselab" value="efselab" selected="selected">efselab</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="border:none;">
+                </td>
+                <td style="border:none;">
+                  <div style="float:right;" class="ui horizontal label">Modell för ordklasstaggare</div>
+                </td>
+                <td  style="border:none;">
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="tagger_model">
+                      <option name="suc" value="suc">SUC 3.0</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+
 
               <tr>
                 <td>
-                  <div class="ui slider checkbox">
-                    <input type="checkbox" name="checkParse" checked><label>Syntaktisk analys</label>
-                  </div>
+                  <label>Syntaktisk analys</label>
+
                 </td>
 
                 <td>
@@ -163,7 +161,7 @@
 
                 </tr>
 
-                <tr>
+                <tr style="display:none;">
                   <td style="display:none;">
                     <div class="ui slider checkbox">
                       <input type="checkbox" name="defaultColumns" checked>

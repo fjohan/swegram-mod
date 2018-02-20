@@ -406,8 +406,6 @@ def download_file(request, file_id):
     file_to_dl = [f for f in request.session['file_list']\
     if f.file_id == int(file_id)][0]
 
-    print(len(file_to_dl.raw_contents_list))
-
     f = NamedTemporaryFile(delete=False)
 
     def test_signal(sender, **kwargs):
@@ -415,11 +413,13 @@ def download_file(request, file_id):
     request_finished.connect(test_signal, weak=False)
     request_finished.disconnect(test_signal)
 
-    f.write('<' + ' '.join(file_to_dl.metadata_labels) + '>\n')
+    if file_to_dl.metadata_labels:
+        f.write('<' + ' '.join(file_to_dl.metadata_labels) + '>\n')
 
     for text in file_to_dl.texts:
-        f.write('<' + ' '.join(text.metadata) + '>')
-        f.write('\n')
+        if text.metadata:
+            f.write('<' + ' '.join(text.metadata) + '>')
+            f.write('\n')
         for sentence in text.sentences:
             for token in sentence.tokens:
                 f.write(

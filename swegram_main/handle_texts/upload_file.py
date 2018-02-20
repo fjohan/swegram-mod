@@ -140,7 +140,10 @@ def annotate_uploaded_file(request):
     try:
         t = import_textfile(annotated_file_path, text_eligible, normalized)
     finally:
-        os.remove(annotated_file_path)
+        try:
+            os.remove(annotated_file_path)
+        except:
+            pass
 
     if not t:
         return JsonResponse({'success': 0})
