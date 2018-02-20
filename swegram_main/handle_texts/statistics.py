@@ -108,8 +108,15 @@ def nominal_quota(textlist):
             nn_pp_pc += text_nn_pp_pc
             pn_ab_vb += text_pn_ab_vb
 
-        text_simple_nq = (float(text_nn)/text_vb)
-        text_full_nq = (float(text_nn_pp_pc) / text_pn_ab_vb)
+        if text_nn == 0 or text_vb == 0:
+            simple = 0
+        else:
+            text_simple_nq = (float(text_nn)/text_vb)
+
+        if text_nn_pp_pc == 0 or text_pn_ab_vb == 0:
+            full = 0
+        else:
+            text_full_nq = (float(text_nn_pp_pc) / text_pn_ab_vb)
 
         individual_simple_nq.append(text_simple_nq)
         individual_full_nq.append(text_full_nq)
@@ -137,15 +144,20 @@ def ovix_ttr(textlist):
             s_tokens = [token.norm.lower() for token in s.tokens if token.xpos not in ['MAD', 'MID', 'PAD']]
             text_tokens += s_tokens
             tokens += s_tokens
-        try:
-            text_n_tokens = float(len(text_tokens))
-            text_n_types = float(len(set(text_tokens)))
+
+
+        text_n_tokens = float(len(text_tokens))
+        text_n_types = float(len(set(text_tokens)))
+
+        if n_types == 0 or n_tokens == 0:
+            text_ovix = 0
+            text_ttr = 0
+        else:
             text_ovix = np.log(text_n_tokens) / np.log(2-(np.log(text_n_types)/np.log(text_n_tokens)))
             text_ttr = float(len(set(text_tokens))) / len(text_tokens)
-            individual_ttr_values.append(text_ttr)
-            individual_ovix_values.append(text_ovix)
-        except:
-            pass
+        individual_ttr_values.append(text_ttr)
+        individual_ovix_values.append(text_ovix)
+
     n_tokens = float(len(tokens))
     n_types = float(len(set(tokens)))
 
