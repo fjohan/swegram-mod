@@ -137,13 +137,15 @@ def ovix_ttr(textlist):
             s_tokens = [token.norm.lower() for token in s.tokens if token.xpos not in ['MAD', 'MID', 'PAD']]
             text_tokens += s_tokens
             tokens += s_tokens
-        text_n_tokens = float(len(text_tokens))
-        text_n_types = float(len(set(text_tokens)))
-        text_ovix = np.log(text_n_tokens) / np.log(2-(np.log(text_n_types)/np.log(text_n_tokens)))
-        text_ttr = float(len(set(text_tokens))) / len(text_tokens)
-
-        individual_ttr_values.append(text_ttr)
-        individual_ovix_values.append(text_ovix)
+        try:
+            text_n_tokens = float(len(text_tokens))
+            text_n_types = float(len(set(text_tokens)))
+            text_ovix = np.log(text_n_tokens) / np.log(2-(np.log(text_n_types)/np.log(text_n_tokens)))
+            text_ttr = float(len(set(text_tokens))) / len(text_tokens)
+            individual_ttr_values.append(text_ttr)
+            individual_ovix_values.append(text_ovix)
+        except:
+            pass
     n_tokens = float(len(tokens))
     n_types = float(len(set(tokens)))
 
