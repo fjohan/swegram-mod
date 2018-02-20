@@ -109,12 +109,12 @@ def nominal_quota(textlist):
             pn_ab_vb += text_pn_ab_vb
 
         if text_nn == 0 or text_vb == 0:
-            simple = 0
+            text_simple_nq = 0
         else:
             text_simple_nq = (float(text_nn)/text_vb)
 
         if text_nn_pp_pc == 0 or text_pn_ab_vb == 0:
-            full = 0
+            text_full_nq = 0
         else:
             text_full_nq = (float(text_nn_pp_pc) / text_pn_ab_vb)
 
