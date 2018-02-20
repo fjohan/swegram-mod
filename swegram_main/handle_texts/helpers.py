@@ -356,7 +356,7 @@ def str_to_bool(s):
 # Remove any empty lines in the beginning
 def rm_blanks(text_list):
     while True:
-        if if text_list and text_list[0] == '\n':
+        if text_list and text_list[0] == '\n':
             del text_list[0]
         else:
             break
