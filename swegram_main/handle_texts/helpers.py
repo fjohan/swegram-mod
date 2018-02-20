@@ -439,8 +439,11 @@ def download_file(request, file_id):
 
     f.close()
 
-    UploadedFile.objects.create(md5_checksum=get_md5(file_to_dl), normalized=file_to_dl.normalized)
-
+    try:
+        UploadedFile.objects.create(md5_checksum=get_md5(file_to_dl), normalized=file_to_dl.normalized)
+    except UploadedFile.IntegrityError:
+        pass
+        
     response = HttpResponse(FileWrapper(open(f.name)), content_type='application/force-download')
 
     response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_to_dl.filename)
