@@ -263,6 +263,7 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
     T = Textfile(path, eligible, normalized)
 
     text_list = T.raw_contents_list
+    print('len', len(text_list))
 
     file_id = T.file_id
 
