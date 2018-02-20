@@ -406,6 +406,8 @@ def download_file(request, file_id):
     file_to_dl = [f for f in request.session['file_list']\
     if f.file_id == int(file_id)][0]
 
+    print(len(file_to_dl.raw_contents_list))
+
     f = NamedTemporaryFile(delete=False)
 
     def test_signal(sender, **kwargs):
