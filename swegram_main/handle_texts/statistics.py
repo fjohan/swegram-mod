@@ -149,7 +149,7 @@ def ovix_ttr(textlist):
         text_n_tokens = float(len(text_tokens))
         text_n_types = float(len(set(text_tokens)))
 
-        if n_types == 0 or n_tokens == 0:
+        if text_n_types == 0 or text_n_tokens == 0:
             text_ovix = 0
             text_ttr = 0
         else:
