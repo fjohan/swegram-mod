@@ -106,7 +106,6 @@ def download_all(request):
             + str(statistics.calculate_lengths([text], 'equal', equals_n, 'words'))])
 
         if request.GET.get('pos'):
-            print(text.pos_counts)
             writer.writerow([])
             writer.writerow(['# Ordklasstatistik'])
             for key in sorted(text.pos_counts.keys(), key = lambda x: text.pos_counts[x][0], reverse = True):
@@ -288,10 +287,10 @@ def update_metadata(request):
         meta_prop = '_'
     else:
         meta_prop = smart_str(meta.split("_")[1])
-    print(request.session['metadata'][meta_label])
     request.session['metadata'][meta_label][meta_prop][0] = invert(request.session['metadata'][meta_label][meta_prop][0])
-    print(request.session['metadata'][meta_label])
-    return JsonResponse({})
+    return JsonResponse({
+                        'text_n': len([text for text in request.session['text_list'] if text.eligible]),
+                        'texts_selected': 20})
 
 def text_eligibility(request, text):
     if not text.activated:
@@ -435,7 +434,7 @@ def download_file(request, file_id):
                 token.head + '\t' +
                 token.deprel + '\t' +
                 token.deps + '\t' +
-                token.misc
+                token.misc.strip() + '\n'
                 )
             f.write('\n')
 
@@ -458,7 +457,7 @@ def update_sidebar(request):
     fl = request.session['file_list']
     tl = request.session['text_list']
 
-
+    print('a')
 
     for prop in request.GET:
         if prop == 'rm':

@@ -576,6 +576,9 @@ def get_general_stats(request):
         for p in t.paragraph_sents:
             paragraph_sent_lengths.append(p)
 
+    stats['texts_selected']  = len(text_list)
+    stats['text_n']          = len([text for text in request.session['text_list'] if text.eligible])
+
     stats['n_tokens'] = sum(tokens)
     stats['mean_tokens'] = round(np.mean(tokens), 2)
     stats['median_tokens'] = np.median(tokens)

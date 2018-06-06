@@ -142,29 +142,36 @@ def get_text_stats(text):
 
     def create_sentences(text):
 
-        def new_token(t, compound_originals=None):
+        def new_token(t, compound_originals=False):
             token = Token()
             token.text_id  = t[0]
             token.token_id = t[1]
-            token.form     = t[2]
-            token.norm     = t[3]
-            token.lemma    = t[4]
-            token.upos     = t[5]
-            token.xpos     = t[6]
-            token.feats    = t[7]
-            token.ufeats   = t[8]
-            token.head     = t[9]
-            token.deprel   = t[10]
-            token.deps     = t[11]
-            token.misc     = t[12]
+            token.form     = t[2].strip()
+            if compound_originals:
+                token.norm     = "_"
+                token.lemma    = "_"
+                token.upos     = "_"
+                token.xpos     = "_"
+                token.feats    = "_"
+                token.ufeats   = "_"
+                token.head     = "_"
+                token.deprel   = "_"
+                token.deps     = "_"
+                token.misc     = "_"
+            else:
+                token.norm     = t[3]
+                token.lemma    = t[4]
+                token.upos     = t[5]
+                token.xpos     = t[6]
+                token.feats    = t[7]
+                token.ufeats   = t[8]
+                token.head     = t[9]
+                token.deprel   = t[10]
+                token.deps     = t[11]
+                token.misc     = t[12]
 
             token.length = len(token.norm)
 
-            # If corrected compound, include original tokens
-            if compound_originals:
-                token.form = ' '.join(compound_originals) + ' [särskrivning]'
-                print('Form:')
-                print(token.form)
             return token
 
         sentences = []
@@ -174,16 +181,12 @@ def get_text_stats(text):
         for x in range(len(text.text)):
             split_line = text.text[x].split("\t")
             if len(split_line) == 13:
-                if '-' in split_line[1]:
-                    cmpnd_1 = text.text[x+1].split("\t")[2].strip()
-                    cmpnd_2 = text.text[x+2].split("\t")[2].strip()
-                    token = new_token(split_line, (cmpnd_1, cmpnd_2))
-                else:
-                    token = new_token(split_line)
+                token = new_token(split_line)
                 sentence.tokens.append(token)
-
+            elif len(split_line) == 3:
+                token = new_token(split_line, True)
+                sentence.tokens.append(token)
             elif split_line[0] == '\n':
-
                 if sentence.tokens:
                     # Check for fundament
                     for x in range(len(sentence.tokens)):
@@ -269,7 +272,7 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
     file_id = T.file_id
 
     list_of_texts = []
-    
+
     text_list = rm_blanks(text_list)
 
     #if text_list[0].strip().startswith(METADATA_INITIAL) and\
@@ -353,4 +356,5 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
         pos_counts = {}
 
     T.texts = list_of_texts
+
     return T

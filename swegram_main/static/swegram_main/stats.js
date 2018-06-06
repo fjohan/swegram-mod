@@ -268,6 +268,11 @@ function update_general_stats(){
     var rendered = template(data);
     $('#general_stats_zone').html(rendered);
 
+    var source = $('#n_loaded_texts_template').html();
+    var template = Handlebars.compile(source);
+    var rendered = template(data);
+    $('#n_loaded_texts_zone').html(rendered);
+
 
     initialize_semantic();
 
@@ -400,7 +405,6 @@ function update_pos(toggle=false){
 
 function update_sidebar(rm=false, file_id="none", update_loaded_texts = true){
   //$('.ui.dimmer').dimmer({closable: false}).dimmer('show');
-  console.log('sidebar update')
   var queryStr = "?";
 
   if (rm != false){
@@ -412,11 +416,6 @@ function update_sidebar(rm=false, file_id="none", update_loaded_texts = true){
   }
 
   $.get(url_prefix + '/update_sidebar' + queryStr, function(data) {
-
-    var source = $('#n_loaded_texts_template').html();
-    var template = Handlebars.compile(source);
-    var rendered = template(data);
-    $('#n_loaded_texts_zone').html(rendered);
 
     var source = $('#text_menu_template').html();
     var template = Handlebars.compile(source);

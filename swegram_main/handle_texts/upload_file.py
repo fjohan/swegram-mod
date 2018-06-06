@@ -152,6 +152,5 @@ def annotate_uploaded_file(request):
         return JsonResponse({'success': 0, 'error_meta': t})
 
     request = set_session(request, t)
-    for s in request.session.items():
-        print(s)
+
     return JsonResponse({'success': 1})

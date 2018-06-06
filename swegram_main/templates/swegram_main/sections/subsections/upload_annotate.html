@@ -34,7 +34,7 @@
               <tr>
                 <td>
                   <label>Tokenisering</label>
-                
+
                 </td>
                 <td>
                   <div style="float:right;" class="ui disabled horizontal label">Tokeniserare</div>
@@ -43,6 +43,37 @@
                   <div class="field">
                     <select class="ui disabled fluid dropdown" name="tokenizer">
                       <option name="efselab" value="efselab">efselab (svannotate)</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label>Ordklasstaggning</label>
+
+                </td>
+                <td>
+                  <div style="float:right;" class="ui horizontal label">Ordklasstaggare</div>
+                </td>
+                <td>
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="tagger">
+                      <option name="efselab" value="efselab" selected="selected">efselab</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="border:none;">
+                </td>
+                <td style="border:none;">
+                  <div style="float:right;" class="ui horizontal label">Modell för ordklasstaggare</div>
+                </td>
+                <td  style="border:none;">
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="tagger_model">
+                      <option name="suc" value="suc">SUC 3.0</option>
                     </select>
                   </div>
                 </td>
@@ -89,38 +120,6 @@
                 </td>
 
               </tr>
-
-              <tr>
-                <td>
-                  <label>Ordklasstaggning</label>
-
-                </td>
-                <td>
-                  <div style="float:right;" class="ui horizontal label">Ordklasstaggare</div>
-                </td>
-                <td>
-                  <div class="field">
-                    <select class="ui fluid dropdown" name="tagger">
-                      <option name="efselab" value="efselab" selected="selected">efselab</option>
-                    </select>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td style="border:none;">
-                </td>
-                <td style="border:none;">
-                  <div style="float:right;" class="ui horizontal label">Modell för ordklasstaggare</div>
-                </td>
-                <td  style="border:none;">
-                  <div class="field">
-                    <select class="ui fluid dropdown" name="tagger_model">
-                      <option name="suc" value="suc">SUC 3.0</option>
-                    </select>
-                  </div>
-                </td>
-              </tr>
-
 
               <tr>
                 <td>
