@@ -18,7 +18,8 @@ from django.conf import settings
 
 from ..models import UploadedFile
 
-from pipeline import pipeline
+from pipeline import pipeline, pipeline_en
+
 from get_optparse import get_optparse
 from helpers import handle_uploaded_file, checkbox_to_bool, add_text_metadata, str_to_bool, get_md5
 from .. import config
@@ -133,15 +134,19 @@ def annotate_uploaded_file(request):
         text_eligible = True
 
     try:
-        annotated_file_path = pipeline.run(options)
+        if request.session['language'] == 'en':
+            annotated_file_path = pipeline_en.run(options)
+        else:
+            annotated_file_path = pipeline.run(options)
     finally:
         shutil.rmtree(tmp_dir)
     # The second arg here is whether to use metadata or not
     try:
-        t = import_textfile(annotated_file_path, text_eligible, normalized)
+        t = import_textfile(request, annotated_file_path, text_eligible, normalized)
     finally:
         try:
-            os.remove(annotated_file_path)
+            pass
+            #os.remove(annotated_file_path)
         except:
             pass
 

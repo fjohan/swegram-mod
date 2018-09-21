@@ -135,10 +135,17 @@ class Text:
         self.activated = eligible
         self.normalized = normalized
 
-def get_text_stats(text):
+def get_text_stats(request, text):
     # Saker som måste optimeras:
     # läsbarhetsberäkning
     # frekvenslistor
+
+    if request.session['language'] == 'en':
+        import statistics_en as statistics
+        line_length = 12
+    else:
+        line_length = 13
+        import statistics
 
     def create_sentences(text):
 
@@ -159,16 +166,27 @@ def get_text_stats(text):
                 token.deps     = "_"
                 token.misc     = "_"
             else:
-                token.norm     = t[3]
-                token.lemma    = t[4]
-                token.upos     = t[5]
-                token.xpos     = t[6]
-                token.feats    = t[7]
-                token.ufeats   = t[8]
-                token.head     = t[9]
-                token.deprel   = t[10]
-                token.deps     = t[11]
-                token.misc     = t[12]
+                if request.session['language'] == 'en':
+                    token.norm     = t[3]
+                    token.lemma    = t[4]
+                    token.upos     = t[5]
+                    token.xpos     = t[6]
+                    token.feats    = t[7]
+                    token.head     = t[8]
+                    token.deprel   = t[9]
+                    token.deps     = t[10]
+                    token.misc     = t[11]
+                else:
+                    token.norm     = t[3]
+                    token.lemma    = t[4]
+                    token.upos     = t[5]
+                    token.xpos     = t[6]
+                    token.feats    = t[7]
+                    token.ufeats   = t[8]
+                    token.head     = t[9]
+                    token.deprel   = t[10]
+                    token.deps     = t[11]
+                    token.misc     = t[12]
 
             token.length = len(token.norm)
 
@@ -180,7 +198,7 @@ def get_text_stats(text):
 
         for x in range(len(text.text)):
             split_line = text.text[x].split("\t")
-            if len(split_line) == 13:
+            if len(split_line) == line_length:
                 token = new_token(split_line)
                 sentence.tokens.append(token)
             elif len(split_line) == 3:
@@ -189,12 +207,13 @@ def get_text_stats(text):
             elif split_line[0] == '\n':
                 if sentence.tokens:
                     # Check for fundament
-                    for x in range(len(sentence.tokens)):
-                        t = sentence.tokens[x]
-                        if 'VerbForm=Fin' in t.ufeats:
-                            for tok in sentence.tokens[:x]:
-                                tok.part_of_fundament = True
-                            break
+                    if request.session['language'] == 'sv':
+                        for x in range(len(sentence.tokens)):
+                            t = sentence.tokens[x]
+                            if 'VerbForm=Fin' in t.ufeats:
+                                for tok in sentence.tokens[:x]:
+                                    tok.part_of_fundament = True
+                                break
                     sentences.append(sentence)
                     sentence = Sentence()
                     sentence.tokens = []
@@ -240,10 +259,10 @@ def get_text_stats(text):
                 paragraph_sents.append(current_sent_count)
                 current_sent_count = 0
                 paragraphs.append(paragraph_token_count)
-                if token.xpos not in ['MAD', 'MID', 'PAD']:
+                if token.upos not in ['PUNCT']:
                     paragraph_token_count = 1
                 current_paragraph += 1
-            elif token.xpos not in ['MAD', 'MID', 'PAD']:
+            elif token.upos not in ['PUNCT']:
                 paragraph_token_count += 1
     paragraph_sents.append(current_sent_count)
     paragraphs.append(paragraph_token_count)
@@ -254,7 +273,7 @@ def get_text_stats(text):
 
     for sentence in text.sentences:
         for token in sentence.tokens:
-            if token.xpos in ['MAD', 'MID', 'PAD']:
+            if token.upos in ['PUNCT']:
                 text.total_token_len += token.length
             else:
                 text.content_words.append(token)
@@ -263,7 +282,7 @@ def get_text_stats(text):
 
     return text
 
-def import_textfile(path, eligible, normalized, check_if_normalized=False):
+def import_textfile(request, path, eligible, normalized, check_if_normalized=False):
 
     T = Textfile(path, eligible, normalized)
 
@@ -308,7 +327,7 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
                     t.metadata = new_text_metadata.split(METADATA_DELIMITER)
                     t.metadata_labels = metadata_labels.split(METADATA_DELIMITER)
                     if eligible:
-                        t = get_text_stats(t)
+                        t = get_text_stats(request, t)
                     list_of_texts.append(t)
 
                     new_text_contents = []
@@ -324,7 +343,7 @@ def import_textfile(path, eligible, normalized, check_if_normalized=False):
         t.metadata = new_text_metadata.split(METADATA_DELIMITER)
         t.metadata_labels = metadata_labels.split(METADATA_DELIMITER)
         if eligible:
-            t = get_text_stats(t)
+            t = get_text_stats(request, t)
         list_of_texts.append(t)
 
     else: # If we aren't using metadata

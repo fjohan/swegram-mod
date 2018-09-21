@@ -51,7 +51,11 @@ def get_optparse(request, filename, tmp_dir, custom_filename=False):
 
     options.parser_model = str(dict['parser_model'])
     options.tagger_model = str(dict['tagger_model'])
-    options.compounds_method = str(dict['compounds_method'])
+
+    if not dict.get('compounds_method'):
+        options.compounds_method = 'none'
+    else:
+        options.compounds_method = str(dict['compounds_method'])
 
     options.preserve_paragraphs = True
     options.preserve_metadata = True
