@@ -145,8 +145,7 @@ def annotate_uploaded_file(request):
         t = import_textfile(request, annotated_file_path, text_eligible, normalized)
     finally:
         try:
-            pass
-            #os.remove(annotated_file_path)
+            os.remove(annotated_file_path)
         except:
             pass
 
