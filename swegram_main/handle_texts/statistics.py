@@ -6,7 +6,7 @@ import numpy as np
 from django.http import JsonResponse
 
 from collections import Counter
-
+import time
 from .. import config
 
 def invert(bool):
@@ -21,8 +21,8 @@ def get_text_list(request):
     else:
         return []
 
-def basic_stats(text_list, request):
 
+def basic_stats(text_list, request):
     data = {}
 
     data['text_ids']        = []
@@ -72,6 +72,10 @@ def basic_stats(text_list, request):
                 )
 
     return data
+
+def nominal_quota_rust(textlist):
+    pass
+
 
 def nominal_quota(textlist):
     # Return simple, full
@@ -133,7 +137,9 @@ def nominal_quota(textlist):
 
     return round(simple, 2), round(full, 2), round(np.median(individual_simple_nq), 2), round(np.median(individual_full_nq), 2)
 
+
 def ovix_ttr(textlist):
+
     # gets ovix (median), ovix (total), and ttr since they use the same data
     tokens = []
     individual_ovix_values = []
@@ -168,7 +174,9 @@ def ovix_ttr(textlist):
     return round(np.median(individual_ovix_values), 2), round(np.log(n_tokens) / np.log(2-(np.log(n_types)/np.log(n_tokens))), 2),\
     round((float(len(set(tokens))) / len(tokens)), 2), round(np.median(individual_ttr_values), 2)
 
+
 def lix(textlist):
+
     long_words = 0
     words = np.sum([text.word_count for text in textlist])
     sentences = np.sum([text.sentence_count for text in textlist])
@@ -186,6 +194,7 @@ def lix(textlist):
         individual_lix_values.append((float(t_words)/t_sentences) + ((t_long_words*100) / float(t_words)))
 
     return round(np.median(individual_lix_values), 2), round((float(words)/sentences) + ((long_words*100) / float(words)), 2)
+
 
 def freq_list(text, type):
 
@@ -224,6 +233,7 @@ def freq_list(text, type):
         freq_as_list.append([x+1, sorted_words[x][0], sorted_words[x][1][0], sorted_words[x][1][1]])
 
     return freq_as_list
+
 
 def set_freq_limit(request):
 
@@ -292,7 +302,9 @@ def get_freq_list(request):
             request.session['freq_type'] = request.GET[prop]
         if prop == 'toggle_freq_pos':
             for pos in request.session['freq_pos_list']:
-                if pos[0] == request.GET[prop]:
+                if request.GET[prop] == 'deselect_all':
+                    pos[1] = False
+                elif pos[0] == request.GET[prop]:
                     pos[1] = invert(pos[1])
     disabled_pos = [p[0] for p in request.session['freq_pos_list'] if p[1] == False]
 
@@ -339,7 +351,9 @@ def get_freq_list(request):
                          'freq_pos_list': request.session['freq_pos_list'],
                          'non_normalized_files': request.session['non_normalized_files']})
 
+
 def get_pos_stats(request):
+
     def invert(bool):
         return not bool
 
@@ -354,6 +368,9 @@ def get_pos_stats(request):
     pos_list = sorted(list(set([x for sublist in [text.pos_counts.keys() for text\
     in request.session['text_list']] for x in sublist])))
 
+    if toggle == 'deselect_all':
+        request.session['pos_enabled'] = [[p, False] for p in pos_list]
+        toggle = False
     # Pos enabled has the values POS - enabled
     # enabled = whether the user has turned it on or off in the pos stats menu
     #del request.session['pos_enabled']
@@ -381,6 +398,7 @@ def get_pos_stats(request):
 
 
 def calculate_lengths(texts, type, n, words_pos):
+
     occurrences = 0
 
     if type == 'morethan':
@@ -492,6 +510,7 @@ def get_length(request):
 
     return JsonResponse(data)
 
+
 def get_metadata(request):
     all_labels = []
     for text in request.session.get('text_list'):
@@ -512,15 +531,17 @@ def get_metadata(request):
                     meta_combos[text.metadata_labels[x]] = [text.metadata[x]]
     return meta_combos
 
+
 def mean_median_word_len(text_list):
     # Total number of words, their mean and median length
     token_lens = []
-    for text in textlist:
+    for text in text_list:
         for s in text.sentences:
             for token in s.tokens:
                 if token.xpos not in ['MAD', 'MID', 'PAD']:
                     token_lens.append(len(token.norm))
     return round(np.mean(token_lens), 2), round(np.median(token_lens), 2)
+
 
 def mean_median_sent_len(textlist):
     text_lens = []
@@ -529,7 +550,9 @@ def mean_median_sent_len(textlist):
             text_lens.append(len(s.tokens))
     return round(np.mean(text_lens), 2), round(np.median(text_lens), 2)
 
+
 def get_general_stats(request):
+
     if not request.session.get('file_list'):
         return JsonResponse({})
 
@@ -620,7 +643,9 @@ def get_general_stats(request):
 def frequencies(text_list, pos_list, n):
     pass
 
+
 def pos_stats(text_list, included_pos_tags):
+
     def perc_string(acc, dp=2):
         # Makes sure there's two decimals
         return ("{0:." + str(dp) + "f}").format(acc * 100) + "%"
@@ -646,7 +671,9 @@ def pos_stats(text_list, included_pos_tags):
     d2 = list(sorted(d2.items(), key=lambda k: k[1][0], reverse=True))
     return d2
 
+
 def token_count_text(text):
+
     tot_tokens = 0
 
     for line in text.text:
@@ -654,7 +681,9 @@ def token_count_text(text):
             tot_tokens += 1
     return tot_tokens
 
+
 def word_count_text(text):
+
     tot_words = 0
     stoplist = ["MAD", "MID", "PAD"]
     for line in text.text:
@@ -662,7 +691,9 @@ def word_count_text(text):
             tot_words += 1
     return tot_words
 
+
 def avg_word_len_text(text):
+
     tot_len = 0
     tot_words = 0
     stoplist = ["MAD", "MID", "PAD"]
@@ -672,24 +703,30 @@ def avg_word_len_text(text):
             tot_words += 1
     return format(round((tot_len/tot_words), 2), '.2f')
 
+
 def number_of_sentences_text(text):
+
     no_of_sents = 0
     for line in text.text:
         if len(line.split("\t")) > 5:
             if ":" not in line.split("\t")[2]:
-                if line.split("\t")[6] == "MAD":
+                if line.split("\t")[6] == "MAD" or line.split("\t")[6] == '.':
                     no_of_sents += 1
     if no_of_sents == 0:
         return 1
     return no_of_sents
 
+
 def avg_sent_len_text(text):
+
     no_of_sents = number_of_sentences_text(text)
     no_of_tokens = token_count_text(text)
 
     return format(round((no_of_tokens/no_of_sents), 2), '.2f')
 
+
 def get_readability(request):
+
     text_list = get_text_list(request)
 
     data = {}
@@ -703,12 +740,14 @@ def get_readability(request):
 
 
 def misspells_text(text):
+
     matches = 0
     for line in text.text:
         if len(line.split("\t")) > 3:
             if line.split("\t")[2] != line.split("\t")[3]:
                 matches +=1
     return matches
+
 
 def compound_count_text(text):
     matches = 0

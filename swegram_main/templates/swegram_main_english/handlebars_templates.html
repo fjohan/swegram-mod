@@ -17,13 +17,13 @@
     <div class="column">
       <div class="ui segment">
       <div class="ui fluid icon input">
-        <input onkeyup="token_search()" id="search_token" type="text" placeholder="Sök token...">
+        <input onkeyup="token_search()" id="search_token" type="text" placeholder="Search token...">
           <i class="search icon"></i>
       </div><br>
 
         <div class="ui compact menu">
         <div class="ui simple dropdown item">
-          <span id="mark_pos_label">Check part-of-speech</span>
+          <span id="mark_pos_label">Highlight pos</span>
           <i class="dropdown icon"></i>
           <div class="menu">
           <br>
@@ -45,7 +45,7 @@
       <div class="column">
         <div style="word-wrap: break-word;" class="ui fitted segment">
 
-          <h4>Markerad token</h4>
+          <h4>Highlighted token</h4>
           <i style="cursor:pointer;" onclick="edit_text('form', '{{text_id}}')" class="edit icon"></i> Form: <span id="marked_form"></span><br>
           <i style="cursor:pointer;" onclick="edit_text('norm', '{{text_id}}')" class="edit icon"></i> Norm: <span id="marked_norm"></span><br>
           <i style="cursor:pointer;" onclick="edit_text('lemma', '{{text_id}}')" class="edit icon"></i> Lemma: <span id="marked_lemma"></span><br>
@@ -114,7 +114,7 @@
   <script id="readability_template" type="x-tmpl-mustache">
 
   <table class="ui very basic table" id="table_readability" style="width:100%;">
-  <thead style="display:none;"><tr style="display:none;"><th>#Allmän statistik</th></tr></thead>
+  <thead style="display:none;"><tr style="display:none;"><th>#General statistics</th></tr></thead>
 
     <thead>
       <tr>
@@ -147,13 +147,13 @@
       </tr>
 
       <tr>
-        <td>Full nominalkvot</td>
+        <td>Full nominal quota</td>
         <td class="td_content" style="text-align:right;">{{nq_full_total}}</td>
         <td class="td_content" style="text-align:right;">{{nq_full_median}}</td>
       </tr>
 
       <tr>
-        <td>Enkel nominalkvot</td>
+        <td>Simple nominal quota</td>
         <td class="td_content" style="text-align:right;">{{nq_simple_total}}</td>
         <td class="td_content" style="text-align:right;">{{nq_simple_median}}</td>
       </tr>
@@ -194,15 +194,15 @@
 
   <table>
     <table class="ui very basic table" id="table_lengths" style="width:100%;">
-    <thead style="display:none;"><tr style="display:none;"><th>#Allmän statistik</th></tr></thead>
+    <thead style="display:none;"><tr style="display:none;"><th>#General statistics</th></tr></thead>
 
       <tbody>
         <tr>
         <td id="morethan_label" style="width:20%;">
-        {{words_pos}} containing more than
+        {{words_pos}} with more than
         </td>
         <td>
-        <i onclick="update_lengths('morethan', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{morethan_n}} <i style="cursor:pointer;" onclick="update_lengths('morethan', 'plus');" class="plus square outline icon"></i>
+        <i onclick="update_lengths('morethan', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{morethan_n}} <i style="cursor:pointer;" onclick="update_lengths('morethan', 'plus');" class="plus square outline icon"></i> characters
         </td>
         <td id="morethan_total" style="text-align:right;">
         {{morethan_total}}
@@ -211,10 +211,10 @@
 
         <tr>
         <td id="lessthan_label" style="width:20%;">
-        {{words_pos}} containing less than
+        {{words_pos}} with less than
         </td>
         <td style="text-align:left;">
-        <i onclick="update_lengths('lessthan', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{lessthan_n}} <i style="cursor:pointer;" onclick="update_lengths('lessthan', 'plus');" class="plus square outline icon"></i>
+        <i onclick="update_lengths('lessthan', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{lessthan_n}} <i style="cursor:pointer;" onclick="update_lengths('lessthan', 'plus');" class="plus square outline icon"></i> characters
         </td>
         <td id="lessthan_total" style="text-align:right;">
         {{lessthan_total}}
@@ -223,10 +223,10 @@
 
         <tr>
         <td id="equal_label" style="width:20%;">
-        {{words_pos}} containing exactly
+        {{words_pos}} with
         </td>
         <td>
-        <i onclick="update_lengths('equal', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{equal_n}} <i style="cursor:pointer;" onclick="update_lengths('equal', 'plus');" class="plus square outline icon"></i>
+        <i onclick="update_lengths('equal', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{equal_n}} <i style="cursor:pointer;" onclick="update_lengths('equal', 'plus');" class="plus square outline icon"></i> characters
         </td>
         <td  id="equal_total" style="text-align:right;">
         {{equal_total}}
@@ -254,7 +254,7 @@
         <tr>
 
         <th></th>
-        <th style="text-align:right;">Count</th>
+        <th style="text-align:right;">Amount</th>
         <th style="text-align:right;">Average</th>
         <th style="text-align:right;">Median</th>
       </tr></thead>
@@ -413,14 +413,14 @@
       <tr style="display:none;"><br></tr>
       </tbody>
     </table>
-    <br><sup>1</sup> Exklusive skiljetecken
+    <br><sup>1</sup> Excluding punctuation
   </script>
 {% endverbatim myblock %}
 
 {% verbatim myblock %}
   <script id="text_menu_template" type="x-tmpl-mustache">
   <div class="ui simple dropdown item">
-    <b>Visualize text</b> <i class="dropdown icon"></i>
+    <b>Visualisera text</b> <i class="dropdown icon"></i>
 
 
     <div class="menu">
@@ -553,38 +553,38 @@
 
           <div id="{{this.[1]}}" class="text_faded sixteen wide column transition hidden">
           <br>
-            Use<span style="float:right; left:20px;" class="ui checked slider checkbox">
+            Include<span style="float:right; left:20px;" class="ui checked slider checkbox">
             <input type="checkbox" onclick="change_file_state({{this.[1]}});" {{#unless this.[6]}} disabled="disabled"{{/unless}}
             {{#if this.[7]}}checked=""{{/if}}><label>&nbsp;</label></span><br>
 
-            <div style="margin-top:2px;">Size<span style="float:right;">{{this.[2]}}</span></div>
+            <div style="margin-top:2px;">Storlek<span style="float:right;">{{this.[2]}}</span></div>
             Texter<span style="float:right;">{{this.[3]}}</span> <br>
             {{#if this.[5]}}
-              Has metadata<span style="float:right;">Ja</span><br>
+              Has metadata<span style="float:right;">Yes</span><br>
             {{else}}
-              Has metadata<span style="float:right;">Nej</span><br>
+              Has metadata<span style="float:right;">No</span><br>
             {{/if}}
             {{#if this.[6]}}
-              Can be analyzed<span style="float:right;">Ja</span><br>
+              Can be analyzed<span style="float:right;">Yes</span><br>
             {{else}}
-              Can be analyzed<span style="float:right;">Nej</span><br>
+              Can be analyzed<span style="float:right;">No</span><br>
             {{/if}}
             {{#if this.[8]}}
-              Normalized<span style="float:right;">Ja</span><br>
+              Normalized<span style="float:right;">Yes</span><br>
             {{else}}
-              Normalized<span style="float:right;">Nej</span><br>
+              Normalized<span style="float:right;">No</span><br>
             {{/if}}
 
-            Uploaded at <span style="float:right;">{{this.[4]}}</span><br>
+            Uploaded<span style="float:right;">{{this.[4]}}</span><br>
             <hr>
             <a style="" href="/swegram_dev/dl/{{this.[1]}}">
               <i class="download icon"></i>
-              Ladda ned
+              Download
             </a>
 
            <a style="color:red; float:right" href="#" onclick="update_sidebar({{this.[1]}});">
               <i class="remove icon"></i>
-              Ta bort
+              Remove
            </a>
 
 
@@ -623,10 +623,10 @@
     </div>
   </div>
 </div>
+<button class="ui basic button" onclick="update_freq_pos('deselect_all')">Deselect all parts-of-speech</button><br><br>
+<div id='freq_pos_list' class="ui grid text_faded sixteen wide column transition">
 
-<button class="ui basic button" onclick="fade_down_main('freq_pos_list')">Choose parts-of-speech</button><br><br>
 
-<div id='freq_pos_list' class="ui grid text_faded sixteen wide column transition hidden">
 
 {{#each freq_pos_list}}
   <div class="five wide column"><span class="ui checked slider checkbox">
@@ -637,10 +637,10 @@
 </div>
 <br>
 <center>
-<button class="ui small basic button" onclick="set_freq_limit('all')">Show all</button>
-<button class="ui small basic button" onclick="set_freq_limit('reset')">Show 25</button>
-<button class="ui small basic button" onclick="set_freq_limit('increase')">Show 25 more</button>
-<button class="ui small basic button" onclick="set_freq_limit('decrease')">Show 25 less</button>
+<button class="ui small basic button" onclick="set_freq_limit('all')">Visa alla</button>
+<button class="ui small basic button" onclick="set_freq_limit('reset')">Visa 25</button>
+<button class="ui small basic button" onclick="set_freq_limit('increase')">Visa 25 till</button>
+<button class="ui small basic button" onclick="set_freq_limit('decrease')">Visa 25 färre</button>
 
 
 </center>
@@ -665,8 +665,8 @@ Följande filer inkluderas inte eftersom de inte är normaliserade:<br>
 
       <th width="10%;">Index</th>
       <th width="50%;">Token</th>
-      <th width="10%;">Part-of-speech</th>
-      <th width="15%;" style="text-align:right;">Occurrences</th>
+      <th width="10%;">Ordklass</th>
+      <th width="15%;" style="text-align:right;">Amount</th>
       <th width="15%;" style="text-align:right;">Share</th>
     </tr></thead>
     <tbody>
@@ -696,10 +696,12 @@ Följande filer inkluderas inte eftersom de inte är normaliserade:<br>
 
 {% verbatim myblock %}
 <script id="pos_list_template" type="x-tmpl-mustache">
-<button class="ui basic button" onclick="fade_down_main('pos_list')">Choose parts-of-speech</button><br><br>
 
 
-<div id='pos_list' class="ui grid text_faded sixteen wide column transition hidden">
+<button class="ui basic button" onclick="update_pos('deselect_all')">Deselect all parts-of-speech</button><br><br>
+
+
+<div id='pos_list' class="ui grid text_faded sixteen wide column transition">
 
 {{#each pos_list}}
   <div class="five wide column"><span class="ui checked slider checkbox">
@@ -721,7 +723,7 @@ Följande filer inkluderas inte eftersom de inte är normaliserade:<br>
       <thead>
         <tr>
 
-        <th>Part-of-speech</th>
+        <th>Ordklass</th>
         <th style="text-align:right;">Amount</th>
         <th style="text-align:right;">Share</th>
       </tr></thead>

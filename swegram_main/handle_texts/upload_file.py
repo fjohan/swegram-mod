@@ -27,6 +27,17 @@ from import_text import import_textfile
 import os
 from django.http import JsonResponse
 
+import time
+
+def timing(f):
+    def wrap(*args):
+        time1 = time.time()
+        ret = f(*args)
+        time2 = time.time()
+        print '%s function took %0.3f ms' % (f.func_name, (time2-time1)*1000.0)
+        return ret
+    return wrap
+
 pipe_path       = config.PIPE_PATH
 upload_location = config.UPLOAD_LOCATION
 
@@ -140,9 +151,13 @@ def annotate_uploaded_file(request):
             annotated_file_path = pipeline.run(options)
     finally:
         shutil.rmtree(tmp_dir)
+
+    @timing
+    def import_t(request, annotated_file_path, text_eligible, normalized):
+        return import_textfile(request, annotated_file_path, text_eligible, normalized)
     # The second arg here is whether to use metadata or not
     try:
-        t = import_textfile(request, annotated_file_path, text_eligible, normalized)
+        t = import_t(request, annotated_file_path, text_eligible, normalized)
     finally:
         try:
             os.remove(annotated_file_path)

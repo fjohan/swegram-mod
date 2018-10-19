@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import statistics
+import statistics as statistics
 import os
 from helpers import rm_blanks, get_md5
 from ..config import METADATA_DELIMITER, METADATA_INITIAL, METADATA_FINAL
@@ -141,11 +141,9 @@ def get_text_stats(request, text):
     # frekvenslistor
 
     if request.session['language'] == 'en':
-        import statistics_en as statistics
         line_length = 12
     else:
         line_length = 13
-        import statistics
 
     def create_sentences(text):
 
@@ -352,7 +350,7 @@ def import_textfile(request, path, eligible, normalized, check_if_normalized=Fal
         t.metadata_labels = None  # Change this?
         t.text = text_list
         if eligible:
-            t = get_text_stats(t)
+            t = get_text_stats(request, t)
         list_of_texts.append(t)
 
     for text in list_of_texts: # Move this to get_text_stats perhaps

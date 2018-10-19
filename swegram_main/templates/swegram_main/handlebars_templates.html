@@ -202,7 +202,7 @@
         {{words_pos}} med fler än
         </td>
         <td>
-        <i onclick="update_lengths('morethan', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{morethan_n}} <i style="cursor:pointer;" onclick="update_lengths('morethan', 'plus');" class="plus square outline icon"></i>
+        <i onclick="update_lengths('morethan', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{morethan_n}} <i style="cursor:pointer;" onclick="update_lengths('morethan', 'plus');" class="plus square outline icon"></i> tecken
         </td>
         <td id="morethan_total" style="text-align:right;">
         {{morethan_total}}
@@ -214,7 +214,7 @@
         {{words_pos}} med färre än
         </td>
         <td style="text-align:left;">
-        <i onclick="update_lengths('lessthan', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{lessthan_n}} <i style="cursor:pointer;" onclick="update_lengths('lessthan', 'plus');" class="plus square outline icon"></i>
+        <i onclick="update_lengths('lessthan', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{lessthan_n}} <i style="cursor:pointer;" onclick="update_lengths('lessthan', 'plus');" class="plus square outline icon"></i> tecken
         </td>
         <td id="lessthan_total" style="text-align:right;">
         {{lessthan_total}}
@@ -226,7 +226,7 @@
         {{words_pos}} med exakt
         </td>
         <td>
-        <i onclick="update_lengths('equal', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{equal_n}} <i style="cursor:pointer;" onclick="update_lengths('equal', 'plus');" class="plus square outline icon"></i>
+        <i onclick="update_lengths('equal', 'minus');" style="cursor:pointer;" class="minus square outline icon"></i> {{equal_n}} <i style="cursor:pointer;" onclick="update_lengths('equal', 'plus');" class="plus square outline icon"></i> tecken
         </td>
         <td  id="equal_total" style="text-align:right;">
         {{equal_total}}
@@ -623,10 +623,10 @@
     </div>
   </div>
 </div>
+<button class="ui basic button" onclick="update_freq_pos('deselect_all')">Välj bort alla ordklasser</button><br><br>
+<div id='freq_pos_list' class="ui grid text_faded sixteen wide column transition">
 
-<button class="ui basic button" onclick="fade_down_main('freq_pos_list')">Välj ordklasser</button><br><br>
 
-<div id='freq_pos_list' class="ui grid text_faded sixteen wide column transition hidden">
 
 {{#each freq_pos_list}}
   <div class="five wide column"><span class="ui checked slider checkbox">
@@ -696,10 +696,12 @@ Följande filer inkluderas inte eftersom de inte är normaliserade:<br>
 
 {% verbatim myblock %}
 <script id="pos_list_template" type="x-tmpl-mustache">
-<button class="ui basic button" onclick="fade_down_main('pos_list')">Välj ordklasser</button><br><br>
 
 
-<div id='pos_list' class="ui grid text_faded sixteen wide column transition hidden">
+<button class="ui basic button" onclick="update_pos('deselect_all')">Välj bort alla ordklasser</button><br><br>
+
+
+<div id='pos_list' class="ui grid text_faded sixteen wide column transition">
 
 {{#each pos_list}}
   <div class="five wide column"><span class="ui checked slider checkbox">
