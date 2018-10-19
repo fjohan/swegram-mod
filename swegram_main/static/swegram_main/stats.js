@@ -1,3 +1,4 @@
+
 function getQueryStr() {
   var queryStrParts = [];
 
