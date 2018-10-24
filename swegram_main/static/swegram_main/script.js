@@ -89,10 +89,13 @@ function token_search() {
       });
 
       $(".norm").each(function() {
-          var norm = $(this).data('norm')
-          if (norm.toUpperCase() === search_query.toUpperCase()) {
-            $(this).addClass('highlighted');
+          var norm = $(this).data('norm');
+          if (typeof(norm) === "string") {
+            if (norm.toUpperCase() === search_query.toUpperCase()) {
+              $(this).addClass('highlighted');
+            }
           }
+
       });
 
     } else {
@@ -101,9 +104,11 @@ function token_search() {
       });
 
       $(".form").each(function() {
-          var form = $(this).data('form')
-          if (form.toUpperCase() === search_query.toUpperCase()) {
-            $(this).addClass('highlighted');
+          var form = $(this).data('form');
+          if (typeof(form) === "string") {
+            if (form.toUpperCase() === search_query.toUpperCase()) {
+              $(this).addClass('highlighted');
+            }
           }
       });
 
@@ -364,6 +369,7 @@ function fade_down(item){
 }
 
 function show_upload_section(){
+  console.log('show_upload');
   $('#upload_annotate_main').css('display', 'none');
   $('#paste_section').css('display', 'none');
   $('#file_select_label').css('display', '');
