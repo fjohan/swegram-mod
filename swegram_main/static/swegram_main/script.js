@@ -90,7 +90,7 @@ function token_search() {
 
       $(".norm").each(function() {
           var norm = $(this).data('norm')
-          if (norm === search_query) {
+          if (norm.toUpperCase() === search_query.toUpperCase()) {
             $(this).addClass('highlighted');
           }
       });
@@ -102,7 +102,7 @@ function token_search() {
 
       $(".form").each(function() {
           var form = $(this).data('form')
-          if (form === search_query) {
+          if (form.toUpperCase() === search_query.toUpperCase()) {
             $(this).addClass('highlighted');
           }
       });

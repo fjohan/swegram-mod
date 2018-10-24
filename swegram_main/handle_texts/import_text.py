@@ -357,10 +357,11 @@ def import_textfile(request, path, eligible, normalized, check_if_normalized=Fal
         pos_counts = {}
         for sentence in text.sentences:
             for token in sentence.tokens:
-                if token.xpos in pos_counts:
-                    pos_counts[token.xpos] += 1
-                else:
-                    pos_counts[token.xpos] = 1
+                if token.xpos != '_':
+                    if token.xpos in pos_counts:
+                        pos_counts[token.xpos] += 1
+                    else:
+                        pos_counts[token.xpos] = 1
 
         #text.pos_counts = sorted(pos_counts, key=pos_counts.get, reverse=True)
         text.pos_counts = pos_counts
