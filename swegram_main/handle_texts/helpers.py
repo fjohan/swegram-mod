@@ -434,7 +434,7 @@ def download_file(request, file_id):
                 token.head + '\t' +
                 token.deprel + '\t' +
                 token.deps + '\t' +
-                token.misc.strip() + '\n'
+                token.misc + '\n'
                 )
             f.write('\n')
 
