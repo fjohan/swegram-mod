@@ -167,8 +167,8 @@ def get_text_stats(request, text):
                 if request.session['language'] == 'en':
                     token.norm     = t[3]
                     token.lemma    = t[4]
-                    token.upos     = t[5]
-                    token.xpos     = t[6]
+                    token.upos     = t[6]
+                    token.xpos     = t[5]
                     token.feats    = t[7]
                     token.head     = t[8]
                     token.deprel   = t[9]

@@ -14,6 +14,9 @@ def start_english(request):
     return render(request, 'swegram_main_english/start_en.html')
 
 def swegram_main_swedish(request):
+    if request.session.get('language') == 'en':
+        del request.session['file_list']
+        del request.session['text_list']
     request.session['language'] = 'sv'
     if request.session.get('file_list') and request.session.get('text_list'):
         request.session['text_list'] = sum([[text for text in file.texts] for file in request.session['file_list'] if file.activated], [])
@@ -25,6 +28,9 @@ def swegram_main_swedish(request):
     return render(request, "swegram_main/main.html", context)
 
 def swegram_main_english(request):
+    if request.session.get('language') == 'sv':
+        del request.session['file_list']
+        del request.session['text_list']
     request.session['language'] = 'en'
     if request.session.get('file_list') and request.session.get('text_list'):
         request.session['text_list'] = sum([[text for text in file.texts] for file in request.session['file_list'] if file.activated], [])
