@@ -421,21 +421,37 @@ def download_file(request, file_id):
             f.write('\n')
         for sentence in text.sentences:
             for token in sentence.tokens:
-                f.write(
-                token.text_id + '\t' +
-                token.token_id + '\t' +
-                token.form + '\t' +
-                token.norm + '\t' +
-                token.lemma + '\t' +
-                token.upos + '\t' +
-                token.xpos + '\t' +
-                token.feats + '\t' +
-                token.ufeats + '\t' +
-                token.head + '\t' +
-                token.deprel + '\t' +
-                token.deps + '\t' +
-                token.misc + '\n'
-                )
+                if request.session['language'] == 'sv':
+                    f.write(
+                    token.text_id + '\t' +
+                    token.token_id + '\t' +
+                    token.form + '\t' +
+                    token.norm + '\t' +
+                    token.lemma + '\t' +
+                    token.upos + '\t' +
+                    token.xpos + '\t' +
+                    token.feats + '\t' +
+                    token.ufeats + '\t' +
+                    token.head + '\t' +
+                    token.deprel + '\t' +
+                    token.deps + '\t' +
+                    token.misc.strip() + '\n'
+                    )
+                else:
+                    f.write(
+                    token.text_id + '\t' +
+                    token.token_id + '\t' +
+                    token.form + '\t' +
+                    token.norm + '\t' +
+                    token.lemma + '\t' +
+                    token.upos + '\t' +
+                    token.xpos + '\t' +
+                    token.feats + '\t' +
+                    token.head + '\t' +
+                    token.deprel + '\t' +
+                    token.deps + '\t' +
+                    token.misc.strip() + '\n'
+                    )
             f.write('\n')
 
     f.close()
@@ -457,7 +473,6 @@ def update_sidebar(request):
     fl = request.session['file_list']
     tl = request.session['text_list']
 
-    print('a')
 
     for prop in request.GET:
         if prop == 'rm':

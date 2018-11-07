@@ -22,7 +22,6 @@ def get_text_list(request):
         return []
 
 def basic_stats(text_list, request):
-    print('basic_stats')
     data = {}
 
     data['text_ids']        = []
@@ -74,7 +73,6 @@ def basic_stats(text_list, request):
     return data
 
 def nominal_quota(textlist):
-    print('nominal_quota')
     # Return simple, full
     nn       = 0
     vb       = 0
@@ -135,7 +133,6 @@ def nominal_quota(textlist):
     return round(simple, 2), round(full, 2), round(np.median(individual_simple_nq), 2), round(np.median(individual_full_nq), 2)
 
 def ovix_ttr(textlist):
-    print('ovix_ttr')
     # gets ovix (median), ovix (total), and ttr since they use the same data
     tokens = []
     individual_ovix_values = []
@@ -171,7 +168,6 @@ def ovix_ttr(textlist):
     round((float(len(set(tokens))) / len(tokens)), 2), round(np.median(individual_ttr_values), 2)
 
 def lix(textlist):
-    print('lix')
     long_words = 0
     words = np.sum([text.word_count for text in textlist])
     sentences = np.sum([text.sentence_count for text in textlist])
@@ -191,7 +187,6 @@ def lix(textlist):
     return round(np.median(individual_lix_values), 2), round((float(words)/sentences) + ((long_words*100) / float(words)), 2)
 
 def freq_list(text, type):
-    print('freq_list')
     total = 0.0
     freq_list = {}
 
@@ -267,7 +262,6 @@ def set_freq_limit(request):
 
 
 def get_freq_list(request):
-    print('get_freq_list')
     def perc_string(acc, dp=2):
         # Makes sure there's two decimals
         return ("{0:." + str(dp) + "f}").format(acc * 100) + "%"
@@ -343,7 +337,6 @@ def get_freq_list(request):
                          'non_normalized_files': request.session['non_normalized_files']})
 
 def get_pos_stats(request):
-    print('get_pos_stats')
     def invert(bool):
         return not bool
 
@@ -385,7 +378,6 @@ def get_pos_stats(request):
 
 
 def calculate_lengths(texts, type, n, words_pos):
-    print('calculate_lengths')
     occurrences = 0
 
     if type == 'morethan':
@@ -535,7 +527,6 @@ def mean_median_sent_len(textlist):
     return round(np.mean(text_lens), 2), round(np.median(text_lens), 2)
 
 def get_general_stats(request):
-    print('get_general_stats')
     if not request.session.get('file_list'):
         return JsonResponse({})
 
@@ -627,7 +618,6 @@ def frequencies(text_list, pos_list, n):
     pass
 
 def pos_stats(text_list, included_pos_tags):
-    print('pos_stats')
     def perc_string(acc, dp=2):
         # Makes sure there's two decimals
         return ("{0:." + str(dp) + "f}").format(acc * 100) + "%"
@@ -654,7 +644,6 @@ def pos_stats(text_list, included_pos_tags):
     return d2
 
 def token_count_text(text):
-    print('token_count_text')
     tot_tokens = 0
 
     for line in text.text:
@@ -663,7 +652,6 @@ def token_count_text(text):
     return tot_tokens
 
 def word_count_text(text):
-    print('word_count_text')
     tot_words = 0
     stoplist = ["MAD", "MID", "PAD"]
     for line in text.text:
@@ -672,7 +660,6 @@ def word_count_text(text):
     return tot_words
 
 def avg_word_len_text(text):
-    print('avg_word_len_text')
     tot_len = 0
     tot_words = 0
     stoplist = ["MAD", "MID", "PAD"]
@@ -683,7 +670,6 @@ def avg_word_len_text(text):
     return format(round((tot_len/tot_words), 2), '.2f')
 
 def number_of_sentences_text(text):
-    print('number_of_sentences_text')
     no_of_sents = 0
     for line in text.text:
         if len(line.split("\t")) > 5:
@@ -695,14 +681,12 @@ def number_of_sentences_text(text):
     return no_of_sents
 
 def avg_sent_len_text(text):
-    print('avg_sent_len_text')
     no_of_sents = number_of_sentences_text(text)
     no_of_tokens = token_count_text(text)
 
     return format(round((no_of_tokens/no_of_sents), 2), '.2f')
 
 def get_readability(request):
-    print('get_readability')
     text_list = get_text_list(request)
 
     data = {}
@@ -716,7 +700,6 @@ def get_readability(request):
 
 
 def misspells_text(text):
-    print('misspells_text')
     matches = 0
     for line in text.text:
         if len(line.split("\t")) > 3:
@@ -725,7 +708,6 @@ def misspells_text(text):
     return matches
 
 def compound_count_text(text):
-    print('compound_count_text')
     matches = 0
     for line in text.text:
         if len(line.split("\t")) > 1:

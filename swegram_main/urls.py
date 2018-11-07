@@ -10,7 +10,9 @@ from .views import show_session, u
 
 app_name = 'swegram'
 urlpatterns = [
-    url(r'^$', views.swegram_main_swedish, name='swegram_main_swedish'),
+    url(r'^$', views.start_swedish, name='start_swedish'),
+    url(r'^en/$', views.start_english, name='start_english'),
+    url(r'^swedish/$', views.swegram_main_swedish, name='swegram_main_swedish'),
     url(r'^english/$', views.swegram_main_english, name='swegram_main_english'),
     url(r'^upload_annotate/$', annotate_uploaded_file, name="annotate_uploaded_file"),
     url(r'^upload/$', upload_annotated_file, name="upload_annotated_file"),

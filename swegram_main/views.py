@@ -7,6 +7,12 @@ from django.shortcuts import render, HttpResponse
 
 from django.contrib.auth.models import User
 
+def start_swedish(request):
+    return render(request, 'swegram_main/start_sv.html')
+
+def start_english(request):
+    return render(request, 'swegram_main_english/start_en.html')
+
 def swegram_main_swedish(request):
     request.session['language'] = 'sv'
     if request.session.get('file_list') and request.session.get('text_list'):
