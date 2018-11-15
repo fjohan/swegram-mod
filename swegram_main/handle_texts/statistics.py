@@ -792,12 +792,18 @@ def get_readability(request):
             data['ovix_median'], data['ovix_total'], data['ttr_total'], data['ttr_median'] = ovix_ttr(text_list)
             data['lix_median'], data['lix_total'] = lix(text_list)
         elif request.session['language'] == 'en':
-            n_sentences = 0.0
-            n_words = 0.0
-            n_characters = 0.0
-            n_syllables = 0.0
-            n_polysyllables = 0.0
+
+            cli_list = []
+            fres_list = []
+            fkgl_list = []
+            ari_list = []
+            smog_list = []
             for t in text_list:
+                n_sentences = 0.0
+                n_words = 0.0
+                n_characters = 0.0
+                n_syllables = 0.0
+                n_polysyllables = 0.0
                 for s in t.sentences:
                     n_sentences += 1
                     for token in s.tokens:
@@ -808,12 +814,18 @@ def get_readability(request):
                             n_syllables += syllable_count
                             if syllable_count > 2:
                                 n_polysyllables += 1
-            data['cli'] =  cli(n_sentences, n_words, n_characters)
-            data['fres'] = fres(n_sentences, n_words, n_syllables)
-            data['fkgl'] = fkgl(n_sentences, n_words, n_syllables)
-            data['ari'] =  ari(n_characters, n_words, n_sentences)
-            data['smog'] = smog(n_sentences, n_polysyllables)
-            print(data)
+                cli_list.append(cli(n_sentences, n_words, n_characters))
+                fres_list.append(fres(n_sentences, n_words, n_syllables))
+                fkgl_list.append(fkgl(n_sentences, n_words, n_syllables))
+                ari_list.append(ari(n_characters, n_words, n_sentences))
+                smog_list.append(smog(n_sentences, n_polysyllables))
+
+            data['cli_mean'], data['cli_median'] = round(np.mean(cli_list), 2), round(np.median(cli_list), 2)
+            data['fres_mean'], data['fres_median'] = round(np.mean(fres_list), 2), round(np.median(fres_list), 2)
+            data['fkgl_mean'], data['fkgl_median'] = round(np.mean(fkgl_list), 2), round(np.median(fkgl_list), 2)
+            data['ari_mean'], data['ari_median'] = round(np.mean(ari_list), 2), round(np.median(ari_list), 2)
+            data['smog_mean'], data['smog_median'] = round(np.mean(smog_list), 2), round(np.median(smog_list), 2)
+
 
 
     return JsonResponse(data)
