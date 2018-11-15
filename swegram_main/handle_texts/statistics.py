@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 from helpers import f7, text_eligibility
+from helpers import syllable_count_en
 import numpy as np
 from django.http import JsonResponse
 
 from collections import Counter
 import time
 from .. import config
+import math
 
 def invert(bool):
     return not bool
@@ -73,9 +75,47 @@ def basic_stats(text_list, request):
 
     return data
 
-def nominal_quota_rust(textlist):
-    pass
 
+
+def cli(sents, words, chars):
+    sents = float(sents)
+    words = float(words)
+    chars = float(chars)
+    l = (chars / words) * 100
+    s = (sents / words) * 100
+
+    cli = (0.0588 * l) - (0.296 * s) - 15.8
+
+    return cli
+
+def fres(sents, words, syllables):
+
+    sents = float(sents)
+    words = float(words)
+    syllables = float(syllables)
+
+    return 206.835 - (1.015 * (words/sents)) - (84.6 * (syllables/words))
+
+
+def fkgl(sents, words, syllables):
+    sents = float(sents)
+    words = float(words)
+    syllables = float(syllables)
+
+    return 0.39 * (words / sents) + 11.8 * (syllables / words) - 15.59
+
+def ari(chars, words, sents):
+    chars = float(chars)
+    words = float(words)
+    sents = float(sents)
+
+    return 4.71 * (chars / words) + 0.5 * (words/sents) - 21.43
+
+def smog(sents, polysyllables):
+    sents = float(sents)
+    polysyllables = float(polysyllables)
+
+    return 1.0430 * (math.sqrt(polysyllables * (30/sents)) + 3.1291)
 
 def nominal_quota(textlist):
     # Return simple, full
@@ -747,9 +787,34 @@ def get_readability(request):
     data = {}
 
     if text_list:
-        data['nq_simple_total'], data['nq_full_total'], data['nq_simple_median'], data['nq_full_median'] = nominal_quota(text_list)
-        data['ovix_median'], data['ovix_total'], data['ttr_total'], data['ttr_median'] = ovix_ttr(text_list)
-        data['lix_median'], data['lix_total'] = lix(text_list)
+        if request.session['language'] == 'sv':
+            data['nq_simple_total'], data['nq_full_total'], data['nq_simple_median'], data['nq_full_median'] = nominal_quota(text_list)
+            data['ovix_median'], data['ovix_total'], data['ttr_total'], data['ttr_median'] = ovix_ttr(text_list)
+            data['lix_median'], data['lix_total'] = lix(text_list)
+        elif request.session['language'] == 'en':
+            n_sentences = 0.0
+            n_words = 0.0
+            n_characters = 0.0
+            n_syllables = 0.0
+            n_polysyllables = 0.0
+            for t in text_list:
+                for s in t.sentences:
+                    n_sentences += 1
+                    for token in s.tokens:
+                        if token.xpos != 'PUNCT':
+                            n_words += 1
+                            n_characters += len(token.norm)
+                            syllable_count = syllable_count_en(token.norm)
+                            n_syllables += syllable_count
+                            if syllable_count > 2:
+                                n_polysyllables += 1
+            data['cli'] =  cli(n_sentences, n_words, n_characters)
+            data['fres'] = fres(n_sentences, n_words, n_syllables)
+            data['fkgl'] = fkgl(n_sentences, n_words, n_syllables)
+            data['ari'] =  ari(n_characters, n_words, n_sentences)
+            data['smog'] = smog(n_sentences, n_polysyllables)
+            print(data)
+
 
     return JsonResponse(data)
 
