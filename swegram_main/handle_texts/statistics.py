@@ -86,7 +86,7 @@ def cli(sents, words, chars):
 
     cli = (0.0588 * l) - (0.296 * s) - 15.8
 
-    return cli
+    return round(cli, 2)
 
 def fres(sents, words, syllables):
 
@@ -94,7 +94,7 @@ def fres(sents, words, syllables):
     words = float(words)
     syllables = float(syllables)
 
-    return 206.835 - (1.015 * (words/sents)) - (84.6 * (syllables/words))
+    return round(206.835 - (1.015 * (words/sents)) - (84.6 * (syllables/words)), 2)
 
 
 def fkgl(sents, words, syllables):
@@ -102,20 +102,20 @@ def fkgl(sents, words, syllables):
     words = float(words)
     syllables = float(syllables)
 
-    return 0.39 * (words / sents) + 11.8 * (syllables / words) - 15.59
+    return round(0.39 * (words / sents) + 11.8 * (syllables / words) - 15.59, 2)
 
 def ari(chars, words, sents):
     chars = float(chars)
     words = float(words)
     sents = float(sents)
 
-    return 4.71 * (chars / words) + 0.5 * (words/sents) - 21.43
+    return round(4.71 * (chars / words) + 0.5 * (words/sents) - 21.43, 2)
 
 def smog(sents, polysyllables):
     sents = float(sents)
     polysyllables = float(polysyllables)
 
-    return 1.0430 * (math.sqrt(polysyllables * (30/sents)) + 3.1291)
+    return round(1.0430 * (math.sqrt(polysyllables * (30/sents)) + 3.1291), 2)
 
 def nominal_quota(textlist):
     # Return simple, full
