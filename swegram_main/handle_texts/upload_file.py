@@ -29,15 +29,6 @@ from django.http import JsonResponse
 
 import time
 
-def timing(f):
-    def wrap(*args):
-        time1 = time.time()
-        ret = f(*args)
-        time2 = time.time()
-        print '%s function took %0.3f ms' % (f.func_name, (time2-time1)*1000.0)
-        return ret
-    return wrap
-
 pipe_path       = config.PIPE_PATH
 upload_location = config.UPLOAD_LOCATION
 
@@ -59,24 +50,11 @@ def set_session(request, t):
     add_text_metadata(request, t.file_id)
     return request
 
-def check_if_normalized(text):
-    # These are estimations, but they should work most of the time
-
-    return True
-
-    if len(text) > 200:
-        for x in range(200):
-            pass
-
-    # if len > 100
-    # else:
-    # check everything
-
 def upload_annotated_file(request):
     handle_uploaded_file(request.FILES['file_to_analyze'])
     filename = str(request.FILES['file_to_analyze'])
 
-    normalized = check_if_normalized(open(upload_location + filename).readlines())
+    normalized = True # Implement a way to actually check this at some point
 
     try:
         # File that are already annotated are assumed to be eligible
@@ -152,7 +130,6 @@ def annotate_uploaded_file(request):
     finally:
         shutil.rmtree(tmp_dir)
 
-    @timing
     def import_t(request, annotated_file_path, text_eligible, normalized):
         return import_textfile(request, annotated_file_path, text_eligible, normalized)
     # The second arg here is whether to use metadata or not
