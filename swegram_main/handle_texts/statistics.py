@@ -346,10 +346,17 @@ def get_freq_list(request):
 
     request.session['freq_list'] = freq_as_list
 
+    available_pos_tags = [tag[0] for tag in request.session['freq_pos_list']]
+    if request.session['language'] == 'en':
+        additional_pos_tags = [tag for tag in config.UD_TAGS if tag not in available_pos_tags]
+    else:
+        additional_pos_tags = [tag for tag in config.SUC_TAGS if tag not in available_pos_tags]
+
     return JsonResponse({'freq_type': request.session['freq_type'],
                          'freq_list': request.session['freq_list'][:request.session['freq_limit']],
                          'freq_pos_list': request.session['freq_pos_list'],
-                         'non_normalized_files': request.session['non_normalized_files']})
+                         'non_normalized_files': request.session['non_normalized_files'],
+                         'disabled_pos_list': additional_pos_tags})
 
 
 def get_pos_stats(request):
@@ -394,7 +401,15 @@ def get_pos_stats(request):
 
     text_list = get_text_list(request)
 
-    return JsonResponse({'pos_counts': pos_stats(text_list, included_pos_tags), 'pos_list': request.session['pos_enabled']})
+    available_pos_tags = [tag[0] for tag in request.session['pos_enabled']]
+    if request.session['language'] == 'en':
+        additional_pos_tags = [tag for tag in config.UD_TAGS if tag not in available_pos_tags]
+    else:
+        additional_pos_tags = [tag for tag in config.SUC_TAGS if tag not in available_pos_tags]
+
+    return JsonResponse({'pos_counts': pos_stats(text_list, included_pos_tags),
+                         'pos_list': request.session['pos_enabled'],
+                         'disabled_pos_list': additional_pos_tags})
 
 
 def calculate_lengths(texts, type, n, words_pos):

@@ -634,6 +634,12 @@
   </span></div>
 {{/each}}
 
+{{#each disabled_pos_list}}
+  <div class="five wide column"><span class="ui slider checkbox">
+  <label><strike>{{this}}</strike></label>
+  </span></div>
+{{/each}}
+
 </div>
 <br>
 <center>
@@ -706,6 +712,12 @@ Följande filer inkluderas inte eftersom de inte är normaliserade:<br>
 {{#each pos_list}}
   <div class="five wide column"><span class="ui checked slider checkbox">
   <input type="checkbox" {{#if this.[1]}}checked="" {{/if}}onclick="update_pos('{{this.[0]}}')"><label>{{this.[0]}}</label>
+  </span></div>
+{{/each}}
+
+{{#each disabled_pos_list}}
+  <div class="five wide column"><span class="ui slider checkbox">
+  <label>{{this}}</label>
   </span></div>
 {{/each}}
 

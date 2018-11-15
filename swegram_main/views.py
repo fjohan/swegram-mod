@@ -15,8 +15,10 @@ def start_english(request):
 
 def swegram_main_swedish(request):
     if request.session.get('language') == 'en':
-        del request.session['file_list']
-        del request.session['text_list']
+        if request.session.get('file_list'):
+            del request.session['file_list']
+        if request.session.get('text_list'):
+            del request.session['text_list']
     request.session['language'] = 'sv'
     if request.session.get('file_list') and request.session.get('text_list'):
         request.session['text_list'] = sum([[text for text in file.texts] for file in request.session['file_list'] if file.activated], [])
@@ -29,8 +31,10 @@ def swegram_main_swedish(request):
 
 def swegram_main_english(request):
     if request.session.get('language') == 'sv':
-        del request.session['file_list']
-        del request.session['text_list']
+        if request.session.get('file_list'):
+            del request.session['file_list']
+        if request.session.get('text_list'):
+            del request.session['text_list']
     request.session['language'] = 'en'
     if request.session.get('file_list') and request.session.get('text_list'):
         request.session['text_list'] = sum([[text for text in file.texts] for file in request.session['file_list'] if file.activated], [])
