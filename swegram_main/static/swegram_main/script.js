@@ -22,6 +22,7 @@ document.getElementById('pasted_text').onkeyup = function () {
 function get_pos_color(pos){
   var color_dict = {};
 
+  // SUC tags
   color_dict['AB'] = '#F9EBEA';
   color_dict['DT'] = '#F5EEF8';
   color_dict['HA'] = '#EAF2F8';
@@ -48,6 +49,25 @@ function get_pos_color(pos){
   color_dict['UO'] = '#F4F6F6';
   color_dict['VB'] = '#3498DB';
 
+  // UD tags
+  color_dict['ADJ'] = '#F9EBEA';
+  color_dict['ADP'] = '#F5EEF8';
+  color_dict['ADV'] = '#EAF2F8';
+  color_dict['AUX'] = '#E8F8F5';
+  color_dict['CCONJ'] = '#E9F7EF';
+  color_dict['DET'] = '#FEF9E7';
+  color_dict['INTJ'] = '#FDF2E9';
+  color_dict['NOUN'] = '#FADBD8';
+  color_dict['NUM'] = '#E8DAEF';
+  color_dict['PART'] = '#D6EAF8';
+  color_dict['PRON'] = '#D4EFDF';
+  color_dict['PROPN'] = '#FDEBD0';
+  color_dict['PUNCT'] = '#E6B0AA';
+  color_dict['SCONJ'] = '#D7BDE2';
+  color_dict['SYM'] = '#A9CCE3';
+  color_dict['VERB'] = '#F4D03F';
+  color_dict['X'] = '#F9E79F';
+
   /*
     Additional unused colors
     #EAEDED
@@ -62,6 +82,7 @@ function get_pos_color(pos){
 
 function toggle_visualise_pos(pos){
   if (document.getElementById("pos_" + pos + "_slider").checked === true){
+    console.log('true');
     $(".token").each(function() {
         var norm = $(this).data('xpos')
         if (norm === pos){
@@ -70,6 +91,7 @@ function toggle_visualise_pos(pos){
         }
     });
   } else{
+    console.log('false');
     $(".token").each(function() {
         var norm = $(this).data('xpos')
         if (norm === pos){
