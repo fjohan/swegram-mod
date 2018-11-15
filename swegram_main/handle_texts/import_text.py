@@ -353,7 +353,7 @@ def import_textfile(request, path, eligible, normalized, check_if_normalized=Fal
             t = get_text_stats(request, t)
         list_of_texts.append(t)
 
-    for text in list_of_texts: # Move this to get_text_stats perhaps
+    for text in list_of_texts: 
         pos_counts = {}
         for sentence in text.sentences:
             for token in sentence.tokens:
