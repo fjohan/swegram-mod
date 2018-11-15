@@ -44,23 +44,3 @@ def swegram_main_english(request):
         context['url'] = '/swegram_dev'
 
     return render(request, "swegram_main_english/main.html", context)
-
-def show_session(request):
-
-    print('caches:')
-    from django.core.cache.backends import locmem
-    print(locmem._caches)
-
-    if request.session.get('test'):
-        print('TEST working')
-
-    print('current session:')
-    request.session['test'] = 1
-    print(request.session.session_key)
-    for r in request.session.iteritems():
-        print(r)
-
-    return HttpResponse('aa')
-
-def u(request):
-    return HttpResponse([u.username for u in User.objects.all()])
