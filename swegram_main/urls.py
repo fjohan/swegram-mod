@@ -6,7 +6,6 @@ from handle_texts.helpers import update_sidebar, download_file, set_filename,\
 visualise_text, edit_token, set_stats_type, update_metadata, download_stats, download_all
 from handle_texts.statistics import get_pos_stats, get_freq_list,\
 get_general_stats, get_length, get_readability, set_freq_limit
-from .views import show_session, u
 
 app_name = 'swegram'
 urlpatterns = [
@@ -34,8 +33,6 @@ urlpatterns = [
     url(r'^set_filename/$', set_filename, name='set_filename'),
     url(r'^dl/(?P<file_id>.*)/$', download_file, name='download_file'),
 
-    url(r'^show_session/$', show_session, name='show_session'),
 
     url(r'^get_stats/$', download_stats, name='download_stats'),
-    url(r'^u/$', u, name='u'),
 ]
