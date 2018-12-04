@@ -13,8 +13,6 @@ from tempfile import NamedTemporaryFile
 from wsgiref.util import FileWrapper
 from django.utils.encoding import smart_str
 
-import numpy as np
-
 from datetime import datetime
 
 import os, csv
@@ -22,6 +20,18 @@ import os, csv
 import statistics
 
 from ..models import UploadedFile
+
+def median(lst):
+    n = len(lst)
+    if n < 1:
+            return None
+    if n % 2 == 1:
+            return sorted(lst)[n//2]
+    else:
+            return sum(sorted(lst)[n//2-1:n//2+1])/2.0
+
+def mean(numbers):
+    return float(sum(numbers)) / max(len(numbers), 1)
 
 def syllable_count_en(word):
     word = word.lower()
@@ -107,10 +117,10 @@ def download_all(request):
 
             writer.writerow(['Tokens'] + [text.token_count])
             writer.writerow(['Ord'] + [text.word_count])
-            writer.writerow(['Ordlängd, medelvärde'] + [round(np.mean(wordlens), 2)])
-            writer.writerow(['Ordlängd, median'] + [round(np.median(wordlens), 2)])
-            writer.writerow(['Meningslängd, medelvärde'] + [round(np.mean(sentlens), 2)])
-            writer.writerow(['Meningslängd, median'] + [round(np.median(sentlens), 2)])
+            writer.writerow(['Ordlängd, medelvärde'] + [round(mean(wordlens), 2)])
+            writer.writerow(['Ordlängd, median'] + [round(median(wordlens), 2)])
+            writer.writerow(['Meningslängd, medelvärde'] + [round(mean(sentlens), 2)])
+            writer.writerow(['Meningslängd, median'] + [round(median(sentlens), 2)])
             writer.writerow(['Felstavningar'] + [text.misspells])
             writer.writerow(['Särskrivningar'] + [text.compounds])
             writer.writerow(['Ord mer fler än ' + str(morethan_n) + ' tecken: '\

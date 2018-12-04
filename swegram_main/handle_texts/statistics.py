@@ -3,7 +3,7 @@
 
 from helpers import f7, text_eligibility
 from helpers import syllable_count_en
-import numpy as np
+from helpers import mean, median
 from django.http import JsonResponse
 
 from collections import Counter
@@ -47,11 +47,11 @@ def basic_stats(text_list, request):
                                 a.activated,
                                 a.normalized] for a in request.session.get('file_list')]
     data['metadata']        = request.session.get('metadata')
-    data['total_words']     = int(np.sum([text.word_count for text in text_list]))
-    data['total_tokens']    = int(np.sum([text.token_count for text in text_list]))
-    data['total_sentences'] = int(np.sum([text.sentence_count for text in text_list]))
-    data['compounds']       = int(np.sum([text.compounds for text in text_list]))
-    data['misspells']       = int(np.sum([text.misspells for text in text_list]))
+    data['total_words']     = int(sum([text.word_count for text in text_list]))
+    data['total_tokens']    = int(sum([text.token_count for text in text_list]))
+    data['total_sentences'] = int(sum([text.sentence_count for text in text_list]))
+    data['compounds']       = int(sum([text.compounds for text in text_list]))
+    data['misspells']       = int(sum([text.misspells for text in text_list]))
     data['texts']           = []
 
     for text_file in request.session['file_list']:
@@ -175,7 +175,7 @@ def nominal_quota(textlist):
     else:
         full = round((float(nn_pp_pc) / pn_ab_vb), 2)
 
-    return round(simple, 2), round(full, 2), round(np.median(individual_simple_nq), 2), round(np.median(individual_full_nq), 2)
+    return round(simple, 2), round(full, 2), round(median(individual_simple_nq), 2), round(median(individual_full_nq), 2)
 
 
 def ovix_ttr(textlist):
@@ -199,7 +199,10 @@ def ovix_ttr(textlist):
             text_ovix = 0
             text_ttr = 0
         else:
-            text_ovix = np.log(text_n_tokens) / np.log(2-(np.log(text_n_types)/np.log(text_n_tokens)))
+            try:
+                text_ovix = math.log(text_n_tokens) / math.log(2-(math.log(text_n_types)/math.log(text_n_tokens)))
+            except ZeroDivisionError:
+                text_ovix = 0.0
             text_ttr = float(len(set(text_tokens))) / len(text_tokens)
         individual_ttr_values.append(text_ttr)
         individual_ovix_values.append(text_ovix)
@@ -211,15 +214,15 @@ def ovix_ttr(textlist):
         return 0, 0, 0, 0
     if n_types == n_tokens:
         return 0, 0, 1, 1
-    return round(np.median(individual_ovix_values), 2), round(np.log(n_tokens) / np.log(2-(np.log(n_types)/np.log(n_tokens))), 2),\
-    round((float(len(set(tokens))) / len(tokens)), 2), round(np.median(individual_ttr_values), 2)
+    return round(median(individual_ovix_values), 2), round(math.log(n_tokens) / math.log(2-(math.log(n_types)/math.log(n_tokens))), 2),\
+    round((float(len(set(tokens))) / len(tokens)), 2), round(median(individual_ttr_values), 2)
 
 
 def lix(textlist):
 
     long_words = 0
-    words = np.sum([text.word_count for text in textlist])
-    sentences = np.sum([text.sentence_count for text in textlist])
+    words = sum([text.word_count for text in textlist])
+    sentences = sum([text.sentence_count for text in textlist])
 
     individual_lix_values = []
 
@@ -233,7 +236,7 @@ def lix(textlist):
             t_long_words += lw
         individual_lix_values.append((float(t_words)/t_sentences) + ((t_long_words*100) / float(t_words)))
 
-    return round(np.median(individual_lix_values), 2), round((float(words)/sentences) + ((long_words*100) / float(words)), 2)
+    return round(median(individual_lix_values), 2), round((float(words)/sentences) + ((long_words*100) / float(words)), 2)
 
 
 def freq_list(text, type):
@@ -595,7 +598,7 @@ def mean_median_word_len(text_list):
             for token in s.tokens:
                 if token.xpos not in ['MAD', 'MID', 'PAD']:
                     token_lens.append(len(token.norm))
-    return round(np.mean(token_lens), 2), round(np.median(token_lens), 2)
+    return round(mean(token_lens), 2), round(median(token_lens), 2)
 
 
 def mean_median_sent_len(textlist):
@@ -603,7 +606,7 @@ def mean_median_sent_len(textlist):
     for text in textlist:
         for s in text.sentences:
             text_lens.append(len(s.tokens))
-    return round(np.mean(text_lens), 2), round(np.median(text_lens), 2)
+    return round(mean(text_lens), 2), round(median(text_lens), 2)
 
 
 def get_general_stats(request):
@@ -618,14 +621,14 @@ def get_general_stats(request):
                 for token in s.tokens:
                     if token.xpos not in ['MAD', 'MID', 'PAD']:
                         token_lens.append(len(token.norm))
-        return round(np.mean(token_lens), 2), round(np.median(token_lens), 2)
+        return round(mean(token_lens), 2), round(median(token_lens), 2)
 
     def mean_median_sent_len(textlist):
         text_lens = []
         for text in textlist:
             for s in text.sentences:
                 text_lens.append(len([t for t in s.tokens if t.xpos not in ['MID','MAD','PAD']]))
-        return round(np.mean(text_lens), 2), round(np.median(text_lens), 2)
+        return round(mean(text_lens), 2), round(median(text_lens), 2)
 
     stats = {}
     text_list = get_text_list(request)
@@ -658,40 +661,40 @@ def get_general_stats(request):
     stats['text_n']          = len([text for text in request.session['text_list'] if text.eligible])
 
     stats['n_tokens'] = sum(tokens)
-    stats['mean_tokens'] = round(np.mean(tokens), 2)
-    stats['median_tokens'] = np.median(tokens)
+    stats['mean_tokens'] = round(mean(tokens), 2)
+    stats['median_tokens'] = median(tokens)
 
     stats['mean_word_len'], stats['median_word_len'] = mean_median_word_len(text_list)
 
     stats['n_words'] = sum(words)
-    stats['mean_words'] = round(np.mean(words), 2)
-    stats['median_words'] = np.median(words)
+    stats['mean_words'] = round(mean(words), 2)
+    stats['median_words'] = median(words)
 
     stats['n_sent'] = sum(sentences)
-    stats['mean_sent'] = round(np.mean(sentences), 2)
-    stats['median_sent'] = np.median(sentences)
+    stats['mean_sent'] = round(mean(sentences), 2)
+    stats['median_sent'] = median(sentences)
 
     stats['mean_sent_len'], stats['median_sent_len'] = mean_median_sent_len(text_list)
 
     stats['n_misspells'] = sum(misspells)
-    stats['mean_misspells'] = round(np.mean(misspells), 2)
-    stats['median_misspells'] = np.median(misspells)
+    stats['mean_misspells'] = round(mean(misspells), 2)
+    stats['median_misspells'] = median(misspells)
 
     stats['n_compounds'] = sum(compounds)
-    stats['mean_compounds'] = round(np.mean(compounds), 2)
-    stats['median_compounds'] = np.median(compounds)
+    stats['mean_compounds'] = round(mean(compounds), 2)
+    stats['median_compounds'] = median(compounds)
 
     stats['non_normalized_files'] = non_normalized_files
 
     stats['n_paragraphs'] = sum(paragraphs)
-    stats['mean_paragraphs'] = round(np.mean(paragraphs), 2)
-    stats['median_paragraphs']  = np.median(paragraphs)
+    stats['mean_paragraphs'] = round(mean(paragraphs), 2)
+    stats['median_paragraphs']  = median(paragraphs)
 
-    stats['mean_paragraph_length'] = round(np.mean(paragraph_lengths), 2)
-    stats['median_paragraph_length'] = round(np.median(paragraph_lengths), 2)
+    stats['mean_paragraph_length'] = round(mean(paragraph_lengths), 2)
+    stats['median_paragraph_length'] = round(median(paragraph_lengths), 2)
 
-    stats['mean_paragraph_sentence_length'] = round(np.mean(paragraph_sent_lengths), 2)
-    stats['median_paragraph_sentence_length'] = round(np.median(paragraph_sent_lengths), 2)
+    stats['mean_paragraph_sentence_length'] = round(mean(paragraph_sent_lengths), 2)
+    stats['median_paragraph_sentence_length'] = round(median(paragraph_sent_lengths), 2)
 
     return JsonResponse(stats)
 
@@ -820,11 +823,11 @@ def get_readability(request):
                 ari_list.append(ari(n_characters, n_words, n_sentences))
                 smog_list.append(smog(n_sentences, n_polysyllables))
 
-            data['cli_mean'], data['cli_median'] = round(np.mean(cli_list), 2), round(np.median(cli_list), 2)
-            data['fres_mean'], data['fres_median'] = round(np.mean(fres_list), 2), round(np.median(fres_list), 2)
-            data['fkgl_mean'], data['fkgl_median'] = round(np.mean(fkgl_list), 2), round(np.median(fkgl_list), 2)
-            data['ari_mean'], data['ari_median'] = round(np.mean(ari_list), 2), round(np.median(ari_list), 2)
-            data['smog_mean'], data['smog_median'] = round(np.mean(smog_list), 2), round(np.median(smog_list), 2)
+            data['cli_mean'], data['cli_median'] = round(mean(cli_list), 2), round(median(cli_list), 2)
+            data['fres_mean'], data['fres_median'] = round(mean(fres_list), 2), round(median(fres_list), 2)
+            data['fkgl_mean'], data['fkgl_median'] = round(mean(fkgl_list), 2), round(median(fkgl_list), 2)
+            data['ari_mean'], data['ari_median'] = round(mean(ari_list), 2), round(median(ari_list), 2)
+            data['smog_mean'], data['smog_median'] = round(mean(smog_list), 2), round(median(smog_list), 2)
 
 
 
