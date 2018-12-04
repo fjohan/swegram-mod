@@ -235,7 +235,7 @@ function highlight_token(token){
 function highlight_normalized(){
   $(".norm").each(function(){
     if ( $(this).attr('data-normalized') == 'true' ) {
-      $(this).addClass("underlined");
+      $(this).toggleClass("underlined");
     }
   });
 }
