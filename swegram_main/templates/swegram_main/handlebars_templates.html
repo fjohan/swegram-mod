@@ -38,7 +38,12 @@
       </div><br><br>
       <span class="ui checked slider checkbox">
         <input id="visualise_slider" type="checkbox" onclick="toggle_visualise();" checked=""><label>Visa normaliserade tokens</label>
+      </span><br><br>
+
+      <span class="ui checked slider checkbox">
+        <input id="visualise_slider" type="checkbox" onclick="highlight_normalized();" checked=""><label>Markera normaliserade tokens</label>
       </span><br>
+
       </div>
     </div>
     <span id="edit_token_id" style="display:none;"></span>
@@ -85,8 +90,9 @@
         data-deprel="{{deprel}}"
         data-deps="{{deps}}"
         data-misc="{{misc}}"
+        data-normalized="{{normalized}}"
         onclick="highlight_token(this);" class="token norm">
-        {{norm}}</span><span id="form_{{id}}"
+        {{#ifEquals compound_originals false}}{{norm}}{{/ifEquals}}</span><span id="form_{{id}}"
         data-id="{{id}}"
         data-form="{{form}}"
         data-norm="{{norm}}"
@@ -99,9 +105,12 @@
         data-deprel="{{deprel}}"
         data-deps="{{deps}}"
         data-misc="{{misc}}"
+        data-normalized="{{normalized}}"
         onclick="highlight_token(this);" class="token form">
         {{form}}</span>
+
         {{/this}}
+
       </div>
     </div>
     {{/sentences}}

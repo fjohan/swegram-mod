@@ -232,6 +232,14 @@ function highlight_token(token){
   document.getElementById("marked_misc").innerHTML = token.getAttribute("data-misc");
 }
 
+function highlight_normalized(){
+  $(".norm").each(function(){
+    if ( $(this).attr('data-normalized') == 'true' ) {
+      $(this).addClass("underlined");
+    }
+  });
+}
+
 function toggle_visualise(){
   if (document.getElementById("visualise_slider").checked === true){
 

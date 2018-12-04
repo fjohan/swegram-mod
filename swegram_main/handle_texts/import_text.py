@@ -71,6 +71,8 @@ class Token:
     misc     = None
     length   = None
 
+    normalized = False
+
     def __init__(self):
         self.id = id(self)
 
@@ -150,6 +152,7 @@ def get_text_stats(request, text):
         def new_token(t, compound_originals=False):
             token = Token()
             token.text_id  = t[0]
+            token.compound_originals = compound_originals
             token.token_id = t[1]
             token.form     = t[2].strip()
             if compound_originals:
@@ -187,6 +190,9 @@ def get_text_stats(request, text):
                     token.misc     = t[12]
 
             token.length = len(token.norm)
+
+            if token.form != token.norm:
+                token.normalized = True
 
             return token
 
@@ -353,7 +359,7 @@ def import_textfile(request, path, eligible, normalized, check_if_normalized=Fal
             t = get_text_stats(request, t)
         list_of_texts.append(t)
 
-    for text in list_of_texts: 
+    for text in list_of_texts:
         pos_counts = {}
         for sentence in text.sentences:
             for token in sentence.tokens:

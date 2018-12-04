@@ -85,8 +85,9 @@
         data-deprel="{{deprel}}"
         data-deps="{{deps}}"
         data-misc="{{misc}}"
+        data-normalized="{{normalized}}"
         onclick="highlight_token(this);" class="token norm">
-        {{norm}}</span><span id="form_{{id}}"
+        {{#ifEquals compound_originals false}}{{norm}}{{/ifEquals}}</span><span id="form_{{id}}"
         data-id="{{id}}"
         data-form="{{form}}"
         data-norm="{{norm}}"
@@ -99,9 +100,12 @@
         data-deprel="{{deprel}}"
         data-deps="{{deps}}"
         data-misc="{{misc}}"
+        data-normalized="{{normalized}}"
         onclick="highlight_token(this);" class="token form">
         {{form}}</span>
+
         {{/this}}
+
       </div>
     </div>
     {{/sentences}}
@@ -247,7 +251,7 @@
 
   <table>
     <table class="ui very basic table" id="table_general" style="width:100%;">
-    <thead style="display:none;"><tr style="display:none;"><th>#Allmän statistik</th></tr></thead>
+    <thead style="display:none;"><tr style="display:none;"><th>#General statistics</th></tr></thead>
       <thead>
         <tr>
 
@@ -641,10 +645,10 @@
 </div>
 <br>
 <center>
-<button class="ui small basic button" onclick="set_freq_limit('all')">Visa alla</button>
-<button class="ui small basic button" onclick="set_freq_limit('reset')">Visa 25</button>
-<button class="ui small basic button" onclick="set_freq_limit('increase')">Visa 25 till</button>
-<button class="ui small basic button" onclick="set_freq_limit('decrease')">Visa 25 färre</button>
+<button class="ui small basic button" onclick="set_freq_limit('all')">Show all</button>
+<button class="ui small basic button" onclick="set_freq_limit('reset')">Show 25</button>
+<button class="ui small basic button" onclick="set_freq_limit('increase')">Show 25 more</button>
+<button class="ui small basic button" onclick="set_freq_limit('decrease')">Show 25 fewer</button>
 
 
 </center>
@@ -663,13 +667,13 @@ Följande filer inkluderas inte eftersom de inte är normaliserade:<br>
 {{/if}}
 <table>
   <table class="ui very basic table" id="table_freq" style="width:100%;">
-  <thead style="display:none;"><tr style="display:none;"><th>#Frekvenser</th></tr></thead>
+  <thead style="display:none;"><tr style="display:none;"><th>#Frequencies</th></tr></thead>
     <thead>
       <tr>
 
       <th width="10%;">Index</th>
       <th width="50%;">Token</th>
-      <th width="10%;">Ordklass</th>
+      <th width="10%;">Part-of-speech</th>
       <th width="15%;" style="text-align:right;">Amount</th>
       <th width="15%;" style="text-align:right;">Share</th>
     </tr></thead>
@@ -729,11 +733,11 @@ Följande filer inkluderas inte eftersom de inte är normaliserade:<br>
 
   <table>
     <table class="ui very basic table" id="table_pos" style="width:100%;">
-    <thead style="display:none;"><tr style="display:none;"><th>#Ordklasstatistik</th></tr></thead>
+    <thead style="display:none;"><tr style="display:none;"><th>#Part-of-speech statistics</th></tr></thead>
       <thead>
         <tr>
 
-        <th>Ordklass</th>
+        <th>Part-of-speech</th>
         <th style="text-align:right;">Amount</th>
         <th style="text-align:right;">Share</th>
       </tr></thead>
