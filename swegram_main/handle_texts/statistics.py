@@ -280,6 +280,9 @@ def freq_list(text, type):
 
 def set_freq_limit(request):
 
+    for key, value in request.session.items():
+        print('{} => {}'.format(key, value))
+
     def get_smaller(n):
         return int(n-25)
     def get_larger(n):
@@ -400,7 +403,8 @@ def get_freq_list(request):
         additional_pos_tags = [tag for tag in config.SUC_TAGS if tag not in available_pos_tags]
 
     request.session.modified = True
-
+    for key, value in request.session.items():
+        print('{} => {}'.format(key, value))
     return JsonResponse({'freq_type': request.session['freq_type'],
                          'freq_list': request.session['freq_list'][:request.session['freq_limit']],
                          'freq_pos_list': request.session['freq_pos_list'],
