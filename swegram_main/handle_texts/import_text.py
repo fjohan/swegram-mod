@@ -229,7 +229,7 @@ def get_text_stats(request, text):
     text.token_count = statistics.token_count_text(text)
     text.word_count = statistics.word_count_text(text)
     text.avg_word_len = statistics.avg_word_len_text(text)
-    text.sentence_count = statistics.number_of_sentences_text(text)
+    text.sentence_count = len(text.sentences)
     text.avg_sent_len = statistics.avg_sent_len_text(text)
 
     text.lix, _ = statistics.lix([text])

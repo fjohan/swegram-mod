@@ -308,6 +308,8 @@ def set_freq_limit(request):
     elif type == 'reset':
         request.session['freq_limit'] = 25
 
+    request.session.modified = True
+
     return JsonResponse({
                         'freq_type': request.session['freq_type'],
                         'freq_list': request.session['freq_list'][:request.session['freq_limit']],
@@ -389,11 +391,15 @@ def get_freq_list(request):
 
     request.session['freq_list'] = freq_as_list
 
+    request.session.modified = True
+
     available_pos_tags = [tag[0] for tag in request.session['freq_pos_list']]
     if request.session['language'] == 'en':
         additional_pos_tags = [tag for tag in config.UD_TAGS if tag not in available_pos_tags]
     else:
         additional_pos_tags = [tag for tag in config.SUC_TAGS if tag not in available_pos_tags]
+
+    request.session.modified = True
 
     return JsonResponse({'freq_type': request.session['freq_type'],
                          'freq_list': request.session['freq_list'][:request.session['freq_limit']],
@@ -734,19 +740,20 @@ def token_count_text(text):
 
     tot_tokens = 0
 
-    for line in text.text:
-        if len(line.split("\t")) > 4:
-            tot_tokens += 1
+    for sentence in text.sentences:
+        tot_tokens += len(sentence.tokens)
     return tot_tokens
 
 
 def word_count_text(text):
 
     tot_words = 0
-    stoplist = ["MAD", "MID", "PAD"]
-    for line in text.text:
-        if len(line.split("\t")) > 5 and line.split("\t")[6] not in stoplist:
-            tot_words += 1
+    stoplist = ["MAD", "MID", "PAD", "PUNCT"]
+    for sentence in text.sentences:
+        for token in sentence.tokens:
+            if token.xpos not in stoplist:
+                tot_words += 1
+
     return tot_words
 
 
@@ -754,11 +761,12 @@ def avg_word_len_text(text):
 
     tot_len = 0
     tot_words = 0
-    stoplist = ["MAD", "MID", "PAD"]
-    for line in text.text:
-        if len(line.split("\t")) > 4 and line.split("\t")[6] not in stoplist:
-            tot_len += len(line.split("\t")[2])
-            tot_words += 1
+    stoplist = ["MAD", "MID", "PAD", "PUNCT"]
+    for sentence in text.sentences:
+        for token in sentence.tokens:
+            if token.xpos not in stoplist:
+                tot_len += len(token.norm)
+                tot_words += 1
     return format(round((tot_len/tot_words), 2), '.2f')
 
 
@@ -768,7 +776,7 @@ def number_of_sentences_text(text):
     for line in text.text:
         if len(line.split("\t")) > 5:
             if ":" not in line.split("\t")[2]:
-                if line.split("\t")[6] == "MAD" or line.split("\t")[6] == '.':
+                if line.split("\t")[6] == "MAD" or line.split("\t")[6] == 'PUNCT':
                     no_of_sents += 1
     if no_of_sents == 0:
         return 1
@@ -777,8 +785,8 @@ def number_of_sentences_text(text):
 
 def avg_sent_len_text(text):
 
-    no_of_sents = number_of_sentences_text(text)
-    no_of_tokens = token_count_text(text)
+    no_of_sents = text.sentence_count
+    no_of_tokens = text.token_count
 
     return format(round((no_of_tokens/no_of_sents), 2), '.2f')
 

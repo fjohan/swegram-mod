@@ -48,6 +48,7 @@ def set_session(request, t):
         request.session['text_list'] += [text for text in t.texts]
 
     add_text_metadata(request, t.file_id)
+    request.session.modified = True
     return request
 
 def upload_annotated_file(request):
