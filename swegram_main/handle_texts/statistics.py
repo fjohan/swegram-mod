@@ -33,7 +33,7 @@ def basic_stats(text_list, request):
             if text.metadata:
                 data['text_ids'].append([text.id, ' '.join(text.metadata)])
             else:
-                data['text_ids'].append([text.id, config.NO_METADATA_STRING])
+                data['text_ids'].append([text.id, text.filename])
     #sum([[ for text in file.texts if text_eligibility(request, text)] for file in request.session['file_list']], [])
     data['texts_selected']  = len(text_list)
     data['text_n']          = len([text for text in request.session['text_list'] if text.eligible])
@@ -64,11 +64,19 @@ def basic_stats(text_list, request):
                         for t in text_file.texts]
                     }
                 )
-            else:
+            elif request.session['language'] == 'sv':
                 data['texts'].append(
                     {
                         'filename': text_file.filename,
                         'texts_in_file': [{'meta': '(ingen metadata)', 'id': t.id}\
+                        for t in text_file.texts]
+                    }
+                )
+            else:
+                data['texts'].append(
+                    {
+                        'filename': text_file.filename,
+                        'texts_in_file': [{'meta': '(no metadata)', 'id': t.id}\
                         for t in text_file.texts]
                     }
                 )
@@ -277,50 +285,6 @@ def freq_list(text, type):
 
     return freq_as_list
 
-
-def set_freq_limit(request):
-
-    for key, value in request.session.items():
-        print('{} => {}'.format(key, value))
-
-    def get_smaller(n):
-        return int(n-25)
-    def get_larger(n):
-        return int(n+25)
-
-    type = None
-
-    for prop in request.GET:
-        if prop == 'type':
-            type = request.GET[prop]
-
-    if type == 'increase':
-        if len(request.session['freq_list']) < (request.session['freq_limit'] + 25):
-            request.session['freq_limit'] = len(request.session['freq_list'])
-        else:
-            request.session['freq_limit'] = get_larger(request.session['freq_limit'])
-        request.session['freq_limit']
-
-    elif type == 'decrease':
-        if request.session['freq_limit'] > 25:
-            request.session['freq_limit'] = get_smaller(request.session['freq_limit'])
-
-    elif type == 'all':
-        request.session['freq_limit'] = len(request.session['freq_list'])*10
-
-    elif type == 'reset':
-        request.session['freq_limit'] = 25
-
-    request.session.modified = True
-
-    return JsonResponse({
-                        'freq_type': request.session['freq_type'],
-                        'freq_list': request.session['freq_list'][:request.session['freq_limit']],
-                        'freq_pos_list': request.session['freq_pos_list'],
-                        'non_normalized_files': request.session['non_normalized_files']
-                        })
-
-
 def get_freq_list(request):
 
     def perc_string(acc, dp=2):
@@ -394,7 +358,6 @@ def get_freq_list(request):
 
     request.session['freq_list'] = freq_as_list
 
-    request.session.modified = True
 
     available_pos_tags = [tag[0] for tag in request.session['freq_pos_list']]
     if request.session['language'] == 'en':
@@ -402,11 +365,9 @@ def get_freq_list(request):
     else:
         additional_pos_tags = [tag for tag in config.SUC_TAGS if tag not in available_pos_tags]
 
-    request.session.modified = True
-    for key, value in request.session.items():
-        print('{} => {}'.format(key, value))
+
     return JsonResponse({'freq_type': request.session['freq_type'],
-                         'freq_list': request.session['freq_list'][:request.session['freq_limit']],
+                         'freq_list': request.session['freq_list'],
                          'freq_pos_list': request.session['freq_pos_list'],
                          'non_normalized_files': request.session['non_normalized_files'],
                          'disabled_pos_list': additional_pos_tags})
@@ -572,7 +533,10 @@ def get_length(request):
     [text.pos_counts.keys() for text in text_list] for x in sublist])))
 
     if request.session['lengths_words_pos'] == 'words':
-        data['words_pos'] = 'Ord'
+        if request.session['language'] == 'sv':
+            data['words_pos'] = 'Ord'
+        else:
+            data['words_pos'] = 'Words'
     else:
         data['words_pos'] = request.session['lengths_words_pos']
 

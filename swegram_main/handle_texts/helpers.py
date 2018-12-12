@@ -506,6 +506,7 @@ def update_sidebar(request):
             request.session['file_list'] = [f for f in fl if f.file_id != file_to_remove]
             request.session['text_list'] = [t for t in tl if t.file_id != file_to_remove]
 
+
         elif prop == 'set_state':
             file_to_change = int(request.GET[prop])
             request.session['file_list'] = [f.toggle_activate() if f.file_id == file_to_change else f for f in fl]

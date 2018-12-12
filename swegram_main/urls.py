@@ -5,7 +5,7 @@ from handle_texts.upload_file import upload_annotated_file, annotate_uploaded_fi
 from handle_texts.helpers import update_sidebar, download_file, set_filename,\
 visualise_text, edit_token, set_stats_type, update_metadata, download_stats, download_all
 from handle_texts.statistics import get_pos_stats, get_freq_list,\
-get_general_stats, get_length, get_readability, set_freq_limit
+get_general_stats, get_length, get_readability
 
 app_name = 'swegram'
 urlpatterns = [
@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^readability/$', get_readability, name='get_readability'),
     url(r'^visualise/$', visualise_text, name='visualise_text'),
     url(r'^edit_token/$', edit_token, name='edit_token'),
-    url(r'^set_freq_limit/$', set_freq_limit, name='set_freq_limit'),
     url(r'^set_stats_type/$', set_stats_type, name='set_stats_type'),
     url(r'^update_metadata/$', update_metadata, name='update_metadata'),
 

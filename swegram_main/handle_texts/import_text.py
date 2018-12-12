@@ -90,6 +90,7 @@ class Text:
 
     # file_id is used to associate a text to a file, used when removing a file
     file_id = None
+    filename = None
     id = 0
     metadata = []
     metadata_labels = []
@@ -343,6 +344,7 @@ def import_textfile(request, path, eligible, normalized, check_if_normalized=Fal
             else: # If not metadata, just add the line to the text
                  new_text_contents.append(line)
         t = Text(file_id, eligible, normalized)
+        t.filename = T.filename
         t.text = new_text_contents
         t.metadata = new_text_metadata.split(METADATA_DELIMITER)
         t.metadata_labels = metadata_labels.split(METADATA_DELIMITER)
@@ -352,6 +354,7 @@ def import_textfile(request, path, eligible, normalized, check_if_normalized=Fal
 
     else: # If we aren't using metadata
         t = Text(file_id, eligible, normalized)
+        t.filename = T.filename
         t.metadata = None         # Change this?
         t.metadata_labels = None  # Change this?
         t.text = text_list
