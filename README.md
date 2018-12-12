@@ -2,7 +2,8 @@
 
 There are two repositories included in swegram that need to be acquired separately:
 
-UDpipe (https://github.com/ufal/udpipe), where the executable should be available in swegram_main/handle_texts/pipeline/nlp/udpipe/udpipe
+`UDpipe` (https://github.com/ufal/udpipe), where the executable should be available in swegram_main/handle_texts/pipeline/nlp/udpipe/udpipe
+
 efselab (https://github.com/robertostling/efselab), along with the Swedish annotation pipeline, for which instructions can be found in the readme for efselab. The swedish pipeline should be available in swegram_main/handle_texts/pipeline/nlp/efselab/swe_pipeline.py
 
 ### Configuring
