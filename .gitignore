@@ -3,4 +3,6 @@
 swegram_main/uploads
 swegram_main/handle_texts/pipeline/nlp/efselab/*
 swegram_main/handle_texts/pipeline/nlp/udpipe/*
+swegram_main/handle_texts/pipeline/tmp/*
+swegram_main/handle_texts/output/*
 swegram/production.py
