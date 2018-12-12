@@ -8,5 +8,5 @@ There are two repositories included in swegram that need to be acquired separate
 
 ### Configuring
 
-swegram/base.py contains settings that are typically shared between production and development environments. It then imports the appropriate configuration, either local.py or production.py. production.py is not included in the repository; just make a copy of local.py and change the appropriate settings (DEBUG, PRODUCTION, SECRET_KEY etc).
+swegram/base.py contains settings that are typically shared between production and development environments. It then imports the appropriate configuration, either local.py or production.py. production.py is not included in the repository; just make a copy of local.py and change the appropriate settings (`DEBUG`, `PRODUCTION`, `SECRET_KEY` etc.).
 
