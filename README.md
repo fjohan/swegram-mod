@@ -14,6 +14,6 @@ The templates, `swegram_main/templates/`, and `swegram_main/views.py` contain a 
 
 A database is required, local.py is configured to use postgres.
 
-By default, LocMemCache is used for caching (for development purposes), but this should be changed to something like Redis or Memcached, or a database cache like postgres. 
+By default, LocMemCache is used for caching (for development purposes), this should be changed to DatabaseCache (or redis, but that's pretty overkill)
 
 Remember to check requirements.txt and install anything that's missing. 
