@@ -97,14 +97,14 @@ def enggram_spellcheck(inputFileName, outputFileName):
     # search the input file for unseen spellings
     with open (inputFileName,'r',encoding='utf8') as f:
         for i in f:
-            if not re.match(ur'^\#',i):
+            if not re.match(r'^\#',i):
                 i = i.rstrip()
-                i = re.sub(ur'^\d+\t([^\t]+)\t.+$', ur'\1', i)
+                i = re.sub(r'^\d+\t([^\t]+)\t.+$', r'\1', i)
 
                 if i not in wdictfreq.keys():
                     if not i.lower() in wdictfreq.keys():
-                        if not re.findall(ur'-',i): #why exclude compounds with hyphen?
-                            if not re.findall(ur'\d+',i):
+                        if not re.findall(r'-',i): #why exclude compounds with hyphen?
+                            if not re.findall(r'\d+',i):
                                 levencandi.append(i)
         f.close()
         levencandi = [word for word in levencandi if word.islower()]
@@ -162,10 +162,10 @@ def enggram_spellcheck(inputFileName, outputFileName):
 
     #print u'compounds: ',u'\n',compound
     for c in compound:
-        if re.findall(ur'-',c):
+        if re.findall(r'-',c):
             sub = u''
             splitter = c.split(u'-')
-        if re.findall(ur'/',c):
+        if re.findall(r'/',c):
             sub = u''
             splitter = c.split(u'/')
             for s in splitter:
@@ -194,13 +194,13 @@ def enggram_spellcheck(inputFileName, outputFileName):
         with open(outputFileName,'w',encoding='utf8')as p:
             for line in f:
                 line = line.rstrip()
-                if re.match(ur'^\#',line):
+                if re.match(r'^\#',line):
                     p.write(line)
                     p.write(u'\n')
                 else:
-                    head = re.sub(ur'^(\d+\t[^\t]+\t)\_.+$', ur'\1', line)
-                    tail = re.sub(ur'^\d+\t[^\t]+\t\_(.+)$', ur'\1', line)
-                    token = re.sub(ur'^\d+\t([^\t]+)\t.+$', ur'\1', line)
+                    head = re.sub(r'^(\d+\t[^\t]+\t)\_.+$', r'\1', line)
+                    tail = re.sub(r'^\d+\t[^\t]+\t\_(.+)$', r'\1', line)
+                    token = re.sub(r'^\d+\t([^\t]+)\t.+$', r'\1', line)
                     if token not in outcandi.keys():
                         p.write(head + token + tail)
                         p.write(u'\n')

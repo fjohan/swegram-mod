@@ -55,34 +55,34 @@ def find_compounds(tagged_file):
             if rule_1(p1, m1, p2, m2):
                 if require_dict_occurrence and cmpnd not in dict:
                     if debug:
-                        print "Not in dict: ", cmpnd
+                        print("Not in dict: ", cmpnd)
                     pass
 
                 else:
                     if debug:
-                        print "In dict: ", cmpnd
+                        print("In dict: ", cmpnd)
                     compounds_list.append(x - decrement)
                     decrement += 1
             elif rule_2(p1, m1, p2, m2):
                 if require_dict_occurrence and cmpnd not in dict:
                     if debug:
-                        print "Not in dict: ", cmpnd
+                        print("Not in dict: ", cmpnd)
                     pass
 
                 else:
                     if debug:
-                        print "In dict: ", cmpnd
+                        print("In dict: ", cmpnd)
                     compounds_list.append(x - decrement)
                     decrement += 1
             elif rule_3(p1, m1, p2, m2):
                 if require_dict_occurrence and cmpnd not in dict:
                     if debug:
-                        print "Not in dict: ", cmpnd
+                        print("Not in dict: ", cmpnd)
                     pass
 
                 else:
                     if debug:
-                        print "In dict: ", cmpnd
+                        print("In dict: ", cmpnd)
                     compounds_list.append(x - decrement)
                     decrement += 1
     return compounds_list

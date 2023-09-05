@@ -4,7 +4,7 @@
 import statistics as statistics
 import os
 from helpers import rm_blanks, get_md5
-from ..config import METADATA_DELIMITER, METADATA_INITIAL, METADATA_FINAL
+from swegram_main.config import METADATA_DELIMITER, METADATA_INITIAL, METADATA_FINAL
 from django.http import HttpResponse
 from datetime import datetime
 import filesize

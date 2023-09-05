@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 import pprint
 from django.contrib.sessions.models import Session
-from models import UploadedFile
+from swegram_main.models import UploadedFile
 
 
 class SessionAdmin(admin.ModelAdmin):

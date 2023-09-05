@@ -8,7 +8,7 @@ from django.http import JsonResponse
 
 from collections import Counter
 import time
-from .. import config
+from swegram_main import config
 import math
 
 def invert(bool):

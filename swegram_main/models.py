@@ -8,3 +8,4 @@ from django.db import models
 class UploadedFile(models.Model):
     md5_checksum = models.CharField(max_length=32, blank=False, primary_key=True)
     normalized = models.BooleanField(blank=False)
+

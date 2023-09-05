@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-UPLOAD_LOCATION = "/Users/jespernasman/jobb/django/swegram/swegram_main/uploads/"
-PIPE_PATH       = "/Users/jespernasman/jobb/django/swegram/swegram_main/annotate/pipeline/"
+#UPLOAD_LOCATION = "/Users/jesper-nasman/jobb/django/swegram/swegram_main/uploads/"
+#PIPE_PATH       = "/Users/jesper-nasman/jobb/django/swegram/swegram_main/annotate/pipeline/"
+UPLOAD_LOCATION = "/home/user/swegram/swegram_main/uploads/"
+PIPE_PATH       = "/home/user/swegram/swegram_main/annotate/pipeline/"
 
 METADATA_DELIMITER = ' '
 METADATA_INITIAL = '<'

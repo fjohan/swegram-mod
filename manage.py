@@ -2,6 +2,15 @@
 import os
 import sys
 
+# jf hack
+sys.path.append('/home/user/swegram/swegram/')
+sys.path.append('/home/user/swegram/swegram_main')
+sys.path.append('/home/user/swegram/swegram_main/handle_texts')
+sys.path.append('/home/user/swegram/swegram_main/handle_texts/pipeline')
+sys.path.append('/home/user/swegram/swegram_main/handle_texts/pipeline/scripts')
+sys.path.append('/home/user/swegram/swegram_main/handle_texts/pipeline/scripts')
+sys.path.append('/home/user/swegram/swegram_main/handle_texts/pipeline/nlp/efselab')
+
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "swegram.base")
     try:

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from .. import config
+from swegram_main import config
 
 upload_location = config.UPLOAD_LOCATION
 
@@ -19,7 +19,7 @@ import os, csv
 
 import statistics
 
-from ..models import UploadedFile
+from swegram_main.models import UploadedFile
 
 def median(lst):
     n = len(lst)

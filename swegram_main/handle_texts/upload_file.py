@@ -16,13 +16,13 @@ import subprocess
 
 from django.conf import settings
 
-from ..models import UploadedFile
+from swegram_main.models import UploadedFile
 
 from pipeline import pipeline, pipeline_en
 
 from get_optparse import get_optparse
 from helpers import handle_uploaded_file, checkbox_to_bool, add_text_metadata, str_to_bool, get_md5
-from .. import config
+from swegram_main import config
 from import_text import import_textfile
 import os
 from django.http import JsonResponse
@@ -124,10 +124,11 @@ def annotate_uploaded_file(request):
         text_eligible = True
 
     try:
-        if request.session['language'] == 'en':
-            annotated_file_path = pipeline_en.run(options)
-        else:
-            annotated_file_path = pipeline.run(options)
+        #if request.session['language'] == 'en':
+        #    annotated_file_path = pipeline_en.run(options)
+        #else:
+        #    annotated_file_path = pipeline.run(options)
+        annotated_file_path = pipeline.run(options)
     finally:
         shutil.rmtree(tmp_dir)
 

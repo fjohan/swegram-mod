@@ -1,5 +1,8 @@
 import os
 
+os.environ["USER"] = "swegramuser"
+os.environ["POSTGRESPW"] = "verysecret"
+
 DEBUG = True
 
 PRODUCTION = False
@@ -8,7 +11,8 @@ SECRET_KEY = 'o3&g^gsc=+8+mw49gdv447xg1c1%$*$raz)=(!!7n8t&9gx*py'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-STATIC_ROOT = "/Users/jespernasman/jobb/django/swegram/swegram_main/static/swegram_main"
+#STATIC_ROOT = "/Users/jespernasman/jobb/django/swegram/swegram_main/static/swegram_main"
+STATIC_ROOT = "/home/user/swegram/swegram_main/static/swegram_main"
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'swegram_main/static'),)
 

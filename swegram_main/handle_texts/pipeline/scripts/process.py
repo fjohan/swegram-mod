@@ -183,7 +183,8 @@ def list_enumeration(input_file, contains_metadata, metadata_format):
     return infile
 
 
-PYTHON3_DIR     = '/anaconda3/bin/python3'
+#PYTHON3_DIR     = '/anaconda3/bin/python3'
+PYTHON3_DIR     = 'python3'
 PIPE_DIR        = os.path.realpath(__file__).replace(os.path.basename(os.path.realpath(__file__)), '').replace('scripts/', '')
 EFSELAB_DIR     = PIPE_DIR + "nlp/efselab/swe_pipeline.py"
 HISTNORM_DIR    = PIPE_DIR + "nlp/HistNorm/"
