@@ -1,3 +1,5 @@
+NB: This is a personal copy of jespernasman/swegram
+
 ### Installing
 
 There are two modules that need to be aquired separately:
