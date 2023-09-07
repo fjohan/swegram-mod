@@ -446,7 +446,8 @@ def download_file(request, file_id):
             f.write('\n')
         for sentence in text.sentences:
             for token in sentence.tokens:
-                if request.session['language'] == 'sv':
+                #if request.session['language'] == 'sv':
+                if True:
                     f.write(
                     token.text_id + '\t' +
                     token.token_id + '\t' +
@@ -492,6 +493,76 @@ def download_file(request, file_id):
 
     return response
 
+def get_text_list(request):
+    if request.session.get('single_text'):
+        return request.session['single_text']
+    elif request.session.get('text_list'):
+
+        return [text for text in request.session['text_list'] if text_eligibility(request, text)]
+    else:
+        return []
+
+def basic_stats(text_list, request):
+    data = {}
+
+    data['text_ids']        = []
+    for file in request.session['file_list']:
+        for text in file.texts:
+            if text.metadata:
+                data['text_ids'].append([text.id, ' '.join(text.metadata)])
+            else:
+                data['text_ids'].append([text.id, text.filename])
+    #sum([[ for text in file.texts if text_eligibility(request, text)] for file in request.session['file_list']], [])
+    data['texts_selected']  = len(text_list)
+    data['text_n']          = len([text for text in request.session['text_list'] if text.eligible])
+    data['loaded_files']    = [[a.filename,
+                                a.file_id,
+                                a.file_size,
+                                len(a.texts),
+                                a.date_added,
+                                a.has_metadata,
+                                a.eligible,
+                                a.activated,
+                                a.normalized] for a in request.session.get('file_list')]
+    data['metadata']        = request.session.get('metadata')
+    data['total_words']     = int(sum([text.word_count for text in text_list]))
+    data['total_tokens']    = int(sum([text.token_count for text in text_list]))
+    data['total_sentences'] = int(sum([text.sentence_count for text in text_list]))
+    data['compounds']       = int(sum([text.compounds for text in text_list]))
+    data['misspells']       = int(sum([text.misspells for text in text_list]))
+    data['texts']           = []
+
+    for text_file in request.session['file_list']:
+        if text_file.activated:
+            if text_file.has_metadata:
+                data['texts'].append(
+                    {
+                        'filename': text_file.filename,
+                        'texts_in_file': [{'meta': ' '.join(t.metadata), 'id': t.id}\
+                        for t in text_file.texts]
+                    }
+                )
+            #elif request.session['language'] == 'sv':
+            elif True:
+                data['texts'].append(
+                    {
+                        'filename': text_file.filename,
+                        'texts_in_file': [{'meta': '(ingen metadata)', 'id': t.id}\
+                        for t in text_file.texts]
+                    }
+                )
+            else:
+                data['texts'].append(
+                    {
+                        'filename': text_file.filename,
+                        'texts_in_file': [{'meta': '(no metadata)', 'id': t.id}\
+                        for t in text_file.texts]
+                    }
+                )
+
+    return data
+
+
 def update_sidebar(request):
     if not request.session.get('file_list'):
         return JsonResponse({})
@@ -519,9 +590,11 @@ def update_sidebar(request):
                     else:
                         remove_text_metadata(request, file_to_change)
 
-    eligible_texts = statistics.get_text_list(request)
+    #eligible_texts = statistics.get_text_list(request)
+    eligible_texts = get_text_list(request)
 
-    context = statistics.basic_stats(eligible_texts, request)
+    #context = statistics.basic_stats(eligible_texts, request)
+    context = basic_stats(eligible_texts, request)
 
 
     return JsonResponse(context)

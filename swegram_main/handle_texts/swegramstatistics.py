@@ -64,8 +64,7 @@ def basic_stats(text_list, request):
                         for t in text_file.texts]
                     }
                 )
-            #elif request.session['language'] == 'sv':
-            elif True:
+            elif request.session['language'] == 'sv':
                 data['texts'].append(
                     {
                         'filename': text_file.filename,
@@ -276,7 +275,9 @@ def freq_list(text, type):
     for f in freq_list:
         freq_list[f] = [freq_list[f], round(freq_list[f] / total, 2)]
 
-    sorted_words = sorted(freq_list.iteritems(), key=lambda x: int(x[1][0]), reverse=True)
+    # welcome to python3...
+    #sorted_words = sorted(freq_list.iteritems(), key=lambda x: int(x[1][0]), reverse=True)
+    sorted_words = sorted(freq_list.items(), key=lambda x: int(x[1][0]), reverse=True)
 
     freq_as_list = []
 
@@ -348,7 +349,7 @@ def get_freq_list(request):
     for f in frequencies:
         frequencies[f] = [frequencies[f], frequencies[f] / total]
 
-    sorted_words = sorted(frequencies.items(), key=lambda x: int(x[1][0]), reverse=True)
+    sorted_words = sorted(frequencies.iteritems(), key=lambda x: int(x[1][0]), reverse=True)
 
     sorted_words = [x for x in sorted_words if x[0].split('_')[1] not in disabled_pos]
     freq_as_list = []
@@ -361,8 +362,7 @@ def get_freq_list(request):
 
 
     available_pos_tags = [tag[0] for tag in request.session['freq_pos_list']]
-    #if request.session['language'] == 'en':
-    if False:
+    if request.session['language'] == 'en':
         additional_pos_tags = [tag for tag in config.UD_TAGS if tag not in available_pos_tags]
     else:
         additional_pos_tags = [tag for tag in config.SUC_TAGS if tag not in available_pos_tags]
@@ -418,8 +418,7 @@ def get_pos_stats(request):
     text_list = get_text_list(request)
 
     available_pos_tags = [tag[0] for tag in request.session['pos_enabled']]
-    #if request.session['language'] == 'en':
-    if False:
+    if request.session['language'] == 'en':
         additional_pos_tags = [tag for tag in config.UD_TAGS if tag not in available_pos_tags]
     else:
         additional_pos_tags = [tag for tag in config.SUC_TAGS if tag not in available_pos_tags]
@@ -536,8 +535,7 @@ def get_length(request):
     [text.pos_counts.keys() for text in text_list] for x in sublist])))
 
     if request.session['lengths_words_pos'] == 'words':
-        #if request.session['language'] == 'sv':
-        if True:
+        if request.session['language'] == 'sv':
             data['words_pos'] = 'Ord'
         else:
             data['words_pos'] = 'Words'
@@ -770,13 +768,11 @@ def get_readability(request):
     data = {}
 
     if text_list:
-        #if request.session['language'] == 'sv':
-        if True:
+        if request.session['language'] == 'sv':
             data['nq_simple_total'], data['nq_full_total'], data['nq_simple_median'], data['nq_full_median'] = nominal_quota(text_list)
             data['ovix_median'], data['ovix_total'], data['ttr_total'], data['ttr_median'] = ovix_ttr(text_list)
             data['lix_median'], data['lix_total'] = lix(text_list)
-        #elif request.session['language'] == 'en':
-        elif False:
+        elif request.session['language'] == 'en':
 
             cli_list = []
             fres_list = []

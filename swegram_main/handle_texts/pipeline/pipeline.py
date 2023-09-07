@@ -111,7 +111,7 @@ def run(opt):
 
         # Insert original tokens and reenumerate
         list_to_file(insert_originals(file_to_list(tagged_file), originals, compounds_list), compounds_file)
-        shutil.copy(compounds_file, '/Users/jespernasman/Desktop/bbb.txt')
+        shutil.copy(compounds_file, '/tmp/bbb.txt')
 
     else:
         shutil.copy(spellchecked_file, compounds_file)
@@ -161,6 +161,11 @@ def run(opt):
         list_to_file(insert_column(empty_norm, file_to_list(tagged_file), 3), tagged_file)
     list_to_file(separate_pos(tagged_file), tagged_file)
     if opt.custom_filename:
+
+        print(tagged_file)
+        print(PIPE_DIR)
+        print(opt.custom_filename)
+
         shutil.move(tagged_file, PIPE_DIR + 'output/' + opt.custom_filename)
     else:
         shutil.move(tagged_file, PIPE_DIR + 'output/' + original_filename)

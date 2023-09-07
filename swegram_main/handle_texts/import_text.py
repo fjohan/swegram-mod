@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import statistics as statistics
+#import statistics as statistics
+import swegramstatistics as statistics
 import os
 from helpers import rm_blanks, get_md5
 from swegram_main.config import METADATA_DELIMITER, METADATA_INITIAL, METADATA_FINAL
@@ -143,7 +144,8 @@ def get_text_stats(request, text):
     # läsbarhetsberäkning
     # frekvenslistor
 
-    if request.session['language'] == 'en':
+    #if request.session['language'] == 'en':
+    if False:
         line_length = 12
     else:
         line_length = 13
@@ -168,7 +170,8 @@ def get_text_stats(request, text):
                 token.deps     = "_"
                 token.misc     = "_"
             else:
-                if request.session['language'] == 'en':
+                #if request.session['language'] == 'en':
+                if False:
                     token.norm     = t[3]
                     token.lemma    = t[4]
                     token.upos     = t[6]
@@ -212,7 +215,8 @@ def get_text_stats(request, text):
             elif split_line[0] == '\n':
                 if sentence.tokens:
                     # Check for fundament
-                    if request.session['language'] == 'sv':
+                    #if request.session['language'] == 'sv':
+                    if True:
                         for x in range(len(sentence.tokens)):
                             t = sentence.tokens[x]
                             if 'VerbForm=Fin' in t.ufeats:

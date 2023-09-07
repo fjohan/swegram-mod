@@ -1,0 +1,510 @@
+1.1	1	Tillsammans	Tillsammans	tillsammans	ADV	AB	_	_	7	advmod	_	_
+1.1	2	med	med	med	ADP	PP	_	_	4	case	_	_
+1.1	3	min	min	min	DET	PS	UTR|SIN|DEF	Definite=Def|Gender=Com|Number=Sing|Poss=Yes	4	nmod:poss	_	_
+1.1	4	sv�ger	svåger	svåger	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	1	obl	_	_
+1.1	5	hade	hade	ha	AUX	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	7	aux	_	_
+1.1	6	hon	hon	hon	PRON	PN	UTR|SIN|DEF|SUB	Case=Nom|Definite=Def|Gender=Com|Number=Sing	7	nsubj	_	_
+1.1	7	blivit	blivit	bliva	VERB	VB	SUP|AKT	VerbForm=Sup|Voice=Act	0	root	_	_
+1.1	8	ditlockad	ditlockad	ditlockad	ADJ	PC	PRF|UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing|Tense=Past|VerbForm=Part	7	xcomp	_	_
+1.1	9	av	av	av	ADP	PP	_	_	11	case	_	_
+1.1	10	v�r	var	var	DET	DT	UTR|SIN|IND	Definite=Ind|Gender=Com|Number=Sing	11	det	_	_
+1.1	11	kusin	kusin	kusin	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	7	obl	_	_
+1.1	12	och	och	och	CCONJ	KN	_	_	14	cc	_	_
+1.1	13	hennes	hennes	hennes	DET	PS	UTR/NEU|SIN/PLU|DEF	Definite=Def|Poss=Yes	14	nmod:poss	_	_
+1.1	14	man	man	man	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	11	conj	_	_
+1.1	15	som	som	som	CCONJ	KN	_	_	19	mark	_	_
+1.1	16	�	�	�	NOUN	NN	AN	Abbr=Yes	17	nmod	_	_
+1.1	17	r	r	r	NOUN	NN	AN	Abbr=Yes	18	obl	_	_
+1.1	18	inbitna	inbitna	inbiten	ADJ	JJ	POS|UTR/NEU|PLU|IND/DEF|NOM	Case=Nom|Degree=Pos|Number=Plur	19	amod	_	_
+1.1	19	MFF-supporters	MFF-supporters	MFF-supporters	NOUN	NN	UTR|PLU|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Plur	14	acl	_	_
+1.1	20	.	.	.	PUNCT	MAD	_	_	7	punct	_	_
+
+1.2	1	Inte	Inte	inte	ADV	AB	_	Polarity=Neg	2	advmod	_	_
+1.2	2	nog	nog	nog	ADV	AB	_	_	9	advmod	_	_
+1.2	3	med	med	med	ADP	PP	_	_	4	case	_	_
+1.2	4	detta	detta	detta	PRON	PN	NEU|SIN|DEF|SUB/OBJ	Definite=Def|Gender=Neut|Number=Sing	2	obl	_	_
+1.2	5	,	,	,	PUNCT	MID	_	_	9	punct	_	_
+1.2	6	Karins	Karins	Karin	PROPN	PM	GEN	Case=Gen	7	nmod:poss	_	_
+1.2	7	debut	debut	debut	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	9	nsubj	_	_
+1.2	8	skulle	skulle	skola	AUX	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	9	aux	_	_
+1.2	9	ske	ske	ske	VERB	VB	INF|AKT	VerbForm=Inf|Voice=Act	0	root	_	_
+1.2	10	p	p	p	NOUN	NN	NEU|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Neut|Number=Sing	12	det	_	_
+1.2	11	�	�	�	ADJ	RO	NOM	Case=Nom	12	amod	_	_
+1.2	12	st�plats	ståplats	ståplats	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	9	obj	_	_
+1.2	13	-	-	-	PUNCT	MID	_	_	12	punct	_	_
+1.2	14	mot	mot	mot	ADP	PP	_	_	15	case	_	_
+1.2	15	IFK	IFK	IFK	PROPN	PM	NOM	Case=Nom	12	nmod	_	_
+1.2	16	G�teborg	G�teborg	G�teborg	PROPN	PM	NOM	Case=Nom	15	flat:name	_	_
+1.2	17	.	.	.	PUNCT	MAD	_	_	9	punct	_	_
+
+1.3	1	Jisses	Jisses	Jisse	PROPN	PM	GEN	Case=Gen	0	root	_	_
+1.3	2	...	...	...	PUNCT	MAD	_	_	1	punct	_	_
+
+1.4	1	Sj�lv	Själv	själv	ADJ	JJ	POS|UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Degree=Pos|Gender=Com|Number=Sing	2	nsubj	_	_
+1.4	2	jobbade	jobbade	jobba	VERB	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	0	root	_	_
+1.4	3	jag	jag	jag	PRON	PN	UTR|SIN|DEF|SUB	Case=Nom|Definite=Def|Gender=Com|Number=Sing	2	nsubj	_	_
+1.4	4	men	men	men	CCONJ	KN	_	_	5	cc	_	_
+1.4	5	f�ljde	följde	följa	VERB	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	2	conj	_	_
+1.4	6	med	med	med	ADP	PP	_	_	8	case	_	_
+1.4	7	viss	viss	viss	ADJ	JJ	POS|UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Degree=Pos|Gender=Com|Number=Sing	8	amod	_	_
+1.4	8	b�van	bävan	bävan	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	5	obl	_	_
+1.4	9	matchen	matchen	match	NOUN	NN	UTR|SIN|DEF|NOM	Case=Nom|Definite=Def|Gender=Com|Number=Sing	8	conj	_	_
+1.4	10	via	via	via	ADP	PP	_	_	12	case	_	_
+1.4	11	de	de	den	DET	DT	UTR/NEU|PLU|DEF	Definite=Def|Number=Plur	12	det	_	_
+1.4	12	kanaler	kanaler	kanal	NOUN	NN	UTR|PLU|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Plur	9	nmod	_	_
+1.4	13	som	som	som	PRON	HP	-|-|-	PronType=Int,Rel	14	nsubj	_	_
+1.4	14	stod	stod	stå	VERB	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	12	acl:relcl	_	_
+1.4	15	till	till	till	ADP	PP	_	_	16	case	_	_
+1.4	16	buds	buds	bud	NOUN	NN	NEU|SIN|IND|GEN	Case=Gen|Definite=Ind|Gender=Neut|Number=Sing	14	obl	_	_
+1.4	17	och	och	och	CCONJ	KN	_	_	19	cc	_	_
+1.4	18	jag	jag	jag	PRON	PN	UTR|SIN|DEF|SUB	Case=Nom|Definite=Def|Gender=Com|Number=Sing	19	nsubj	_	_
+1.4	19	uppfattade	uppfattade	uppfatta	VERB	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	2	conj	_	_
+1.4	20	saker	saker	sak	NOUN	NN	UTR|PLU|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Plur	19	obj	_	_
+1.4	21	som	som	som	CCONJ	KN	_	_	22	mark	_	_
+1.4	22	bengaltifo	bengaltifo	bengaltifo	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	20	appos	_	_
+1.4	23	,	,	,	PUNCT	MID	_	_	24	punct	_	_
+1.4	24	j�ttefrustration	j�ttefrustration	j�ttefrustration	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	22	conj	_	_
+1.4	25	och	och	och	CCONJ	KN	_	_	27	cc	_	_
+1.4	26	inkastade	inkastade	inkastad	ADJ	PC	PRF|UTR/NEU|PLU|IND/DEF|NOM	Case=Nom|Number=Plur|Tense=Past|VerbForm=Part	27	amod	_	_
+1.4	27	f�rem�l	f�rem�l	f�rem�l	NOUN	NN	NEU|PLU|IND|NOM	Case=Nom|Definite=Ind|Gender=Neut|Number=Plur	22	conj	_	_
+1.4	28	i	i	i	ADP	PP	_	_	27	nmod	_	_
+1.4	29	f�rsta	första	första	ADJ	RO	NOM	Case=Nom	28	fixed	_	_
+1.4	30	halvlek	halvlek	halvlek	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	28	fixed	_	_
+1.4	31	.	.	.	PUNCT	MAD	_	_	2	punct	_	_
+
+1.5	1	Sedan	Sedan	sedan	ADV	AB	_	_	4	mark	_	_
+1.5	2	s�g	sig	sig	PRON	PN	UTR/NEU|SIN/PLU|DEF|OBJ	Case=Acc|Definite=Def	1	fixed	_	_
+1.5	3	jag	jag	jag	PRON	PN	UTR|SIN|DEF|SUB	Case=Nom|Definite=Def|Gender=Com|Number=Sing	4	nsubj	_	_
+1.5	4	andra	andra	andra	ADJ	RO	NOM	Case=Nom	0	root	_	_
+1.5	5	halvlek	halvlek	halvlek	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	4	obj	_	_
+1.5	6	p	p	p	NOUN	NN	NEU|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Neut|Number=Sing	8	case	_	_
+1.5	7	�	�	�	NOUN	NN	AN	Abbr=Yes	8	nmod	_	_
+1.5	8	tv	TV	TV	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	5	nmod	_	_
+1.5	9	och	och	och	CCONJ	KN	_	_	11	cc	_	_
+1.5	10	fick	fick	få	AUX	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	11	aux	_	_
+1.5	11	se	se	se	VERB	VB	INF|AKT	VerbForm=Inf|Voice=Act	4	conj	_	_
+1.5	12	k�nslostormarna	k�nslostormarna	k�nslostorm	NOUN	NN	UTR|PLU|DEF|NOM	Case=Nom|Definite=Def|Gender=Com|Number=Plur	11	obj	_	_
+1.5	13	och	och	och	CCONJ	KN	_	_	15	cc	_	_
+1.5	14	slutligen	slutligen	slutligen	ADV	AB	_	_	15	advmod	_	_
+1.5	15	gl�djekaoset	gl�djekaoset	gl�djekaos	NOUN	NN	NEU|SIN|DEF|NOM	Case=Nom|Definite=Def|Gender=Neut|Number=Sing	11	conj	_	_
+1.5	16	efter	efter	efter	ADP	PP	_	_	17	case	_	_
+1.5	17	kvitteringen	kvitteringen	kvittering	NOUN	NN	UTR|SIN|DEF|NOM	Case=Nom|Definite=Def|Gender=Com|Number=Sing	15	nmod	_	_
+1.5	18	.	.	.	PUNCT	MAD	_	_	4	punct	_	_
+
+1.6	1	Jag	Jag	jag	PRON	PN	UTR|SIN|DEF|SUB	Case=Nom|Definite=Def|Gender=Com|Number=Sing	2	nsubj	_	_
+1.6	2	undrade	undrade	undra	VERB	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	0	root	_	_
+1.6	3	onekligen	onekligen	onekligen	ADV	AB	_	_	2	advmod	_	_
+1.6	4	hur	hur	hur	ADV	HA	_	PronType=Int,Rel	7	advmod	_	_
+1.6	5	syrran	syrran	syrra	NOUN	NN	UTR|SIN|DEF|NOM	Case=Nom|Definite=Def|Gender=Com|Number=Sing	7	nsubj	_	_
+1.6	6	hade	hade	ha	AUX	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	7	aux	_	_
+1.6	7	uppfattat	uppfattat	uppfatta	VERB	VB	SUP|AKT	VerbForm=Sup|Voice=Act	2	ccomp	_	_
+1.6	8	detta	detta	denna	DET	DT	NEU|SIN|DEF	Definite=Def|Gender=Neut|Number=Sing	10	det	_	_
+1.6	9	galna	galna	galen	ADJ	JJ	POS|UTR/NEU|SIN|DEF|NOM	Case=Nom|Definite=Def|Degree=Pos|Number=Sing	10	amod	_	_
+1.6	10	spektra	spektra	spektra	NOUN	NN	NEU|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Neut|Number=Sing	7	obj	_	_
+1.6	11	av	av	av	ADP	PP	_	_	12	case	_	_
+1.6	12	masspsykos	masspsykos	masspsykos	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	10	nmod	_	_
+1.6	13	och	och	och	CCONJ	KN	_	_	7	cc	_	_
+1.6	14	n�r	när	när	ADV	HA	_	PronType=Int,Rel	16	advmod	_	_
+1.6	15	jag	jag	jag	PRON	PN	UTR|SIN|DEF|SUB	Case=Nom|Definite=Def|Gender=Com|Number=Sing	16	nsubj	_	_
+1.6	16	fr�gade	frågade	fråga	VERB	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	17	advcl	_	_
+1.6	17	svarade	svarade	svara	VERB	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	7	conj	_	_
+1.6	18	hon	hon	hon	PRON	PN	UTR|SIN|DEF|SUB	Case=Nom|Definite=Def|Gender=Com|Number=Sing	17	nsubj	_	_
+1.6	19	lugnt	lugnt	lugnt	ADV	AB	POS	Degree=Pos	17	advmod	_	_
+1.6	20	�	�	�	NOUN	NN	AN	Abbr=Yes	24	mark	_	_
+1.6	21	"	"	"	PUNCT	PAD	_	_	20	punct	_	_
+1.6	22	Det	Det	det	PRON	PN	NEU|SIN|DEF|SUB/OBJ	Definite=Def|Gender=Neut|Number=Sing	24	expl	_	_
+1.6	23	var	var	vara	AUX	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	24	cop	_	_
+1.6	24	h�ftigt	häftigt	häftig	ADJ	JJ	POS|NEU|SIN|IND|NOM	Case=Nom|Definite=Ind|Degree=Pos|Gender=Neut|Number=Sing	17	advcl	_	_
+1.6	25	,	,	,	PUNCT	MID	_	_	2	punct	_	_
+1.6	26	det	det	det	PRON	PN	NEU|SIN|DEF|SUB/OBJ	Definite=Def|Gender=Neut|Number=Sing	27	nsubj	_	_
+1.6	27	blir	blir	bli	VERB	VB	PRS|AKT	Mood=Ind|Tense=Pres|VerbForm=Fin|Voice=Act	2	parataxis	_	_
+1.6	28	nog	nog	nog	ADV	AB	_	_	27	advmod	_	_
+1.6	29	fler	fler	fler	ADJ	JJ	POS|UTR/NEU|PLU|IND|NOM	Case=Nom|Definite=Ind|Degree=Pos|Number=Plur	30	amod	_	_
+1.6	30	g�nger	gånger	gång	NOUN	NN	UTR|PLU|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Plur	27	xcomp	_	_
+1.6	31	"	"	"	PUNCT	PAD	_	_	30	punct	_	_
+1.6	32	.	.	.	PUNCT	MAD	_	_	2	punct	_	_
+
+1.7	1	N�sta	nästa	nästa	ADJ	JJ	POS|UTR/NEU|SIN/PLU|IND/DEF|NOM	Case=Nom|Degree=Pos	2	amod	_	_
+1.7	2	g�ng	gång	gång	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	3	obl	_	_
+1.7	3	f�r	för	föra	VERB	VB	PRS|AKT	Mood=Ind|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
+1.7	4	vi	vi	vi	PRON	PN	UTR|PLU|DEF|SUB	Case=Nom|Definite=Def|Gender=Com|Number=Plur	3	nsubj	_	_
+1.7	5	g	g	g	NOUN	NN	AN	Abbr=Yes	6	nmod	_	_
+1.7	6	�	�	�	NOUN	NN	AN	Abbr=Yes	3	obj	_	_
+1.7	7	tillsammans	tillsammans	tillsammans	ADV	AB	_	_	3	advmod	_	_
+1.7	8	.	.	.	PUNCT	MAD	_	_	3	punct	_	_
+
+
+<p{�^��%!��As>T~J]=��v�uzz�1��{��7ו�S�KC���H�f�Ж�
+
+<a:clrMap xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" bg1="lt1" tx1="dk1" bg2="lt2" tx2="dk2" accent1="accent1" accent2="accent2" accent3="accent3" accent4="accent4" accent5="accent5" accent6="accent6" hlink="hlink" folHlink="folHlink"/>    b  /      ����   b        b       �8     �                    @ �   ��    � ��� �    �    �         �0    �(    	�                    
+
+<xsd:schema targetNamespace="http://schemas.microsoft.com/office/2006/metadata/properties" ma:root="true" ma:fieldsID="af83118db334c511a03efec3cfcf6a0f" ns3:_="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://schemas.microsoft.com/office/2006/metadata/properties" xmlns:ns3="10e5838d-977f-4cf1-85c3-e7e108b2459a">
+
+<xsd:import namespace="10e5838d-977f-4cf1-85c3-e7e108b2459a"/>
+
+<xsd:element name="properties">
+
+<xsd:complexType>
+
+<xsd:sequence>
+
+<xsd:element name="documentManagement">
+
+<xsd:complexType>
+
+<xsd:all>
+
+<xsd:element ref="ns3:MediaServiceMetadata" minOccurs="0"/>
+
+<xsd:element ref="ns3:MediaServiceFastMetadata" minOccurs="0"/>
+
+<xsd:element ref="ns3:MediaServiceSearchProperties" minOccurs="0"/>
+
+</xsd:all>
+
+</xsd:complexType>
+
+</xsd:element>
+
+</xsd:sequence>
+
+</xsd:complexType>
+
+</xsd:element>
+
+</xsd:schema>
+
+<xsd:schema targetNamespace="10e5838d-977f-4cf1-85c3-e7e108b2459a" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dms="http://schemas.microsoft.com/office/2006/documentManagement/types" xmlns:pc="http://schemas.microsoft.com/office/infopath/2007/PartnerControls">
+
+<xsd:import namespace="http://schemas.microsoft.com/office/2006/documentManagement/types"/>
+
+<xsd:import namespace="http://schemas.microsoft.com/office/infopath/2007/PartnerControls"/>
+
+<xsd:element name="MediaServiceMetadata" ma:index="8" nillable="true" ma:displayName="MediaServiceMetadata" ma:hidden="true" ma:internalName="MediaServiceMetadata" ma:readOnly="true">
+
+<xsd:simpleType>
+
+<xsd:restriction base="dms:Note"/>
+
+</xsd:simpleType>
+
+</xsd:element>
+
+<xsd:element name="MediaServiceFastMetadata" ma:index="9" nillable="true" ma:displayName="MediaServiceFastMetadata" ma:hidden="true" ma:internalName="MediaServiceFastMetadata" ma:readOnly="true">
+
+<xsd:simpleType>
+
+<xsd:restriction base="dms:Note"/>
+
+</xsd:simpleType>
+
+</xsd:element>
+
+<xsd:element name="MediaServiceSearchProperties" ma:index="10" nillable="true" ma:displayName="MediaServiceSearchProperties" ma:hidden="true" ma:internalName="MediaServiceSearchProperties" ma:readOnly="true">
+
+<xsd:simpleType>
+
+<xsd:restriction base="dms:Note"/>
+
+</xsd:simpleType>
+
+</xsd:element>
+
+</xsd:schema>
+
+<xsd:schema targetNamespace="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" elementFormDefault="qualified" attributeFormDefault="unqualified" blockDefault="#all" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:odoc="http://schemas.microsoft.com/internal/obd">
+
+<xsd:import namespace="http://purl.org/dc/elements/1.1/" schemaLocation="http://dublincore.org/schemas/xmls/qdc/2003/04/02/dc.xsd"/>
+
+<xsd:import namespace="http://purl.org/dc/terms/" schemaLocation="http://dublincore.org/schemas/xmls/qdc/2003/04/02/dcterms.xsd"/>
+
+<xsd:element name="coreProperties" type="CT_coreProperties"/>
+
+<xsd:complexType name="CT_coreProperties">
+
+<xsd:all>
+
+<xsd:element ref="dc:creator" minOccurs="0" maxOccurs="1"/>
+
+<xsd:element ref="dcterms:created" minOccurs="0" maxOccurs="1"/>
+
+<xsd:element ref="dc:identifier" minOccurs="0" maxOccurs="1"/>
+
+<xsd:element name="contentType" minOccurs="0" maxOccurs="1" type="xsd:string" ma:index="0" ma:displayName="Innehållstyp"/>
+
+<xsd:element ref="dc:title" minOccurs="0" maxOccurs="1" ma:index="4" ma:displayName="Rubrik"/>
+
+<xsd:element ref="dc:subject" minOccurs="0" maxOccurs="1"/>
+
+<xsd:element ref="dc:description" minOccurs="0" maxOccurs="1"/>
+
+<xsd:element name="keywords" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+
+<xsd:element ref="dc:language" minOccurs="0" maxOccurs="1"/>
+
+<xsd:element name="category" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+
+<xsd:element name="version" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+
+<xsd:element name="revision" minOccurs="0" maxOccurs="1" type="xsd:string">
+1.1	2	This	This	This	PROPN	PM	NOM	Case=Nom	1	flat:name	_	_
+1.1	3	value	valde	välja	VERB	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	0	root	_	_
+1.1	4	indicates	indicates	indicates	ADV	AB	_	_	3	advmod	_	_
+1.1	5	the	the	the	NOUN	NN	NEU|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Neut|Number=Sing	6	nmod	_	_
+1.1	6	number	nummer	nummer	NOUN	NN	NEU|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Neut|Number=Sing	7	nmod	_	_
+1.1	7	of	of	Of	PROPN	PM	NOM	Case=Nom	8	nsubj:pass	_	_
+1.1	8	saves	sades	säga	VERB	VB	PRT|SFO	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Pass	3	advcl	_	_
+1.1	9	or	or	or	NOUN	UO	_	Foreign=Yes	10	amod	_	_
+1.1	10	revisions	revisions	revision	NOUN	NN	UTR|SIN|IND|GEN	Case=Gen|Definite=Ind|Gender=Com|Number=Sing	8	obl:agent	_	_
+1.1	11	.	.	.	PUNCT	MAD	_	_	3	punct	_	_
+
+1.2	1	The	The	The	PROPN	PM	NOM	Case=Nom	8	nsubj	_	_
+1.2	2	application	applikation	applikation	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	3	nmod	_	_
+1.2	3	is	is	is	NOUN	UO	_	Foreign=Yes	4	compound	_	_
+1.2	4	responsible	responsible	responsible	ADP	UO	_	Foreign=Yes	5	compound	_	_
+1.2	5	for	for	for	ADP	UO	_	Foreign=Yes	8	advmod	_	_
+1.2	6	updating	updating	updating	ADP	UO	_	Foreign=Yes	5	fixed	_	_
+1.2	7	this	phis	phis	NOUN	UO	_	Foreign=Yes	5	fixed	_	_
+1.2	8	value	valde	välja	VERB	VB	PRT|AKT	Mood=Ind|Tense=Past|VerbForm=Fin|Voice=Act	0	root	_	_
+1.2	9	after	after	after	NOUN	UO	_	Foreign=Yes	11	case	_	_
+1.2	10	each	Bach	Bach	PROPN	PM	NOM	Case=Nom	11	det	_	_
+1.2	11	revision	revision	revision	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	8	obl	_	_
+1.2	12	.	.	.	PUNCT	MAD	_	_	8	punct	_	_
+1.2	13	<	<	<	PUNCT	MID	_	_	8	punct	_	_
+1.2	14	/	/	/	PUNCT	PAD	_	_	15	punct	_	_
+1.2	15	xsd	xs	x	NOUN	NN	NEU|PLU|IND|GEN	Case=Gen|Definite=Ind|Gender=Neut|Number=Plur	17	nmod:poss	_	_
+1.2	16	:	:	:	PUNCT	MID	_	_	15	punct	_	_
+1.2	17	documentation	dokumentation	dokumentation	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	8	obj	_	_
+1.2	18	>	>	>	PUNCT	MID	_	_	17	punct	_	_
+
+<xsd:annotation>
+
+<xsd:documentation>
+
+</xsd:annotation>
+
+</xsd:element>
+
+<xsd:element name="lastModifiedBy" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+
+<xsd:element ref="dcterms:modified" minOccurs="0" maxOccurs="1"/>
+
+<xsd:element name="contentStatus" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+
+</xsd:all>
+
+</xsd:complexType>
+
+</xsd:schema>
+
+<xs:schema targetNamespace="http://schemas.microsoft.com/office/infopath/2007/PartnerControls" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:pc="http://schemas.microsoft.com/office/infopath/2007/PartnerControls" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="Person">
+
+<xs:complexType>
+
+<xs:sequence>
+
+<xs:element ref="pc:DisplayName" minOccurs="0"></xs:element>
+
+<xs:element ref="pc:AccountId" minOccurs="0"></xs:element>
+
+<xs:element ref="pc:AccountType" minOccurs="0"></xs:element>
+
+</xs:sequence>
+
+</xs:complexType>
+
+</xs:element>
+
+<xs:element name="DisplayName" type="xs:string"></xs:element>
+
+<xs:element name="AccountId" type="xs:string"></xs:element>
+
+<xs:element name="AccountType" type="xs:string"></xs:element>
+
+<xs:element name="BDCAssociatedEntity">
+
+<xs:complexType>
+
+<xs:sequence>
+
+<xs:element ref="pc:BDCEntity" minOccurs="0" maxOccurs="unbounded"></xs:element>
+
+</xs:sequence>
+
+<xs:attribute ref="pc:EntityNamespace"></xs:attribute>
+
+<xs:attribute ref="pc:EntityName"></xs:attribute>
+
+<xs:attribute ref="pc:SystemInstanceName"></xs:attribute>
+
+<xs:attribute ref="pc:AssociationName"></xs:attribute>
+
+</xs:complexType>
+
+</xs:element>
+
+<xs:attribute name="EntityNamespace" type="xs:string"></xs:attribute>
+
+<xs:attribute name="EntityName" type="xs:string"></xs:attribute>
+
+<xs:attribute name="SystemInstanceName" type="xs:string"></xs:attribute>
+
+<xs:attribute name="AssociationName" type="xs:string"></xs:attribute>
+
+<xs:element name="BDCEntity">
+
+<xs:complexType>
+
+<xs:sequence>
+
+<xs:element ref="pc:EntityDisplayName" minOccurs="0"></xs:element>
+
+<xs:element ref="pc:EntityInstanceReference" minOccurs="0"></xs:element>
+
+<xs:element ref="pc:EntityId1" minOccurs="0"></xs:element>
+
+<xs:element ref="pc:EntityId2" minOccurs="0"></xs:element>
+
+<xs:element ref="pc:EntityId3" minOccurs="0"></xs:element>
+
+<xs:element ref="pc:EntityId4" minOccurs="0"></xs:element>
+
+<xs:element ref="pc:EntityId5" minOccurs="0"></xs:element>
+
+</xs:sequence>
+
+</xs:complexType>
+
+</xs:element>
+
+<xs:element name="EntityDisplayName" type="xs:string"></xs:element>
+
+<xs:element name="EntityInstanceReference" type="xs:string"></xs:element>
+
+<xs:element name="EntityId1" type="xs:string"></xs:element>
+
+<xs:element name="EntityId2" type="xs:string"></xs:element>
+
+<xs:element name="EntityId3" type="xs:string"></xs:element>
+
+<xs:element name="EntityId4" type="xs:string"></xs:element>
+
+<xs:element name="EntityId5" type="xs:string"></xs:element>
+
+<xs:element name="Terms">
+
+<xs:complexType>
+
+<xs:sequence>
+
+<xs:element ref="pc:TermInfo" minOccurs="0" maxOccurs="unbounded"></xs:element>
+
+</xs:sequence>
+
+</xs:complexType>
+
+</xs:element>
+
+<xs:element name="TermInfo">
+
+<xs:complexType>
+
+<xs:sequence>
+
+<xs:element ref="pc:TermName" minOccurs="0"></xs:element>
+
+<xs:element ref="pc:TermId" minOccurs="0"></xs:element>
+
+</xs:sequence>
+
+</xs:complexType>
+
+</xs:element>
+
+<xs:element name="TermName" type="xs:string"></xs:element>
+
+<xs:element name="TermId" type="xs:string"></xs:element>
+1.1	2	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	3	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	4	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	5	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	6				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	7	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	8				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	9	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	10				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	11	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	12	����	����	����	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	13				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	14	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	15				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	16	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	17				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	18	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	19	����	����	����	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	20				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	21	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	22				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	23	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	24				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	25	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	26				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	27	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	28				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	29	   	   	   	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	30	����	����	����	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	31	   	   	   	NOUN	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	32	<	<	<	PUNCT	MID	_	_	1	punct	_	_
+1.1	33	?	?	?	PUNCT	MID	_	_	35	punct	_	_
+1.1	34	xml	ml	ml	NOUN	NN	AN	Abbr=Yes	35	nmod	_	_
+1.1	35	version	version	version	NOUN	NN	UTR|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Com|Number=Sing	1	conj	_	_
+1.1	36	=	=	=	PUNCT	MID	_	_	40	punct	_	_
+1.1	37	"	"	"	PUNCT	PAD	_	_	40	punct	_	_
+1.1	38	1.0	1.0	1.0	NUM	RG	NOM	Case=Nom	40	nummod	_	_
+1.1	39	"	"	"	PUNCT	PAD	_	_	40	punct	_	_
+1.1	40	encoding	encoding	encoding	NOUN	UO	_	Foreign=Yes	1	conj	_	_
+1.1	41	=	=	=	PUNCT	MID	_	_	45	punct	_	_
+1.1	42	"	"	"	PUNCT	PAD	_	_	45	punct	_	_
+1.1	43	UTF-8	UTF-8	UTF-8	ADV	AB	AN	Abbr=Yes	45	advmod	_	_
+1.1	44	"	"	"	PUNCT	PAD	_	_	45	punct	_	_
+1.1	45	standalone	standalone	standalone	NOUN	UO	_	Foreign=Yes	1	conj	_	_
+1.1	46	=	=	=	PUNCT	MID	_	_	48	punct	_	_
+1.1	47	"	"	"	PUNCT	PAD	_	_	48	punct	_	_
+1.1	48	no	NO	NO	PROPN	PM	NOM	Case=Nom	0	root	_	_
+1.1	49	"	"	"	PUNCT	PAD	_	_	48	punct	_	_
+1.1	50	?	?	?	PUNCT	MAD	_	_	48	punct	_	_
+1.1	51	>	>	>	PUNCT	MID	_	_	48	punct	_	_
+
+</xs:schema>
+
+</ct:contentTypeSchema>                                  	   
+1.1	2	  	  	  	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	3	����	����	����	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	4				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	5				ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	6	     	     	     	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	7	�	�	�	ADP	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	8	      	      	      	NOUN	UO	_	Foreign=Yes	1	fixed	_	_
+1.1	9	F	F	F	PROPN	PM	NOM	Case=Nom	0	root	_	_
+1.1	10	   	   	   	PROPN	PM	NOM	Case=Nom	9	flat:name	_	_
+1.1	11	Microsoft	Microsoft	Microsoft	PROPN	PM	NOM	Case=Nom	12	amod	_	_
+1.1	12	Word	Word	Word	PROPN	PM	NOM	Case=Nom	9	nmod	_	_
+1.1	13	97-2003	97-2003	97-2003	NUM	RG	NOM	Case=Nom	12	nmod	_	_
+1.1	14	-	-	-	PUNCT	MID	_	_	9	punct	_	_
+1.1	15	dokument	dokument	dokument	NOUN	NN	NEU|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Neut|Number=Sing	16	nmod	_	_
+1.1	16	 	 	 	NUM	RG	NOM	Case=Nom	17	compound	_	_
+1.1	17	   	   	   	ADP	UO	_	Foreign=Yes	28	case	_	_
+1.1	18	MSWordDoc	MSWordDoc	msworddoc	ADP	UO	_	Foreign=Yes	17	fixed	_	_
+1.1	19	 	 	 	ADP	UO	_	Foreign=Yes	17	fixed	_	_
+1.1	20				ADP	UO	_	Foreign=Yes	17	fixed	_	_
+1.1	21	   	   	   	ADP	UO	_	Foreign=Yes	17	fixed	_	_
+1.1	22	Word.Document.8	Word.Document.8	word.document.8	ADP	UO	_	Foreign=Yes	17	fixed	_	_
+1.1	23	 	 	 	NOUN	UO	_	Foreign=Yes	17	fixed	_	_
+1.1	24	�	�	�	NOUN	NN	AN	Abbr=Yes	26	nmod	_	_
+1.1	25	9	9	9	NUM	RG	NOM	Case=Nom	26	nummod	_	_
+1.1	26	�	�	�	NOUN	NN	AN	Abbr=Yes	27	nmod	_	_
+1.1	27	q	q	q	NOUN	NN	NEU|SIN|IND|NOM	Case=Nom|Definite=Ind|Gender=Neut|Number=Sing	28	nmod	_	_
+1.1	28	                                                                                                                                                                                                                          	                                                                                                                                                                                                                          	                                                                                                                                                                                                                          	NUM	RG	NOM	Case=Nom	9	obl	_	_
+

@@ -22,7 +22,7 @@ def list_to_file(list, file):
     f.close()
 
 def file_to_list(file):
-    f = open(file)
+    f = open(file, 'r', errors='replace')
     list = f.readlines()
     return list
 

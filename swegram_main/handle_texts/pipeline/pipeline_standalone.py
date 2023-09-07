@@ -111,7 +111,7 @@ def run(opt):
 
         # Insert original tokens and reenumerate
         list_to_file(insert_originals(file_to_list(tagged_file), originals, compounds_list), compounds_file)
-        shutil.copy(compounds_file, '/Users/jespernasman/Desktop/bbb.txt')
+        shutil.copy(compounds_file, '/tmp/bbb.txt')
 
     else:
         shutil.copy(spellchecked_file, compounds_file)
